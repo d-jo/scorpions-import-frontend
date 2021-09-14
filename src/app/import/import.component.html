@@ -1,8 +1,5 @@
-<input type="file" class="file-input" (change)="selectFile($event)" #fileUpload>
-
 <div class="droparea" appDragdrop (fileDropped)="onFileDrop($event)" (click)="fileUpload.click()">
-    <input type="file" class="file-input" name="files[]" multiple (change)="selectFile($event)"> 
-    <!-- TODO check name=files[] to ensure you can select multiple files -->
+    <input type="file" class="file-input" name="files" multiple (change)="selectFile($event)" #fileUpload> 
     <mat-icon style="font-size: 50px; margin-right: 25px;">file_upload</mat-icon>
     <h3>Drag and Drop</h3>
     <h3>Or</h3>
