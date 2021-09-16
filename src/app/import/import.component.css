@@ -1,0 +1,46 @@
+.file-input {
+    display: none;
+}
+.droparea {
+    background-color: rgba(228, 220, 220, 0.5);
+    width: 450px;
+    height: 200px;
+    padding: 2rem;
+    text-align: center;
+    border: solid  1px #000;
+    border-radius: 15px;
+    position: relative;
+    margin: 0 auto;
+}
+.droparea:hover {
+    background-color: #d8d7d7;
+    cursor: pointer;
+}
+input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #38424c;
+}
+.fileList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.fileItem {
+    position: relative;
+    border: dashed 1px #38424c;
+    padding: 0.25rem;
+    width: 60%;
+    max-width: 60%;
+}

@@ -1,0 +1,19 @@
+<div class="droparea" appDragdrop (fileDropped)="onFileDrop($event)" (click)="fileUpload.click()">
+    <input type="file" class="file-input" name="files" multiple (change)="selectFile($event)" #fileUpload> 
+    <mat-icon style="font-size: 50px; margin-right: 25px;">file_upload</mat-icon>
+    <h3>Drag and Drop</h3>
+    <h3>Or</h3>
+    <h3>Click to browse</h3>
+</div>
+
+<div *ngIf="files.length > 0" class="fileList">
+    <span class="fileItem" *ngFor="let file of files">
+        <mat-icon style="font-size: 40px; position: absolute; left:10px; top:20px;">upload_file</mat-icon>
+        <p style="margin-left:50px">{{file?.name}} <br />
+           {{formatBytes(file?.size)}}
+        </p>
+        <mat-icon style="font-size: 40px; position:absolute; right:30px; top:20px;">search</mat-icon>
+    </span>
+    <br/>
+    <button mat-flat-button color="warn" (click)="uploadFiles()">Upload</button>
+</div>
