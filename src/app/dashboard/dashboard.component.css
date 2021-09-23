@@ -1,0 +1,37 @@
+.uploading {
+    border: dashed #000 2px;
+    background-color: #d4b485;
+    padding: 10px;
+    float: left;
+    width: 350px;
+    margin: 75px;
+}
+.review {
+    border: dotted #000 2px;
+    background-color: #f5d878;
+    padding: 10px;
+    width: 350px;
+    margin: 50px;
+}
+.done {
+    border: solid #000 2px;
+    background-color: #50b33e;
+    padding: 10px;
+    float: right;
+    width: 350px;
+    margin: 50px;
+    height: 300px;
+}
+h3 {
+    margin-left: 40%;
+}
+.fileHolder {
+    background-color: #fff;
+    border: solid 1px #000;
+    border-radius: 15px;
+    padding: 20px;
+    height: 195px;
+}
+button {
+    margin-left: 100px;
+}

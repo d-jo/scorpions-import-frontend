@@ -1,0 +1,11 @@
+.header {
+    background-color: #000;
+    width: 100%; 
+    height: 90px; 
+    margin-top: -20px;
+    text-align: center;
+}
+.title {
+    color:#FFF;
+    padding-top: 30px;
+}

@@ -44,10 +44,8 @@ export class ImportComponent implements OnInit {
       console.log("No file selected!");
       return
     }
-    let file: File = this.files[0];
-    this.fileName = file.name
 
-    this.upload.uploadFile(this.baseUrl + "/api/upload", file)
+    this.upload.uploadFile(this.baseUrl, this.files)
       .subscribe(data => {
         console.log(data);
       },

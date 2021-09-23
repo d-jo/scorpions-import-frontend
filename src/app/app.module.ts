@@ -9,12 +9,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { UploadService } from './upload-service';
 import { HttpClientModule } from '@angular/common/http';
 import { DragdropDirective } from './dragdrop.directive';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImportComponent,
-    DragdropDirective
+    DragdropDirective,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
