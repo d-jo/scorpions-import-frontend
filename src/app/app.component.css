@@ -1,6 +1,6 @@
 .header {
     background-color: #000;
-    width: 100%; 
+    width: 100vw;
     height: 90px; 
     margin-top: -20px;
     text-align: center;
@@ -8,4 +8,37 @@
 .title {
     color:#FFF;
     padding-top: 30px;
+}
+.sidenav {
+    top: 89px;
+    left: -170px;
+    position: absolute;
+    width: 150px;
+    background-color: rgb(225, 75, 75);
+    transition: 0.5s;
+    min-height: 600px;
+    height:calc(100% - 110px);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.active {
+    transition: 0.5s;
+    transform: translateX(120px);
+}
+.navbox {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    border: 2px solid #000;
+    background-color: #FFF;
+}
+.navbox:hover {
+    background-color: #000;
+    color: #FFF;
+}
+a {
+    margin-left: 48px;
+    text-decoration: none;
+    color: #000;
 }

@@ -12,7 +12,7 @@
         <p style="margin-left:50px">{{file?.name}} <br />
            {{formatBytes(file?.size)}}
         </p>
-        <mat-icon style="font-size: 40px; position:absolute; right:30px; top:20px;">search</mat-icon>
+        <mat-icon (click)="removeFile(file)" style="font-size: 40px; position:absolute; right:30px; top:20px; cursor: pointer;">delete</mat-icon>
     </span>
     <br/>
     <button mat-flat-button color="warn" (click)="uploadFiles()">Import</button>

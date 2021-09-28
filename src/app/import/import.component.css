@@ -10,7 +10,7 @@
     border: solid  1px #000;
     border-radius: 15px;
     position: relative;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 .droparea:hover {
     background-color: #d8d7d7;

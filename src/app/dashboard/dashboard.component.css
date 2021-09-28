@@ -26,6 +26,8 @@ h3 {
     margin-left: 40%;
 }
 .fileHolder {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     border: solid 1px #000;
     border-radius: 15px;

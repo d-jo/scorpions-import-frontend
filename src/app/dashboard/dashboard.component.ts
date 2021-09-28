@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +13,7 @@ export class DashboardComponent implements OnInit {
   completedFiles: any;
   baseUrl = "http://localhost:5000";
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.getFiles();
@@ -32,10 +31,17 @@ export class DashboardComponent implements OnInit {
     return this.httpClient.get(this.baseUrl + "/files");
   }
 
-  extractFiles(): void {
-
+  callExtract() {
+    this.extractFiles().subscribe(() => {
+      console.log("Extraction Finished!");
+    });
   }
-  routeToUpload() {
-    this.router.navigate(['/import']);
+
+  extractFiles(): any {
+    return this.httpClient.get(this.baseUrl + "/trigger_process");
+  }
+
+  reviewFile(file: any) {
+    console.log("Review: " + file);
   }
 }
