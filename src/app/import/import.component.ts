@@ -36,7 +36,6 @@ export class ImportComponent implements OnInit {
 
   validFile(name: String) {
     let ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
-    console.log("file extension: " + ext);
     return ext == 'txt' || ext == 'pdf' || ext == 'docx'
   }
 

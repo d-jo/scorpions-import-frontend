@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 
 @Injectable()
@@ -10,7 +10,9 @@ export class UploadService {
   uploadFile(url: string, files: File[]): Observable<any> {
     let formData = new FormData();
     for(let x = 0; x < files.length; x++)
-      formData.append('file[]', files[x]);
+      formData.append('file', files[x]);
+
+    console.log(formData);
 
     return this.http.post(url, formData, {responseType: 'text'});
   }
