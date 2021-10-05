@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Release Notes
+
+1.0.0 - For this release, we have a working Dashboard page with some mock data for Review and Done sections. For The upload section, a user is able to import a .docx, .pdf, or .txt(for testing) file to the backend and then extract data from them. 
