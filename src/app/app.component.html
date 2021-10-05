@@ -1,3 +1,17 @@
-<h2>Academic Assessment Import</h2>
-<!-- <app-header></app-header> -->
-<router-outlet></router-outlet>
+<div class="header">
+    <mat-icon (click)="toggleSidenav()"
+        style="font-size: 30px; color: #FFF; position:absolute; left:10px; top:28px; cursor: pointer;">menu</mat-icon>
+    <h2 class="title">Academic Assessment Import</h2>
+</div>
+<div id="router" style="transition: 0.5s;">
+    <router-outlet></router-outlet>
+</div>
+<div id="side" class="sidenav">
+    <a routerLink="/dashboard" (click)="toggleSidenav()">
+        <span class="navbox">Dashboard</span>
+    </a>
+    <br/>
+    <a routerLink="/import" (click)="toggleSidenav()">
+        <span class="navbox">Import</span>
+    </a>
+</div>

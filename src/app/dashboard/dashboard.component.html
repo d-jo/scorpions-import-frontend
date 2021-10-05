@@ -1,0 +1,39 @@
+<table>
+    <tr>
+        <td>
+            <div class="uploading">
+                <h3>Upload</h3>
+                <div class="fileHolder">
+                    <span *ngFor="let file of uploadFiles">{{file}}</span>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="review">
+                <h3>Review</h3>
+                <div class="fileHolder">
+                    <span *ngFor="let review of reviewFiles">{{review}} <mat-icon style="float: right; cursor: pointer;" (click)="reviewFile(review)">search</mat-icon></span>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="done">
+                <h3>Done</h3>
+                <div class="fileHolder">
+                    <span *ngFor="let complete of completedFiles">{{complete}}</span>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button mat-flat-button color="warn" (click)="callExtract()">Upload</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a routerLink="/import"><button mat-flat-button color="warn">Import Files for Upload</button></a>
+        </td>
+    </tr>
+</table>
+
