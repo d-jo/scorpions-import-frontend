@@ -27,6 +27,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule
   ],
   providers: [UploadService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

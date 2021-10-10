@@ -30,7 +30,6 @@ export class ImportComponent implements OnInit {
         else
           alert("File extensions can only be .pdf or .docx!");
       }
-      console.log(this.files.length);
     }
   }
 

@@ -12,8 +12,6 @@ export class UploadService {
     for(let x = 0; x < files.length; x++)
       formData.append('file', files[x]);
 
-    console.log(formData);
-
     return this.http.post(url, formData, {responseType: 'text'});
   }
 }

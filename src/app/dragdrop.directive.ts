@@ -22,10 +22,8 @@ export class DragdropDirective {
   @HostListener('drop', ['$event']) public onDrop(event: any) {
     event.preventDefault();
     event.stopPropagation();
-    console.log(event);
     const files = event.dataTransfer.files;
     if(files.length > 0) {
-      console.log(files.length + " files ready!");
       this.fileDropped.emit(files);
     }
   }

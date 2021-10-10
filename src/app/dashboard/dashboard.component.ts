@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   getFiles(): void {
     this.requestFiles().subscribe((data: any) => {
+      console.log(data);
       this.uploadFiles = data.files;
     })
   }
