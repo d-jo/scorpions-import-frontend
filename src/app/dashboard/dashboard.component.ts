@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DashboardFiles } from './dashboard.model';
 
 @Component({
   selector: 'app-dashboard',
