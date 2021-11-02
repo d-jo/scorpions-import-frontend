@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
     this.requestFiles().subscribe((data: DashboardFiles) => {
       this.uploadFiles = data.uploaded;
       this.reviewFiles = data.review;
-      console.log(this.reviewFiles)
       this.completedFiles = data.done;
     })
   }
