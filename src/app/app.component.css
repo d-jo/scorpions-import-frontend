@@ -33,7 +33,6 @@
     border: 2px solid #000;
     background-color: #FFF;
 }
-
 .navbox:hover {
     background-color: #000;
     color: #FFF;
@@ -43,13 +42,16 @@ a {
     text-decoration: none;
     color: #000;
 }
+.user {
+    position: absolute;
+    top:20px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
 .b {
-    
-    display: inline-block;
-    width: 100px;
-    text-align: center;
+    margin-top: 5px;
+    width: 80px;
     border: 2px solid rgb(141, 37, 37);
     background-color: rgb(225, 235, 230);
-    margin-left: 1500px;
-    
 }

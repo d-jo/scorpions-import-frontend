@@ -13,6 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
+import { LoginService } from './login.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { environment as env } from '../environments/environment';
     AppComponent,
     ImportComponent,
     DragdropDirective,
-    DashboardComponent,  
+    DashboardComponent,
+    LoginComponent,  
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { environment as env } from '../environments/environment';
       ...env.auth,
     }),
   ],
-  providers: [UploadService],
+  providers: [UploadService, LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
