@@ -18,19 +18,23 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFiles();
-    this.reviewFiles = ["file3.txt", "file4.docx"];
-    this.completedFiles = ["file5.txt", "file6.docx"];
   }
 
   getFiles(): void {
-    this.requestFiles().subscribe((data: any) => {
-      console.log(data);
-      this.uploadFiles = data.files;
+    this.requestFiles().subscribe((data: DashboardFiles) => {
+      this.uploadFiles = data.uploaded;
+      this.reviewFiles = data.review;
+      console.log(this.reviewFiles)
+      this.completedFiles = data.done;
     })
   }
 
   requestFiles(): any {
     return this.httpClient.get(this.baseUrl + "/dashboard");
+  }
+
+  getFileText(file:any) {
+    return file && file.length > 0 ? file : "";
   }
 
   callExtract() {
