@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   }
 
   requestFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/files");
+    return this.httpClient.get(this.baseUrl + "/dashboard");
   }
 
   callExtract() {
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   extractFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/trigger_process");
+    return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
   }
 
   reviewFile(file: any) {
