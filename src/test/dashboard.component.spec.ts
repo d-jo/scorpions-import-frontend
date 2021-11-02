@@ -10,7 +10,11 @@ describe('DashboardComponent', () => {
   //Mocked objects here
   let mockHttpClient = {
     get(url: string) {
-      return of({ files: ["file1.test", "file2.pdf"]});
+      return of({
+          "uploaded":   ["file1.test", "file2.pdf"],
+          "review":     ["file3.test"],
+          "done":       [ ],
+        });
     }
   }
 
@@ -35,6 +39,12 @@ describe('DashboardComponent', () => {
   it('should retrieve files on load', () => {
     expect(component.uploadFiles.length).toBe(2);
     expect(component.uploadFiles[0]).toBe("file1.test");
+
+    expect(component.reviewFiles.length).toBe(1);
+    expect(component.reviewFiles[0]).toBe("file3.test");
+
+    expect(component.completedFiles.length).toBe(0);
+    expect(component.completedFiles).toEqual([]);
   });
 
   //TODO add extraction test once that is implemented
