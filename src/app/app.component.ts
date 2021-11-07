@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'scorpions-import-frontend';
   showSidenav = false;
+
+  constructor(public login: LoginService) { }
+
+  ngOnDestroy() {
+    this.login.logout();
+  }
+
+  logoutUser() {
+    this.login.logout();
+  }
+
+  getUser() {
+    return this.login.getUsername();
+  }
+
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     let classList = document.getElementById("router")?.classList
     let sideClassList = document.getElementById("side")?.classList
-    if(!classList || !sideClassList) return
+    if (!classList || !sideClassList) return
 
-    if(this.showSidenav) {
+    if (this.showSidenav) {
       classList.add("active");
       sideClassList.add("active");
     } else {

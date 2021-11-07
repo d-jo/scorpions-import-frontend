@@ -1,0 +1,19 @@
+.log {
+  width: 600px;
+  height: 200px;
+  margin: 50px auto;
+  border: 2px solid #000;
+  border-radius: 15px;
+}
+h2 {
+  width: 421px; 
+  margin: auto; 
+  padding: 20px;
+}
+.b {
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}

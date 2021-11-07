@@ -1,12 +1,14 @@
 <div class="header">
     <mat-icon (click)="toggleSidenav()"
-        style="font-size: 30px; color: #FFF; position:absolute; left:10px; top:28px; cursor: pointer;">menu</mat-icon>
+        style="font-size: 30px; color: #000; position:absolute; left:10px; top:28px; cursor: pointer;">menu</mat-icon>
     <h2 class="title">Academic Assessment Import</h2>
+    <div class="user" *ngIf="login.isUserAuthenticated() | async">
+        {{getUser()}}
+        <button class="b" (click)="logoutUser()">Log out</button>
+    </div>
 </div>
-<div id="router" style="transition: 0.5s;">
-    <router-outlet></router-outlet>
-</div>
-<div id="side" class="sidenav">
+  
+<div id="side" *ngIf="login.isUserAuthenticated() | async" class="sidenav">
     <a routerLink="/dashboard" (click)="toggleSidenav()">
         <span class="navbox">Dashboard</span>
     </a>
@@ -14,4 +16,8 @@
     <a routerLink="/import" (click)="toggleSidenav()">
         <span class="navbox">Import</span>
     </a>
+</div>
+
+<div id="router" style="transition: 0.5s;">
+    <router-outlet></router-outlet>
 </div>

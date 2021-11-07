@@ -1,12 +1,12 @@
 .header {
-    background-color: #000;
+    background-color: rgb(219, 210, 210);
     width: 100vw;
     height: 90px; 
     margin-top: -20px;
     text-align: center;
 }
 .title {
-    color:#FFF;
+    color:rgb(158, 32, 32);
     padding-top: 30px;
 }
 .sidenav {
@@ -41,4 +41,17 @@ a {
     margin-left: 48px;
     text-decoration: none;
     color: #000;
+}
+.user {
+    position: absolute;
+    top:20px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.b {
+    margin-top: 5px;
+    width: 80px;
+    border: 2px solid rgb(141, 37, 37);
+    background-color: rgb(225, 235, 230);
 }
