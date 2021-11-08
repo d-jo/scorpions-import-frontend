@@ -37,3 +37,15 @@ h3 {
 button {
     margin-left: 100px;
 }
+.results {
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 600px;
+    border: 1px solid #F00;
+    border-radius: 15px;
+    padding: 10px;
+}
+.disp {
+    display: flex;
+    flex-direction: column;
+}
