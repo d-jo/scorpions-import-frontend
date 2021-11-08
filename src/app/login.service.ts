@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,14 @@ export class LoginService implements CanActivate {
   username:string | undefined;
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.auth.isAuthenticated$;
+    return this.auth.isAuthenticated$.pipe(map((data:boolean) => {
+      if(data) {
+        return true;
+      } else {
+        this.router.navigate(['/login'])
+        return false;
+      }
+    }));
   }
 
   loginWithRedirect(): void {
