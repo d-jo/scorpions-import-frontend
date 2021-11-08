@@ -41,17 +41,11 @@ export class DashboardComponent implements OnInit {
   }
 
   callExtract() {
-    // this.extractFiles().subscribe(() => {
-    //   console.log("Extraction Finished!");
-    // });
     this.extractData().subscribe((data:any) => {
-      // console.log(data);
       for(let i = 0; i < data.reports.length; i++) {
         let item = data.reports[i]
-        console.log(item)
         for(let j = 0; j < item.length; j++) {
           if(item[j] instanceof Array && item[j].length == 0) {
-            console.log("HERE")
             continue
           }
           this.reports.push(item[j])
@@ -59,20 +53,17 @@ export class DashboardComponent implements OnInit {
       }
       for(let i = 0; i < data.slos.length; i++) {
         let item = data.slos[i]
-        console.log(item)
         for(let j = 0; j < item.length; j++) {
           this.slos.push(item[j])
         }
       }
-      console.log(this.reports)
-      console.log(this.slos)
       this.display = true
     });
   }
 
-  extractFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
-  }
+  // extractFiles(): any {
+  //   return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
+  // }
 
   extractData(): any {
     return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {responseType: 'json'});
