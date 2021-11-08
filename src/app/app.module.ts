@@ -6,6 +6,7 @@ import { ImportComponent } from './import/import.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UploadService } from './upload-service';
 import { HttpClientModule } from '@angular/common/http';
 import { DragdropDirective } from './dragdrop.directive';
@@ -31,6 +32,7 @@ import { LoginComponent } from './login/login.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
+    MatCheckboxModule,
     HttpClientModule,
     // Import the module into the application, with configuration
     AuthModule.forRoot({

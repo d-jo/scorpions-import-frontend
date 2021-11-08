@@ -4,7 +4,11 @@
             <div class="uploading">
                 <h3>Upload</h3>
                 <div class="fileHolder">
-                    <span *ngFor="let file of uploadFiles">{{getFileText(file)}}</span>
+                    <span *ngFor="let file of uploadFiles">
+                        <mat-checkbox (change)="addFile($event.checked, file)">
+                            {{getFileText(file)}}
+                        </mat-checkbox>
+                    </span>
                 </div>
             </div>
         </td>
@@ -12,7 +16,8 @@
             <div class="review">
                 <h3>Review</h3>
                 <div class="fileHolder">
-                    <span *ngFor="let review of reviewFiles">{{getFileText(review)}} <mat-icon style="float: right; cursor: pointer;" (click)="reviewFile(review)">search</mat-icon></span>
+                    <span *ngFor="let review of reviewFiles">{{getFileText(review)}} <mat-icon
+                            style="float: right; cursor: pointer;" (click)="reviewFile(review)">search</mat-icon></span>
                 </div>
             </div>
         </td>
@@ -37,3 +42,29 @@
     </tr>
 </table>
 
+<div *ngIf="display" class="results">
+    <div *ngFor="let r of reports; let i = index" class="disp">
+        <h4>Report {{i+1}}: {{files[i]}}</h4><br/>
+        <span><b>Title:</b> {{r.title}}</span>
+        <span><b>Author:</b> {{r.author}}</span>
+        <span><b>Created:</b> {{r.created}}</span>
+        <span><b>College:</b> {{r.college}}</span>
+        <span><b>Department:</b> {{r.department}}</span>
+        <span><b>Program:</b> {{r.program}}</span>
+        <span><b>Degree Level:</b> {{r.degree_level}}</span>
+        <span><b>Academic Year:</b> {{r.academic_year}}</span>
+        <span><b>Date Range:</b> {{r.date_range}}</span><br/>
+        <h2>SLOS</h2>
+        <div *ngFor="let s of slos[i]; let idx = index" class="disp">
+            <h4>SLO {{idx+1}}</h4><br/>
+            <span><b>Description:</b> {{s.description}}</span>
+            <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
+            <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
+        </div>
+        <!-- accreditation_body: {{r.accreditation_body}}
+        last_accreditation_review: {{r.last_accreditation_review}}
+        slos_meet_standards: {{r.slos_meet_standards}}
+        stakeholder_involvement: {{r.stakeholder_involvement}}
+        additional_information: {{r.additional_information}} -->
+    </div><br/>
+</div>
