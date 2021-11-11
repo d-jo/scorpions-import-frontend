@@ -16,6 +16,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from '../environments/environment';
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { ReviewComponent } from './review/review.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { LoginComponent } from './login/login.component';
     ImportComponent,
     DragdropDirective,
     DashboardComponent,
-    LoginComponent,  
+    LoginComponent,
+    AdminComponent,
+    ReviewComponent,  
   ],
   imports: [
     BrowserModule,
