@@ -33,7 +33,11 @@ export class DashboardComponent implements OnInit {
   }
 
   requestFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/dashboard");
+    return this.httpClient.get(this.baseUrl + "/dashboard", {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 
   getFileText(file: any) {
@@ -66,7 +70,13 @@ export class DashboardComponent implements OnInit {
   // }
 
   extractData(): any {
-    return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {responseType: 'json'});
+    return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 
   reviewFile(file: any) {
