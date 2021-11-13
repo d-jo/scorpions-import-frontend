@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   }
 
   requestFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/dashboard", {
+    return this.httpClient.get(this.baseUrl + "/dashboard/", {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
       }

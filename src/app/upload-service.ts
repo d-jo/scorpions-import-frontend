@@ -12,6 +12,11 @@ export class UploadService {
     for(let x = 0; x < files.length; x++)
       formData.append('file', files[x]);
 
-    return this.http.post(url, formData, {responseType: 'text'});
+    return this.http.post(url, formData, {
+      responseType: 'text',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    });
   }
 }
