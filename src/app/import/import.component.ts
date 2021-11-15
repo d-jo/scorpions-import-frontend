@@ -44,7 +44,7 @@ export class ImportComponent implements OnInit {
       return
     }
 
-    this.upload.uploadFile(this.baseUrl + '/files', this.files)
+    this.upload.uploadFile(this.baseUrl + '/files/', this.files)
     .subscribe(
         () => {
           console.log("Upload done");
