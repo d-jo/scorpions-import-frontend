@@ -19,6 +19,13 @@ export class DragdropDirective {
     event.stopPropagation();
   }
 
+  /**
+   * @ngdoc method
+   * @name onDrop 
+   * @description logs out the current user
+   * @param {any} event the event to look at for dropped files into the dropbox
+   * @returns {void}
+   */
   @HostListener('drop', ['$event']) public onDrop(event: any) {
     event.preventDefault();
     event.stopPropagation();

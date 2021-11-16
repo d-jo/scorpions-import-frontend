@@ -24,6 +24,12 @@ export class DashboardComponent implements OnInit {
     this.getFiles();
   }
 
+  /**
+   * @ngdoc method
+   * @name getFiles 
+   * @description requests the files and their states from the backend
+   * @returns {void}
+   */
   getFiles(): void {
     this.requestFiles().subscribe((data: DashboardFiles) => {
       this.uploadFiles = data.uploaded;
@@ -32,6 +38,12 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  /**
+   * @ngdoc method
+   * @name requestFiles 
+   * @description makes the http call to the backend
+   * @returns {any} the backend response
+   */
   requestFiles(): any {
     return this.httpClient.get(this.baseUrl + "/dashboard/", {
       headers: {
@@ -40,10 +52,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * @ngdoc method
+   * @name getFileText 
+   * @description gets the file name to be displayed to the user
+   * @param {any} file the given file to get its name
+   * @returns {string} file name string
+   */
   getFileText(file: any) {
     return file && file.length > 0 ? file : "";
   }
 
+  /**
+   * @ngdoc method
+   * @name callExtract
+   * @description calls the backend to extract the selected files and displays the returned data
+   * @returns {void}
+   */
   callExtract() {
     this.extractData().subscribe((data:any) => {
       for(let i = 0; i < data.reports.length; i++) {
@@ -69,6 +94,12 @@ export class DashboardComponent implements OnInit {
   //   return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
   // }
 
+  /**
+   * @ngdoc method
+   * @name extractData 
+   * @description makes the http request to extract the data from the files
+   * @returns {any} the backend http response
+   */
   extractData(): any {
     return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {
       responseType: 'json',
@@ -79,10 +110,25 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * @ngdoc method
+   * @name reviewFile 
+   * @description TODO
+   * @param {any} file the specified file to review
+   * @returns {void}
+   */
   reviewFile(file: any) {
     console.log("Review: " + file);
   }
 
+  /**
+   * @ngdoc method
+   * @name addFile 
+   * @description adds/removes a file to/from the file list for data extraction 
+   * @param {boolean} checked if the box is checked or not, tells if it is an add or remove
+   * @param {string} file the file name to add/remove from the list
+   * @returns {void}
+   */
   addFile(checked: boolean, file: string) {
     if (checked) {
       this.files.push(file)
