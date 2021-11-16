@@ -1,1 +1,66 @@
-<p>review works!</p>
+<form>
+    <label class="form-input-label" for="academic_year">
+        Academic Year <div class="form-input-valid-icon" *ngIf="reportForm.get('academic_year').valid"></div>
+    </label>
+    <input class="form-input" formControlName="academic_year" type="text" name="academic_year" placeholder="Academic Year" maxlength="32">
+<br>
+    <label class="form-input-label" for="Author">
+        Author <div class="form-input-valid-icon" *ngIf="reportForm.get('Author').valid"></div>
+    </label>
+    <input class="form-input" formControlName="Author" type="text" name="Author" placeholder="Author" maxlength="32">
+<br>
+    <label class="form-input-label" for="college">
+        College <div class="form-input-valid-icon" *ngIf="reportForm.get('college').valid"></div>
+    </label>
+    <input class="form-input" formControlName="college" type="text" name="college" placeholder="College" maxlength="32">
+<br>
+    <label class="form-input-label" for="date_range">
+        Date Range <div class="form-input-valid-icon" *ngIf="reportForm.get('date_range').valid"></div>
+    </label>
+    <input class="form-input" formControlName="date_range" type="text" name="date_range" placeholder="Date Range" maxlength="32">
+<br>
+    <label class="form-input-label" for="degree_level">
+        Degree Level <div class="form-input-valid-icon" *ngIf="reportForm.get('degree_level').valid"></div>
+    </label>
+    <input class="form-input" formControlName="degree_level" type="text" name="degree_level" placeholder="Degree Level" maxlength="32">
+<br>
+    <label class="form-input-label" for="department">
+        Department <div class="form-input-valid-icon" *ngIf="reportForm.get('department').valid"></div>
+    </label>
+    <input class="form-input" formControlName="department" type="text" name="department" placeholder="Department" maxlength="32">
+<br>
+    <label class="form-input-label" for="program">
+        Program <div class="form-input-valid-icon" *ngIf="reportForm.get('program').valid"></div>
+    </label>
+    <input class="form-input" formControlName="program" type="text" name="program" placeholder="Program" maxlength="32">
+</form>
+<!--
+<div *ngIf="display" class="results">
+    <div *ngFor="let r of reports; let i = index" class="disp">
+        <h4>Report: {{file}}</h4><br/>
+        <span><b>Title:</b> {{r.title}}</span>
+        <span><b>Author:</b> {{r.author}}</span>
+        <span><b>Created:</b> {{r.created}}</span>
+        <span><b>College:</b> {{r.college}}</span>
+        <span><b>Department:</b> {{r.department}}</span>
+        <span><b>Program:</b> {{r.program}}</span>
+        <span><b>Degree Level:</b> {{r.degree_level}}</span>
+        <span><b>Academic Year:</b> {{r.academic_year}}</span>
+        <span><b>Date Range:</b> {{r.date_range}}</span><br/>
+        <h2>SLOS</h2>
+        <div *ngFor="let s of slos[i]; let idx = index" class="disp">
+            <h4>SLO {{idx+1}}</h4><br/>
+            <span><b>Description:</b> {{s.description}}</span>
+            <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
+            <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
+        </div>
+-->
+        <!-- accreditation_body: {{r.accreditation_body}}
+        last_accreditation_review: {{r.last_accreditation_review}}
+        slos_meet_standards: {{r.slos_meet_standards}}
+        stakeholder_involvement: {{r.stakeholder_involvement}}
+        additional_information: {{r.additional_information}} -->
+<!--
+    </div><br/>
+</div
+-->
