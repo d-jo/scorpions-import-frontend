@@ -13,6 +13,7 @@ import { DragdropDirective } from './dragdrop.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { environment as env } from '../environments/environment';
 import { LoginService } from './login.service';
 import { LoginComponent } from './login/login.component';
@@ -37,6 +38,8 @@ import { ReviewComponent } from './review/review.component';
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     // Import the module into the application, with configuration
     AuthModule.forRoot({

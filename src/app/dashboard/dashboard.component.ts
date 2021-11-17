@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DashboardFiles } from './dashboard.model';
 
 @Component({
@@ -9,6 +10,9 @@ import { DashboardFiles } from './dashboard.model';
 })
 export class DashboardComponent implements OnInit {
 
+  @Input()
+  fileId: string | undefined;
+  
   uploadFiles: any;
   reviewFiles: any;
   completedFiles: any;
@@ -18,7 +22,7 @@ export class DashboardComponent implements OnInit {
   slos:any[] = []
   reports:any[] = []
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getFiles();
@@ -80,6 +84,9 @@ export class DashboardComponent implements OnInit {
   }
 
   reviewFile(file: any) {
+    this.route
+        .params
+        .subscribe(v => console.log(v))
     console.log("Review: " + file);
   }
 

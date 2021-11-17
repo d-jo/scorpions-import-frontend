@@ -10,8 +10,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class ReviewComponent implements OnInit {
     
-  @Input()
-  public fileId: string | undefined;
+  @Input('fileId')
+  fileId: string = '';
   
   [x: string]: any;
   baseUrl = "http://localhost:5000";
@@ -36,16 +36,24 @@ export class ReviewComponent implements OnInit {
   stakeholder_involvement: string = ''
   title: string = ''
 
-  constructor(/*private formBuilder: FormBuilder ,*/ private httpClient: HttpClient) { 
-    // this.reportForm = this.formBuilder.group({
-    //     academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)])
-    // });
+  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    console.log(this.fileId)
     this.reportForm = this.formBuilder.group({
-        academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)])
+        academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        author: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        college: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        date_range: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
     });
+  }
+
+  get acaYear() {
+      return this.reportForm.get('academic_year');
   }
 
   viewData(): any {

@@ -1,13 +1,13 @@
-<form>
+<form [formGroup]="reportForm">
     <label class="form-input-label" for="academic_year">
         Academic Year <div class="form-input-valid-icon" *ngIf="reportForm.get('academic_year').valid"></div>
     </label>
     <input class="form-input" formControlName="academic_year" type="text" name="academic_year" placeholder="Academic Year" maxlength="32">
 <br>
     <label class="form-input-label" for="Author">
-        Author <div class="form-input-valid-icon" *ngIf="reportForm.get('Author').valid"></div>
+        Author <div class="form-input-valid-icon" *ngIf="reportForm.get('author').valid"></div>
     </label>
-    <input class="form-input" formControlName="Author" type="text" name="Author" placeholder="Author" maxlength="32">
+    <input class="form-input" formControlName="author" type="text" name="Author" placeholder="Author" maxlength="32">
 <br>
     <label class="form-input-label" for="college">
         College <div class="form-input-valid-icon" *ngIf="reportForm.get('college').valid"></div>
