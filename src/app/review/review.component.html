@@ -1,38 +1,122 @@
-<form [formGroup]="reportForm">
-    <label class="form-input-label" for="academic_year">
-        Academic Year <div class="form-input-valid-icon" *ngIf="reportForm.get('academic_year').valid"></div>
-    </label>
-    <input class="form-input" formControlName="academic_year" type="text" name="academic_year" placeholder="Academic Year" maxlength="32">
-<br>
+<form class="form-horizontal" [formGroup]="reportForm">
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <label class="form-input-label" for="academic_year">
+        Academic Year
+        <div
+          class="form-input-valid-icon"
+          *ngIf="reportForm.get('academic_year').valid"
+        ></div>
+      </label>
+      <input
+        class="form-input"
+        formControlName="academic_year"
+        type="text"
+        name="academic_year"
+        placeholder="Academic Year"
+        maxlength="32"
+      />
+    </div>
+    <br />
     <label class="form-input-label" for="Author">
-        Author <div class="form-input-valid-icon" *ngIf="reportForm.get('author').valid"></div>
+      Author
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('author').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="author" type="text" name="Author" placeholder="Author" maxlength="32">
-<br>
+    <input
+      class="form-input"
+      formControlName="author"
+      type="text"
+      name="Author"
+      placeholder="Author"
+      maxlength="32"
+    />
+    <br />
     <label class="form-input-label" for="college">
-        College <div class="form-input-valid-icon" *ngIf="reportForm.get('college').valid"></div>
+      College
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('college').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="college" type="text" name="college" placeholder="College" maxlength="32">
-<br>
+    <input
+      class="form-input"
+      formControlName="college"
+      type="text"
+      name="college"
+      placeholder="College"
+      maxlength="32"
+    />
+    <br />
     <label class="form-input-label" for="date_range">
-        Date Range <div class="form-input-valid-icon" *ngIf="reportForm.get('date_range').valid"></div>
+      Date Range
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('date_range').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="date_range" type="text" name="date_range" placeholder="Date Range" maxlength="32">
-<br>
+    <input
+      class="form-input"
+      formControlName="date_range"
+      type="text"
+      name="date_range"
+      placeholder="Date Range"
+      maxlength="32"
+    />
+    <br />
     <label class="form-input-label" for="degree_level">
-        Degree Level <div class="form-input-valid-icon" *ngIf="reportForm.get('degree_level').valid"></div>
+      Degree Level
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('degree_level').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="degree_level" type="text" name="degree_level" placeholder="Degree Level" maxlength="32">
-<br>
+    <input
+      class="form-input"
+      formControlName="degree_level"
+      type="text"
+      name="degree_level"
+      placeholder="Degree Level"
+      maxlength="32"
+    />
+    <br />
     <label class="form-input-label" for="department">
-        Department <div class="form-input-valid-icon" *ngIf="reportForm.get('department').valid"></div>
+      Department
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('department').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="department" type="text" name="department" placeholder="Department" maxlength="32">
-<br>
+    <input
+      class="form-input"
+      formControlName="department"
+      type="text"
+      name="department"
+      placeholder="Department"
+      maxlength="32"
+    />
+    <br />
     <label class="form-input-label" for="program">
-        Program <div class="form-input-valid-icon" *ngIf="reportForm.get('program').valid"></div>
+      Program
+      <div
+        class="form-input-valid-icon"
+        *ngIf="reportForm.get('program').valid"
+      ></div>
     </label>
-    <input class="form-input" formControlName="program" type="text" name="program" placeholder="Program" maxlength="32">
+    <input
+      class="form-input"
+      formControlName="program"
+      type="text"
+      name="program"
+      placeholder="Program"
+      maxlength="32"
+    />
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-primary" type="submit">Save</button>
+  </div>
 </form>
 <!--
 <div *ngIf="display" class="results">
@@ -55,7 +139,7 @@
             <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
         </div>
 -->
-        <!-- accreditation_body: {{r.accreditation_body}}
+<!-- accreditation_body: {{r.accreditation_body}}
         last_accreditation_review: {{r.last_accreditation_review}}
         slos_meet_standards: {{r.slos_meet_standards}}
         stakeholder_involvement: {{r.stakeholder_involvement}}

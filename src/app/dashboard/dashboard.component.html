@@ -17,7 +17,7 @@
                 <h3>Review</h3>
                 <div class="fileHolder">
                     <span *ngFor="let review of reviewFiles">{{getFileText(review)}} <mat-icon
-                            style="float: right; cursor: pointer;" (click)="reviewFile(review)" [routerLink]="['/review', review]">search</mat-icon></span>
+                            style="float: right; cursor: pointer;" (click)="reviewFile(review)">search</mat-icon></span>
                 </div>
             </div>
         </td>

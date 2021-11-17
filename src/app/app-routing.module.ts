@@ -12,7 +12,7 @@ import { ReviewComponent } from './review/review.component';
 const routes: Routes = [
   { path: 'import', component: ImportComponent, canActivate:[LoginService] },
   { path: 'dashboard', component: DashboardComponent, canActivate:[LoginService] },
-  { path: 'review', component: ReviewComponent, canActivate:[LoginService] },
+  { path: 'review/:id', component: ReviewComponent, canActivate:[LoginService] },
   { path: 'admin', component: AdminComponent, canActivate:[LoginService] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

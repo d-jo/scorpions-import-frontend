@@ -1,6 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { IReport } from '../report/IReport';
+
 
 
 @Component({
@@ -10,10 +15,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class ReviewComponent implements OnInit {
     
-  @Input('fileId')
-  fileId: string = '';
-  
-  [x: string]: any;
   baseUrl = "http://localhost:5000";
   file: string = ''
   display = false
@@ -35,12 +36,13 @@ export class ReviewComponent implements OnInit {
   slos_meet_standards: string = ''
   stakeholder_involvement: string = ''
   title: string = ''
+  reportForm: any;
 
-  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder) {
-  }
+  constructor(private httpClient: HttpClient,
+            private formBuilder: FormBuilder,
+            private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.fileId)
     this.reportForm = this.formBuilder.group({
         academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         author: new FormControl('', [Validators.required, Validators.maxLength(32)]),
@@ -50,20 +52,67 @@ export class ReviewComponent implements OnInit {
         department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
     });
+
+    this.activeRoute.paramMap.subscribe(params => {
+        const fileId = params.get('id');
+        if (fileId) {
+            this.getReportInfo(fileId);
+        }
+    })
   }
+
+  getReportInfo(fileId: string) {
+    this.viewData(fileId).subscribe(
+        (reportData: IReport) => this.editReport(reportData),
+        (err: any) => console.log(err)
+    );
+  }
+
+
+  editReport(reportData: IReport) {
+    console.log(reportData.academic_year);
+      this.reportForm.patchValue({
+          academic_year : reportData.academic_year,
+          accreditation_body : reportData.accreditation_body,
+          additional_information : reportData.additional_information,
+          author : reportData.author,
+          college : reportData.college,
+          created : reportData.created,
+          date_range : reportData.date_range,
+          degree_level : reportData.degree_level,
+          department : reportData.department,
+          has_been_reviewed : reportData.has_been_reviewed,
+          id : reportData.id,
+          last_accreditation_review : reportData.last_accreditation_review,
+          program : reportData.program,
+          slos_meet_standards : reportData.slos_meet_standards,
+          stakeholder_involvement : reportData.stakeholder_involvement,
+          title : reportData.title,
+          slos : reportData.slos,
+      })
+  }
+
 
   get acaYear() {
       return this.reportForm.get('academic_year');
   }
 
-  viewData(): any {
-    return this.httpClient.post(this.baseUrl + "/view/", this.file, {
-      responseType: 'json',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      }
-    });
+  viewData(fileId: string): Observable<IReport> {
+    console.log(fileId);
+    return this.httpClient.get<IReport>(this.baseUrl + "/view/" + fileId, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+      }).pipe(catchError(this.handleError));
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+        console.error('Client Side Error :', errorResponse.error.message);
+    } else {
+        console.error('Server Side Error :', errorResponse);
+    }
+    return throwError('There is a problem with the service. We are notified & working on it. Please try again later.');
   }
 
 }
