@@ -70,7 +70,6 @@ export class ReviewComponent implements OnInit {
 
 
   editReport(reportData: IReport) {
-    console.log(reportData.academic_year);
       this.reportForm.patchValue({
           academic_year : reportData.academic_year,
           accreditation_body : reportData.accreditation_body,
