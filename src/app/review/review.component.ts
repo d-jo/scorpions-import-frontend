@@ -98,7 +98,6 @@ export class ReviewComponent implements OnInit {
   }
 
   viewData(fileId: string): Observable<IReport> {
-    console.log(fileId);
     return this.httpClient.get<IReport>(this.baseUrl + "/view/" + fileId, {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('token'),

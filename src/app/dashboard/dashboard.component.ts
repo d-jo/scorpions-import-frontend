@@ -85,7 +85,6 @@ export class DashboardComponent implements OnInit {
 
   reviewFile(file: any) {
     this.route.navigate(['/review', file[0]]);
-    console.log("Review: " + file);
   }
 
   addFile(checked: boolean, file: string) {
