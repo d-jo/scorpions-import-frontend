@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IReport } from '../report/IReport';
 import { ISlos } from '../report/ISlo';
+import { FileServiceService } from '../shared/services/file-service.service';
 
 
 
@@ -19,28 +20,13 @@ export class ReviewComponent implements OnInit {
   baseUrl = "http://localhost:5000";
   file: string = ''
   display = false
-  slos:ISlos[] = []
-  academic_year: string = ''
-  accreditation_body: string = ''
-  additional_information: string = ''
-  author: string = ''
-  college: string = ''
-  created: string = ''
-  date_range: string = ''
-  degree_level: string = ''
-  department: string = ''
-  has_been_reviewed: string = ''
-  id: string = ''
-  last_accreditation_review: string = ''
-  program: string = ''
-  slos_meet_standards: string = ''
-  stakeholder_involvement: string = ''
-  title: string = ''
+  report!:IReport;
   reportForm: any;
 
   constructor(private httpClient: HttpClient,
             private formBuilder: FormBuilder,
-            private activeRoute: ActivatedRoute) { }
+            private activeRoute: ActivatedRoute,
+            private service: FileServiceService) { }
 
   ngOnInit(): void {
     this.reportForm = this.formBuilder.group({
@@ -63,15 +49,16 @@ export class ReviewComponent implements OnInit {
   }
 
   getReportInfo(fileId: string) {
-    this.viewData(fileId).subscribe(
-        (reportData: IReport) => this.editReport(reportData),
-        (err: any) => console.log(err)
-    );
+    return this.service.getFile(fileId)
+        .subscribe((result : IReport) => {
+            this.report = result;
+            this.editReport(result);
+        });
   }
 
 
   editReport(reportData: IReport) {
-      console.log(reportData.slos)
+    //   console.log(reportData.slos)
       this.reportForm.patchValue({
           academic_year : reportData.academic_year,
           accreditation_body : reportData.accreditation_body,
@@ -94,24 +81,6 @@ export class ReviewComponent implements OnInit {
         })
         // console.log(this.reportForm.get('slos'))
     }
-
-
-  viewData(fileId: string): Observable<IReport> {
-    return this.httpClient.get<IReport>(this.baseUrl + "/view/" + fileId, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        }
-      }).pipe(catchError(this.handleError));
-  }
-
-  private handleError(errorResponse: HttpErrorResponse) {
-    if (errorResponse.error instanceof ErrorEvent) {
-        console.error('Client Side Error :', errorResponse.error.message);
-    } else {
-        console.error('Server Side Error :', errorResponse);
-    }
-    return throwError('There is a problem with the service. We are notified & working on it. Please try again later.');
-  }
 
   createSLO(): FormGroup  {
       return this.formBuilder.group({
