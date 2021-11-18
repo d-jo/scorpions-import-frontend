@@ -17,14 +17,10 @@ import { FileServiceService } from '../shared/services/file-service.service';
 })
 export class ReviewComponent implements OnInit {
     
-  baseUrl = "http://localhost:5000";
-  file: string = ''
-  display = false
   report!:IReport;
   reportForm: any;
 
-  constructor(private httpClient: HttpClient,
-            private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
             private activeRoute: ActivatedRoute,
             private service: FileServiceService) { }
 
