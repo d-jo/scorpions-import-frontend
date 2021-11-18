@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IReport } from '../report/IReport';
+import { ISlos } from '../report/ISlo';
 
 
 
@@ -18,8 +19,7 @@ export class ReviewComponent implements OnInit {
   baseUrl = "http://localhost:5000";
   file: string = ''
   display = false
-  slos:any[] = []
-  reports:any[] = []
+  slos:ISlos[] = []
   academic_year: string = ''
   accreditation_body: string = ''
   additional_information: string = ''
@@ -51,6 +51,7 @@ export class ReviewComponent implements OnInit {
         degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        slos: this.formBuilder.array([this.createSLO()]),
     });
 
     this.activeRoute.paramMap.subscribe(params => {
@@ -70,6 +71,7 @@ export class ReviewComponent implements OnInit {
 
 
   editReport(reportData: IReport) {
+      console.log(reportData.slos)
       this.reportForm.patchValue({
           academic_year : reportData.academic_year,
           accreditation_body : reportData.accreditation_body,
@@ -88,13 +90,11 @@ export class ReviewComponent implements OnInit {
           stakeholder_involvement : reportData.stakeholder_involvement,
           title : reportData.title,
           slos : reportData.slos,
-      })
-  }
+        //   slos : this.formBuilder.array([reportData.slos])
+        })
+        // console.log(this.reportForm.get('slos'))
+    }
 
-
-  get acaYear() {
-      return this.reportForm.get('academic_year');
-  }
 
   viewData(fileId: string): Observable<IReport> {
     return this.httpClient.get<IReport>(this.baseUrl + "/view/" + fileId, {
@@ -113,4 +113,13 @@ export class ReviewComponent implements OnInit {
     return throwError('There is a problem with the service. We are notified & working on it. Please try again later.');
   }
 
-}
+  createSLO(): FormGroup  {
+      return this.formBuilder.group({
+          bloom: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+          common_graduate_program_slo: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+          description: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+          id: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+          report_id: new FormControl('', [Validators.required, Validators.maxLength(32)])
+        });
+      }
+  }

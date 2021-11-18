@@ -147,6 +147,30 @@
           />
         </div>
       </div>
+      <!-- SLO SECTION -->
+      <div class="row">
+        <div class="col-25">
+          <label for="slo">
+            SLOs
+            <div
+              class="form-input-valid-icon"
+              *ngIf="reportForm.get('slos').valid"
+            ></div>
+          </label>
+           <div
+              class="form-input-valid-icon"
+              *ngFor="reportForm.get('slos'); let i = index;"
+            ></div>
+          <input
+            class="form-input"
+            formControlName="slos"
+            type="text"
+            name="slos"
+            placeholder="SLO"
+            maxlength="32"
+          />
+        </div>
+      </div>
     </div>
     <div class="row">
       <button class="btn btn-primary" type="submit">Save</button>
