@@ -7,7 +7,7 @@ import { IReport } from 'src/app/report/IReport';
   providedIn: 'root'
 })
 export class FileServiceService {
-
+  
   private baseUrl = "http://localhost:5000";
 
   constructor(
@@ -40,4 +40,13 @@ export class FileServiceService {
     });
   }
 
+  public updateReport(payload: IReport): any {
+    return this.httpClient.post(this.baseUrl + "/view/" + payload.id, payload, {
+        responseType: 'json',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+      });
+  }
 }

@@ -1,7 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
 import { FileServiceService } from '../shared/services/file-service.service';
 
@@ -15,10 +14,12 @@ import { FileServiceService } from '../shared/services/file-service.service';
 export class ReviewComponent implements OnInit {
     
   report!:IReport;
+  payload?:IReport;
   reportForm: any;
 
   constructor(private formBuilder: FormBuilder,
             private activeRoute: ActivatedRoute,
+            private route: Router,
             private service: FileServiceService) { }
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class ReviewComponent implements OnInit {
         degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        slos: this.formBuilder.array([this.createSLO()]),
+        // slos: this.formBuilder.array([this.createSLO()]),
     });
 
     this.activeRoute.paramMap.subscribe(params => {
@@ -72,16 +73,63 @@ export class ReviewComponent implements OnInit {
         //   slos : reportData.slos,
         //   slos : this.formBuilder.array([reportData.slos])
         })
+        console.log(this.report)
         // console.log(this.reportForm.get('slos'))
     }
 
-  createSLO(): FormGroup  {
-      return this.formBuilder.group({
-          bloom: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-          common_graduate_program_slo: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-          description: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-          id: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-          report_id: new FormControl('', [Validators.required, Validators.maxLength(32)])
+  createSLO(numberOfSlos: number): FormGroup  {
+        return this.formBuilder.group({
+            bloom: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+            common_graduate_program_slo: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+            description: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+            id: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+            report_id: new FormControl('', [Validators.required, Validators.maxLength(32)])
         });
-      }
+    }
+
+  public updateReport(): void {
+      this.payload = this.setPayload()
+      this.service.updateReport(this.payload)
+      .subscribe({
+          error: (error: any) => {
+              console.log(error);
+            },
+            next: () => {
+                this.route.navigate(['/dashboard']);
+            }
+      })
   }
+    setPayload(): IReport {
+        return {
+            academic_year : this.reportForm.get('academic_year'),
+            accreditation_body : this.reportForm.get('accreditation_body'),
+            additional_information : this.reportForm.get('additional_information'),
+            author : this.reportForm.get('author'),
+            college : this.reportForm.get('college'),
+            created : this.reportForm.get('created'),
+            date_range : this.reportForm.get('date_range'),
+            degree_level : this.reportForm.get('degree_level'),
+            department : this.reportForm.get('department'),
+            has_been_reviewed : true,
+            id : this.reportForm.get('id'),
+            last_accreditation_review : this.reportForm.get('last_accreditation_review'),
+            program : this.reportForm.get('program'),
+            slos_meet_standards : this.reportForm.get('slos_meet_standards'),
+            stakeholder_involvement : this.reportForm.get('stakeholder_involvement'),
+            title : this.reportForm.get('title'),
+            slos : [
+                {
+                    bloom: [
+                        "Application"
+                    ],
+                    common_graduate_program_slo: [
+                        "1"
+                    ],
+                    description: "Mastery of discipline content",
+                    id: "565",
+                    report_id: 1
+                }
+            ]
+        }
+    }
+}

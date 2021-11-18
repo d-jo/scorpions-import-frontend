@@ -153,29 +153,28 @@
         >
         <div class="col-25">
           <label for="slo">
-            SLO {{i + 1}}
+            SLO
           </label>
           <input
             class="form-input"
-            formControlName="id"
             type="text"
             name="id"
             placeholder="SLO Number"
+            value="{{ slo.id }}"
             maxlength="32"
             />
           <input
             class="form-input"
-            formControlName="description"
             type="text"
             name="description"
             placeholder="Description"
+            value="{{ slo.description }}"
             maxlength="32"
             />
           <fieldset>
             <legend>Bloom's Taxonomy Cognitive Level</legend>
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Knowledge"
@@ -183,7 +182,6 @@
               /> Knowledge
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Analysis"
@@ -191,7 +189,6 @@
               /> Analysis <br>
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Comprehension"
@@ -199,7 +196,6 @@
               /> Comprehension
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Synthesis"
@@ -207,7 +203,6 @@
               /> Synthesis <br>
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Application"
@@ -215,7 +210,6 @@
               /> Application
             <input
               class="form-input"
-              formControlName="bloom"
               type="checkbox"
               name="bloom"
               value="Evaluation"
@@ -269,7 +263,7 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-primary" (click)="updateReport()" type="submit">Save</button>
     </div>
   </form>
 </div>
