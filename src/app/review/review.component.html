@@ -9,7 +9,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('academic_year').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -18,7 +18,7 @@
             name="academic_year"
             placeholder="Academic Year"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -30,7 +30,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('author').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -39,7 +39,7 @@
             name="Author"
             placeholder="Author"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -51,7 +51,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('college').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -60,7 +60,7 @@
             name="college"
             placeholder="College"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -72,7 +72,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('date_range').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -81,7 +81,7 @@
             name="date_range"
             placeholder="Date Range"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -93,7 +93,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('degree_level').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -102,7 +102,7 @@
             name="degree_level"
             placeholder="Degree Level"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -114,7 +114,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('department').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -123,7 +123,7 @@
             name="department"
             placeholder="Department"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <br />
@@ -135,7 +135,7 @@
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('program').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -144,7 +144,7 @@
             name="program"
             placeholder="Program"
             maxlength="32"
-          />
+            />
         </div>
       </div>
       <!-- SLO SECTION -->
@@ -153,11 +153,11 @@
         >
         <div class="col-25">
           <label for="slo">
-            SLO {{i + 1}}
+            SLO
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('slos').valid"
-            ></div>
+              ></div>
           </label>
           <input
             class="form-input"
@@ -166,108 +166,108 @@
             name="sloId"
             placeholder="SLO Number"
             maxlength="32"
-          />
-           <input
+            />
+          <input
             class="form-input"
             formControlName="description"
             type="text"
             name="description"
             placeholder="Description"
             maxlength="32"
-          />
+            />
           <fieldset>
-           <legend>Bloom's Taxonomy Cognitive Level</legend>
-           <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Knowledge"
-            maxlength="32"
-          /> Knowledge
-          <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Analysis"
-            maxlength="32"
-          /> Analysis <br>
-          <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Comprehension"
-            maxlength="32"
-          /> Comprehension
-          <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Synthesis"
-            maxlength="32"
-          /> Synthesis <br>
-          <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Application"
-            maxlength="32"
-          /> Application
-          <input
-            class="form-input"
-            formControlName="bloom"
-            type="checkbox"
-            name="bloom"
-            value="Evaluation"
-            maxlength="32"
-          /> Evaluation
+            <legend>Bloom's Taxonomy Cognitive Level</legend>
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Knowledge"
+              maxlength="32"
+              /> Knowledge
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Analysis"
+              maxlength="32"
+              /> Analysis <br>
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Comprehension"
+              maxlength="32"
+              /> Comprehension
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Synthesis"
+              maxlength="32"
+              /> Synthesis <br>
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Application"
+              maxlength="32"
+              /> Application
+            <input
+              class="form-input"
+              formControlName="bloom"
+              type="checkbox"
+              name="bloom"
+              value="Evaluation"
+              maxlength="32"
+              /> Evaluation
           </fieldset>
           <fieldset>
-          <legend>Common Graduate Program SLOs</legend>
-          <input
-            class="form-input"
-            formControlName="programSLO"
-            type="checkbox"
-            name="programSLO"
-            value="1"
-            maxlength="32"
-          /> 1
-          <input
-            class="form-input"
-            formControlName="programSLO"
-            type="checkbox"
-            name="programSLO"
-            value="2"
-            maxlength="32"
-          /> 2 <br>
-          <input
-            class="form-input"
-            formControlName="programSLO"
-            type="checkbox"
-            name="programSLO"
-            value="3"
-            maxlength="32"
-          /> 3
-          <input
-            class="form-input"
-            formControlName="programSLO"
-            type="checkbox"
-            name="programSLO"
-            value="4"
-            maxlength="32"
-          /> 4 <br>
-          <input
-            class="form-input"
-            formControlName="programSLO"
-            type="checkbox"
-            name="programSLO"
-            value="NA"
-            maxlength="32"
-          /> Not applicable for SLO
+            <legend>Common Graduate Program SLOs</legend>
+            <input
+              class="form-input"
+              formControlName="common_graduate_program_slo"
+              type="checkbox"
+              name="common_graduate_program_slo"
+              value="1"
+              maxlength="32"
+              /> 1
+            <input
+              class="form-input"
+              formControlName="common_graduate_program_slo"
+              type="checkbox"
+              name="common_graduate_program_slo"
+              value="2"
+              maxlength="32"
+              /> 2 <br>
+            <input
+              class="form-input"
+              formControlName="common_graduate_program_slo"
+              type="checkbox"
+              name="common_graduate_program_slo"
+              value="3"
+              maxlength="32"
+              /> 3
+            <input
+              class="form-input"
+              formControlName="common_graduate_program_slo"
+              type="checkbox"
+              name="common_graduate_program_slo"
+              value="4"
+              maxlength="32"
+              /> 4 <br>
+            <input
+              class="form-input"
+              formControlName="common_graduate_program_slo"
+              type="checkbox"
+              name="common_graduate_program_slo"
+              value="NA"
+              maxlength="32"
+              /> Not applicable for SLO
           </fieldset>
         </div>
       </div>
@@ -278,32 +278,32 @@
   </form>
 </div>
 <!--
-<div *ngIf="display" class="results">
-    <div *ngFor="let r of reports; let i = index" class="disp">
-        <h4>Report: {{file}}</h4><br/>
-        <span><b>Title:</b> {{r.title}}</span>
-        <span><b>Author:</b> {{r.author}}</span>
-        <span><b>Created:</b> {{r.created}}</span>
-        <span><b>College:</b> {{r.college}}</span>
-        <span><b>Department:</b> {{r.department}}</span>
-        <span><b>Program:</b> {{r.program}}</span>
-        <span><b>Degree Level:</b> {{r.degree_level}}</span>
-        <span><b>Academic Year:</b> {{r.academic_year}}</span>
-        <span><b>Date Range:</b> {{r.date_range}}</span><br/>
-        <h2>SLOS</h2>
-        <div *ngFor="let s of slos[i]; let idx = index" class="disp">
-            <h4>SLO {{idx+1}}</h4><br/>
-            <span><b>Description:</b> {{s.description}}</span>
-            <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
-            <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
-        </div>
--->
+  <div *ngIf="display" class="results">
+      <div *ngFor="let r of reports; let i = index" class="disp">
+          <h4>Report: {{file}}</h4><br/>
+          <span><b>Title:</b> {{r.title}}</span>
+          <span><b>Author:</b> {{r.author}}</span>
+          <span><b>Created:</b> {{r.created}}</span>
+          <span><b>College:</b> {{r.college}}</span>
+          <span><b>Department:</b> {{r.department}}</span>
+          <span><b>Program:</b> {{r.program}}</span>
+          <span><b>Degree Level:</b> {{r.degree_level}}</span>
+          <span><b>Academic Year:</b> {{r.academic_year}}</span>
+          <span><b>Date Range:</b> {{r.date_range}}</span><br/>
+          <h2>SLOS</h2>
+          <div *ngFor="let s of slos[i]; let idx = index" class="disp">
+              <h4>SLO {{idx+1}}</h4><br/>
+              <span><b>Description:</b> {{s.description}}</span>
+              <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
+              <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
+          </div>
+  -->
 <!-- accreditation_body: {{r.accreditation_body}}
-        last_accreditation_review: {{r.last_accreditation_review}}
-        slos_meet_standards: {{r.slos_meet_standards}}
-        stakeholder_involvement: {{r.stakeholder_involvement}}
-        additional_information: {{r.additional_information}} -->
+  last_accreditation_review: {{r.last_accreditation_review}}
+  slos_meet_standards: {{r.slos_meet_standards}}
+  stakeholder_involvement: {{r.stakeholder_involvement}}
+  additional_information: {{r.additional_information}} -->
 <!--
-    </div><br/>
-</div
--->
+  </div><br/>
+  </div
+  -->
