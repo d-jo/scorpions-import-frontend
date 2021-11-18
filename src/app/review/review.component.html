@@ -149,11 +149,11 @@
       </div>
       <!-- SLO SECTION -->
       <div class="row"
-        *ngFor="let slo of report.slos"
+        *ngFor="let slo of report.slos; let i = index;"
         >
         <div class="col-25">
           <label for="slo">
-            SLOs
+            SLO {{i + 1}}
             <div
               class="form-input-valid-icon"
               *ngIf="reportForm.get('slos').valid"
@@ -161,12 +161,114 @@
           </label>
           <input
             class="form-input"
-            formControlName="slos"
+            formControlName="sloId"
             type="text"
-            name="slos"
+            name="sloId"
+            placeholder="SLO Number"
             maxlength="32"
-            value=""
           />
+           <input
+            class="form-input"
+            formControlName="description"
+            type="text"
+            name="description"
+            placeholder="Description"
+            maxlength="32"
+          />
+          <fieldset>
+           <legend>Bloom's Taxonomy Cognitive Level</legend>
+           <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Knowledge"
+            maxlength="32"
+          /> Knowledge
+          <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Analysis"
+            maxlength="32"
+          /> Analysis <br>
+          <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Comprehension"
+            maxlength="32"
+          /> Comprehension
+          <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Synthesis"
+            maxlength="32"
+          /> Synthesis <br>
+          <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Application"
+            maxlength="32"
+          /> Application
+          <input
+            class="form-input"
+            formControlName="bloom"
+            type="checkbox"
+            name="bloom"
+            value="Evaluation"
+            maxlength="32"
+          /> Evaluation
+          </fieldset>
+          <fieldset>
+          <legend>Common Graduate Program SLOs</legend>
+          <input
+            class="form-input"
+            formControlName="programSLO"
+            type="checkbox"
+            name="programSLO"
+            value="1"
+            maxlength="32"
+          /> 1
+          <input
+            class="form-input"
+            formControlName="programSLO"
+            type="checkbox"
+            name="programSLO"
+            value="2"
+            maxlength="32"
+          /> 2 <br>
+          <input
+            class="form-input"
+            formControlName="programSLO"
+            type="checkbox"
+            name="programSLO"
+            value="3"
+            maxlength="32"
+          /> 3
+          <input
+            class="form-input"
+            formControlName="programSLO"
+            type="checkbox"
+            name="programSLO"
+            value="4"
+            maxlength="32"
+          /> 4 <br>
+          <input
+            class="form-input"
+            formControlName="programSLO"
+            type="checkbox"
+            name="programSLO"
+            value="NA"
+            maxlength="32"
+          /> Not applicable for SLO
+          </fieldset>
         </div>
       </div>
     </div>
