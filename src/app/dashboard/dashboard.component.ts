@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DashboardFiles } from './dashboard.model';
 import { Router } from '@angular/router';
+import { FileServiceService } from '../shared/services/file-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit {
   slos:any[] = []
   reports:any[] = []
 
-  constructor(private httpClient: HttpClient, private route: Router) { }
+  constructor(private route: Router,
+            private service: FileServiceService) { }
 
   ngOnInit(): void {
     this.getFiles();
@@ -37,11 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   requestFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/dashboard/", {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      }
-    });
+    return this.service.requestFiles();
   }
 
   getFileText(file: any) {
@@ -74,13 +72,7 @@ export class DashboardComponent implements OnInit {
   // }
 
   extractData(): any {
-    return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {
-      responseType: 'json',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      }
-    });
+    return this.service.extractData(this.files);
   }
 
   reviewFile(file: any) {

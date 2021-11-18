@@ -22,5 +22,22 @@ export class FileServiceService {
     });
   }
 
+  public requestFiles(): any {
+    return this.httpClient.get(this.baseUrl + "/dashboard/", {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
+  }
+
+  public extractData(files: any): any {
+    return this.httpClient.post(this.baseUrl + "/reports/extract_data", files, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
+  }
 
 }

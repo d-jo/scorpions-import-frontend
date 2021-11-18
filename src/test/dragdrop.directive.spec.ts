@@ -1,4 +1,4 @@
-import { DragdropDirective } from '../app/dragdrop.directive';
+import { DragdropDirective } from '../app/shared/services/dragdrop.directive';
 
 describe('DragdropDirective', () => {
   it('should create an instance', () => {
