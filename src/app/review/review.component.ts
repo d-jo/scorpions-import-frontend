@@ -2,10 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { IReport } from '../report/IReport';
-import { ISlos } from '../report/ISlo';
 import { FileServiceService } from '../shared/services/file-service.service';
 
 
@@ -72,7 +69,7 @@ export class ReviewComponent implements OnInit {
           slos_meet_standards : reportData.slos_meet_standards,
           stakeholder_involvement : reportData.stakeholder_involvement,
           title : reportData.title,
-          slos : reportData.slos,
+        //   slos : reportData.slos,
         //   slos : this.formBuilder.array([reportData.slos])
         })
         // console.log(this.reportForm.get('slos'))
