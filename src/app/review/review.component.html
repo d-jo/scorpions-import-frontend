@@ -153,17 +153,13 @@
         >
         <div class="col-25">
           <label for="slo">
-            SLO
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('slos').valid"
-              ></div>
+            SLO {{i + 1}}
           </label>
           <input
             class="form-input"
-            formControlName="sloId"
+            formControlName="id"
             type="text"
-            name="sloId"
+            name="id"
             placeholder="SLO Number"
             maxlength="32"
             />
