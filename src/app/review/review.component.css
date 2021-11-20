@@ -16,6 +16,7 @@ label {
 
 button[type=submit],
       [type=delete],
+      [type=cancel],
       [type=reset] {
     color: white;
     padding: 12px 20px;
@@ -39,6 +40,14 @@ button[type=delete] {
 
 button[type=delete]:hover {
     background-color: #802828;
+}
+
+button[type=cancel] {
+    background-color: #646464;
+}
+
+button[type=cancel]:hover {
+    background-color: #474747;
 }
 
 button[type=reset] {

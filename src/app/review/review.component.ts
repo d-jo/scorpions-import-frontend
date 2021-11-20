@@ -104,6 +104,10 @@ export class ReviewComponent implements OnInit {
     this.getReportInfo(this.reportForm.get('program'));
   }
 
+  public cancelReview(): void {
+    this.route.navigate(['/dashboard']);
+  }
+
   public deleteReport(): void {
     if(confirm("Are you sure to delete " + this.reportForm.get('id'))) {
         this.service.deleteReport(this.reportForm.get('id'))
