@@ -101,19 +101,21 @@ export class ReviewComponent implements OnInit {
   }
 
   public resetReport(): void {
-    this.getReportInfo(this.reportForm.id);
+    this.getReportInfo(this.reportForm.get('program'));
   }
 
   public deleteReport(): void {
-    this.service.deleteReport(this.reportForm.id)
-    .subscribe({
-        error: (error: any) => {
-            console.log(error);
-          },
-          next: () => {
-              this.route.navigate(['/dashboard']);
-          }
-    })
+    if(confirm("Are you sure to delete " + this.reportForm.get('id'))) {
+        this.service.deleteReport(this.reportForm.get('id'))
+        // .subscribe({
+        //     error: (error: any) => {
+        //         console.log(error);
+        //     },
+            // next: () => {
+                this.route.navigate(['/dashboard']);
+            // }
+        // })
+    }
   }
 
     setPayload(): IReport {

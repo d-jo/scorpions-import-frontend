@@ -50,13 +50,14 @@ export class FileServiceService {
       });
   }
 
-  public deleteReport(docId: string): any {
-    return this.httpClient.delete(this.baseUrl + "/view/" + docId, {
-        responseType: 'json',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        }
-      });
+  public deleteReport(docId: string): void {
+      console.log('Deleting file ' + docId);
+    // return this.httpClient.delete(this.baseUrl + "/view/" + docId, {
+    //     responseType: 'json',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    //     }
+    //   });
   }
 }
