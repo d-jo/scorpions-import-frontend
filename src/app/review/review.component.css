@@ -14,8 +14,9 @@ label {
     display: inline-block;
 }
 
-button[type=submit] {
-    background-color: #4CAF50;
+button[type=submit],
+      [type=delete],
+      [type=reset] {
     color: white;
     padding: 12px 20px;
     border: none;
@@ -24,8 +25,28 @@ button[type=submit] {
     float: right;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
+button[type=submit] {
+    background-color: #4CAF50;
+}
+
+button[type=submit]:hover {
+    background-color: #37803b;
+}
+
+button[type=delete] {
+    background-color: #ac3535;
+}
+
+button[type=delete]:hover {
+    background-color: #802828;
+}
+
+button[type=reset] {
+    background-color: #646464;
+}
+
+button[type=reset]:hover {
+    background-color: #474747;
 }
 
 .container {

@@ -99,6 +99,23 @@ export class ReviewComponent implements OnInit {
             }
       })
   }
+
+  public resetReport(): void {
+    this.getReportInfo(this.reportForm.id);
+  }
+
+  public deleteReport(): void {
+    this.service.deleteReport(this.reportForm.id)
+    .subscribe({
+        error: (error: any) => {
+            console.log(error);
+          },
+          next: () => {
+              this.route.navigate(['/dashboard']);
+          }
+    })
+  }
+
     setPayload(): IReport {
         return {
             academic_year : this.reportForm.get('academic_year'),

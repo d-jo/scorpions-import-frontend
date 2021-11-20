@@ -149,7 +149,7 @@
       </div>
       <!-- SLO SECTION -->
       <div class="row"
-        *ngFor="let slo of report.slos; let i = index;"
+        *ngFor="let slo of report.slos; index as i;"
         >
         <div class="col-25">
           <label for="slo">
@@ -264,6 +264,8 @@
     </div>
     <div class="row">
       <button class="btn btn-primary" (click)="updateReport()" type="submit">Save</button>
+      <button class="btn btn-primary" (click)="resetReport()" type="reset">Reset</button>
+      <button class="btn btn-primary" (click)="deleteReport()" type="delete">Delete</button>
     </div>
   </form>
 </div>
