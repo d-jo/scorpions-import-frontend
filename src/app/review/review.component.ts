@@ -101,7 +101,7 @@ export class ReviewComponent implements OnInit {
   }
 
   public resetReport(): void {
-    this.getReportInfo(this.reportForm.get('program'));
+    this.getReportInfo(this.report.id);
   }
 
   public cancelReview(): void {
@@ -109,16 +109,16 @@ export class ReviewComponent implements OnInit {
   }
 
   public deleteReport(): void {
-    if(confirm("Are you sure to delete " + this.reportForm.get('id'))) {
-        this.service.deleteReport(this.reportForm.get('id'))
-        // .subscribe({
-        //     error: (error: any) => {
-        //         console.log(error);
-        //     },
-            // next: () => {
+    if(confirm("Are you sure to delete " + this.report.id)) {
+        this.service.deleteReport(this.report.id)
+        .subscribe({
+            error: (error: any) => {
+                console.log(error);
+            },
+            next: () => {
                 this.route.navigate(['/dashboard']);
-            // }
-        // })
+            }
+        })
     }
   }
 

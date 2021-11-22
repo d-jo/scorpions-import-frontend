@@ -15,7 +15,7 @@ export class FileServiceService {
   ) { }
 
   public getFile(fileId: string): Observable<IReport> {
-    return this.httpClient.get<IReport>(this.baseUrl + "/view/" + fileId, {
+    return this.httpClient.get<IReport>(this.baseUrl + "/reports/" + fileId, {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
       }
@@ -41,7 +41,7 @@ export class FileServiceService {
   }
 
   public updateReport(payload: IReport): any {
-    return this.httpClient.post(this.baseUrl + "/view/" + payload.id, payload, {
+    return this.httpClient.post(this.baseUrl + "/reports/" + payload.id, payload, {
         responseType: 'json',
         headers: {
           'Content-Type': 'application/json',
@@ -50,14 +50,14 @@ export class FileServiceService {
       });
   }
 
-  public deleteReport(docId: string): void {
+  public deleteReport(docId: string): any {
       console.log('Deleting file ' + docId);
-    // return this.httpClient.delete(this.baseUrl + "/view/" + docId, {
-    //     responseType: 'json',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': 'Bearer ' + localStorage.getItem('token'),
-    //     }
-    //   });
+    return this.httpClient.delete(this.baseUrl + "/reports/" + docId, {
+        responseType: 'json',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+      });
   }
 }
