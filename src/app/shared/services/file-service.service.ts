@@ -51,7 +51,6 @@ export class FileServiceService {
   }
 
   public deleteReport(docId: string): any {
-      console.log('Deleting file ' + docId);
     return this.httpClient.delete(this.baseUrl + "/reports/" + docId, {
         responseType: 'json',
         headers: {
