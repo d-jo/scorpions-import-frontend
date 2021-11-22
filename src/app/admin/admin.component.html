@@ -1,1 +1,38 @@
-<p>admin works!</p>
+<div class="userList">
+    <h3>Add or Remove User Roles</h3>
+    <br />
+    <span class="header">
+        <b>User Results</b>
+        <mat-form-field style="padding-left: 10px;">
+            <mat-label>Filter Username</mat-label>
+            <input matInput (input)="onChange($event)" />
+        </mat-form-field>
+    </span>
+    <span *ngFor="let user of users" class="user" (click)="editUser(user)">
+        {{user.username}}
+    </span>
+</div>
+
+<table *ngIf="edit" class="userList">
+    <span class="header">
+        <b>{{user.username}}'s Roles</b>
+        <mat-icon *ngIf="!add" (click)="add = true"
+            style="font-size: 20px; position: absolute; right:0px; cursor: pointer;">add</mat-icon>
+        <mat-icon *ngIf="add" (click)="add = false"
+            style="font-size: 20px; position: absolute; right:0px; cursor: pointer;">remove</mat-icon>
+    </span>
+    <span *ngIf="add" class="role">
+        <mat-form-field>
+            <mat-label>Role</mat-label>
+            <mat-select [(value)]="roleInput">
+                <mat-option value="instructor_role">Instructor</mat-option>
+                <mat-option value="aac_role">Admin</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="warn" (click)="addRole()">Add Role</button>
+    </span>
+    <span *ngFor="let role of user.roles" class="role">
+        {{role}}<mat-icon (click)="removeRole(user.username, role)"
+            style="font-size: 20px; position:absolute; right:0px; cursor: pointer;">delete</mat-icon>
+    </span>
+</table>

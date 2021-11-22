@@ -7,11 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { UploadService } from './shared/services/upload-service';
 import { HttpClientModule } from '@angular/common/http';
 import { DragdropDirective } from './shared/services/dragdrop.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
-// Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { environment as env } from '../environments/environment';
@@ -38,10 +39,11 @@ import { ReviewComponent } from './review/review.component';
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatInputModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // Import the module into the application, with configuration
     AuthModule.forRoot({
       ...env.auth,
     }),

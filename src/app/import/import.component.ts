@@ -8,14 +8,14 @@ import { UploadService } from '../shared/services/upload-service';
   styleUrls: ['./import.component.css']
 })
 export class ImportComponent implements OnInit {
-
+  
   constructor(private upload: UploadService, private router: Router) { }
 
   baseUrl = "http://localhost:5000";
   fileName: string | undefined;
   files = [] as any;
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   selectFile(event: any) {
     if (!event || !event.target) return;
