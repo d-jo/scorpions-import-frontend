@@ -201,7 +201,6 @@ public isChecked(bloom:any, type:string):boolean {
   }
 
     setPayload(): IReport {
-        // console.log(this.report)
         console.log(
             {
             academic_year : this.reportForm.get('academic_year').value,
