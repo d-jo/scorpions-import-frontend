@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
+import { ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
 
 @Component({
@@ -201,42 +202,38 @@ public isChecked(bloom:any, type:string):boolean {
   }
 
     setPayload(): IReport {
-        console.log(
-            {
-            academic_year : this.reportForm.get('academic_year').value,
-            creator_id: this.report['creator_id'],
-            valid: this.report['valid'],
-            accreditation_body : this.report['accreditation_body'],
-            additional_information: this.report['additional_information'],
-            author : this.reportForm.get('author').value,
-            college : this.reportForm.get('college').value,
-            created : this.report['created'],
-            date_range : this.reportForm.get('date_range').value,
-            degree_level : this.reportForm.get('degree_level').value,
-            department : this.reportForm.get('department').value,
-            has_been_reviewed : true,
-            id : this.report['id'],
-            last_accreditation_review: this.report['last_accreditation_review'],
-            program : this.reportForm.get('program').value,
-            slos_meet_standards : this.reportForm.get('slos_meet_standards') === null 
-                ? '' : this.reportForm.get('slos_meet_standards').value,
-            stakeholder_involvement: this.report['stakeholder_involvement'],
-            title : this.report['title'],
-            slos : [
-                {
-                    accredited_data_analyses: [],
-                    bloom: '',
-                    collection_analyses: [],
-                    common_graduate_program_slo: '',
-                    decision_actions: [],
-                    description: '',
-                    id: 25,
-                    measures: [],
-                    methods: [],
-                    report_id: 7,
-                }
-            ]
-        })
+        let slos: ISlos[] = [];
+        for (let sloIndex = 1; sloIndex <= this.report.slos.length; sloIndex++) {
+            console.log('SLO #' + sloIndex);
+            const form = document.querySelector('#mySLO' + sloIndex) as HTMLFormElement;
+            const data = new FormData(form);
+            console.log(data)
+            console.log(this.report.slos[sloIndex])
+            let slo: ISlos;
+            // console.log(this.report.slos[sloIndex]['accredited_data_analyses'].length == 0 
+            // ? ['empty'] : this.report.slos[sloIndex]['accredited_data_analyses'])
+            let reportId = parseInt(this.report['id']);
+            let sloId = this.report.slos[sloIndex]['id'];
+            // console.log(this.report.slos[sloIndex]['id']);
+            console.log(reportId)
+            console.log(sloId);
+            slo = {
+                accredited_data_analyses: [],
+                bloom: data.get('bloom') as string,
+                // collection_analyses: this.report.slos[sloIndex]['collection_analyses'],
+                collection_analyses: [],
+                common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
+                // decision_actions: this.report.slos[sloIndex]['decision_actions'],
+                decision_actions: [],
+                description: data.get('description') as string,
+                id: sloId,
+                measures: this.report.slos[sloIndex]['measures'],
+                methods: this.report.slos[sloIndex]['methods'],
+                report_id: reportId,
+            }
+            slos.push(slo);
+        }
+        console.log(slos)
         return {
             academic_year : this.reportForm.get('academic_year').value,
             creator_id: this.report['creator_id'],
