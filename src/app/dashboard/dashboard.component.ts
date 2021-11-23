@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   uploadFiles: any;
   reviewFiles: any;
   completedFiles: any;
-  baseUrl = "http://localhost:5000";
   files: string[] = []
   display = false
   slos:any[] = []
@@ -27,8 +26,7 @@ export class DashboardComponent implements OnInit {
             private service: FileServiceService) { }
 
   ngOnInit(): void {
-    // this.getFiles();
-    this.reviewFiles = ["file1.docx"]
+    this.getFiles();
   }
 
   getFiles(): void {
@@ -67,10 +65,6 @@ export class DashboardComponent implements OnInit {
       this.display = true
     });
   }
-
-  // extractFiles(): any {
-  //   return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
-  // }
 
   extractData(): any {
     return this.service.extractData(this.files);
