@@ -202,28 +202,23 @@ public isChecked(bloom:any, type:string):boolean {
   }
 
     setPayload(): IReport {
-        let slos: ISlos[] = [];
-        for (let sloIndex = 1; sloIndex <= this.report.slos.length; sloIndex++) {
-            console.log('SLO #' + sloIndex);
-            const form = document.querySelector('#mySLO' + sloIndex) as HTMLFormElement;
+        let slosPayload: ISlos[] = [];
+        for (let sloFormIndex = 1; sloFormIndex <= this.report.slos.length; sloFormIndex++) {
+            let sloIndex = sloFormIndex - 1;
+            const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
             const data = new FormData(form);
-            console.log(data)
-            console.log(this.report.slos[sloIndex])
             let slo: ISlos;
-            // console.log(this.report.slos[sloIndex]['accredited_data_analyses'].length == 0 
-            // ? ['empty'] : this.report.slos[sloIndex]['accredited_data_analyses'])
+            // console.log(this.report.slos[sloFormIndex]['accredited_data_analyses'].length == 0 
+            // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
             let reportId = parseInt(this.report['id']);
             let sloId = this.report.slos[sloIndex]['id'];
-            // console.log(this.report.slos[sloIndex]['id']);
-            console.log(reportId)
-            console.log(sloId);
             slo = {
                 accredited_data_analyses: [],
                 bloom: data.get('bloom') as string,
-                // collection_analyses: this.report.slos[sloIndex]['collection_analyses'],
+                // collection_analyses: this.report.slos[sloFormIndex]['collection_analyses'],
                 collection_analyses: [],
                 common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
-                // decision_actions: this.report.slos[sloIndex]['decision_actions'],
+                // decision_actions: this.report.slos[sloFormIndex]['decision_actions'],
                 decision_actions: [],
                 description: data.get('description') as string,
                 id: sloId,
@@ -231,9 +226,8 @@ public isChecked(bloom:any, type:string):boolean {
                 methods: this.report.slos[sloIndex]['methods'],
                 report_id: reportId,
             }
-            slos.push(slo);
+            slosPayload.push(slo);
         }
-        console.log(slos)
         return {
             academic_year : this.reportForm.get('academic_year').value,
             creator_id: this.report['creator_id'],
@@ -254,20 +248,7 @@ public isChecked(bloom:any, type:string):boolean {
                 ? '' : this.reportForm.get('slos_meet_standards').value,
             stakeholder_involvement: this.report['stakeholder_involvement'],
             title : this.report['title'],
-            slos : [
-                {
-                    accredited_data_analyses: [],
-                    bloom: '',
-                    collection_analyses: [],
-                    common_graduate_program_slo: '',
-                    decision_actions: [],
-                    description: '',
-                    id: 25,
-                    measures: [],
-                    methods: [],
-                    report_id: 7,
-                }
-            ]
+            slos : slosPayload
         }
     }
     
