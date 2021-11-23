@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FileServiceService } from '../shared/services/file-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private service: FileServiceService) { }
 
-  baseUrl = "http://localhost:5000";
   edit: boolean = false;
   add: boolean = false;
   user: any;
@@ -51,15 +50,11 @@ export class AdminComponent implements OnInit {
   }
 
   findAllUsers() {
-    this.requestUsers().subscribe((data: any) => {
+    this.service.requestUsers().subscribe((data: any) => {
       console.log(data)
       this.users = data.users;
       this.backup = data.users;
     })
-  }
-
-  requestUsers(): Observable<any> {
-    return this.http.get(this.baseUrl + "/all_users");
   }
 
   mockUsersAndRoles() {
@@ -71,14 +66,10 @@ export class AdminComponent implements OnInit {
     if (confirm("Are you sure you want to remove " + role + " from " + this.user + "?")) {
       let roleId = this.map.get(role);
       if (!roleId) return
-      this.requestRemove(this.user, roleId).subscribe((data:any) => {
+      this.service.requestRemove(this.user, roleId).subscribe((data:any) => {
         console.log(data)
       })
     }
-  }
-
-  requestRemove(username: any, role: any): Observable<any> {
-    return this.http.post(this.baseUrl + "/remove_role", { uid: username, desired_role_id: role });
   }
 
   addRole() {
@@ -88,26 +79,19 @@ export class AdminComponent implements OnInit {
     }
     let roleId = this.map.get(this.roleInput);
     if (!roleId) return
-    this.requestAdd(this.user, roleId).subscribe((data:any) => {
+    this.service.requestAdd(this.user, roleId).subscribe((data:any) => {
       console.log(data)
     })
     this.roleInput = ""
   }
 
-  requestAdd(username: any, role: any): Observable<any> {
-    return this.http.post(this.baseUrl + "/add_role", { uid: username, desired_role_id: role });
-  }
 
   editUser(user: any) {
     this.user = user;
     this.edit = true;
-    this.getUserRoles(this.user).subscribe((data:any) => {
+    this.service.getUserRoles(this.user).subscribe((data:any) => {
       this.roles = data.roles;
     });
-  }
-
-  getUserRoles(username:string):Observable<any> {
-    return this.http.post(this.baseUrl+"/get_user_roles", {uid:username});
   }
 
 }

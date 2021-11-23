@@ -59,4 +59,20 @@ export class FileServiceService {
         }
       });
   }
+
+  public requestUsers(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "/all_users");
+  }
+
+  public requestAdd(username: any, role: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/add_role", { uid: username, desired_role_id: role });
+  }
+
+  public getUserRoles(username:string):Observable<any> {
+    return this.httpClient.post(this.baseUrl+"/get_user_roles", {uid:username});
+  }
+
+  public requestRemove(username: any, role: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/remove_role", { uid: username, desired_role_id: role });
+  }
 }
