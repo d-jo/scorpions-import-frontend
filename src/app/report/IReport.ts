@@ -17,5 +17,7 @@ export interface IReport {
     slos_meet_standards: string;
     stakeholder_involvement: string;
     title: string;
+    creator_id:string;
+    valid:boolean;
     slos: ISlos[];
 }

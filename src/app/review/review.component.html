@@ -150,7 +150,7 @@
       <!-- SLO SECTION -->
       <div class="row"
         *ngFor="let slo of report.slos; index as i;"
-        >
+        formGroupName="slos">
         <div class="col-25">
           <label for="slo">
             SLO
@@ -176,6 +176,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Knowledge')"
               name="bloom"
               value="Knowledge"
               maxlength="32"
@@ -183,6 +184,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Analysis')"
               name="bloom"
               value="Analysis"
               maxlength="32"
@@ -190,6 +192,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Comprehension')"
               name="bloom"
               value="Comprehension"
               maxlength="32"
@@ -197,6 +200,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Synthesis')"
               name="bloom"
               value="Synthesis"
               maxlength="32"
@@ -204,6 +208,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Application')"
               name="bloom"
               value="Application"
               maxlength="32"
@@ -211,6 +216,7 @@
             <input
               class="form-input"
               type="checkbox"
+              [checked]="isChecked(slo.bloom, 'Evaluation')"
               name="bloom"
               value="Evaluation"
               maxlength="32"
@@ -220,40 +226,40 @@
             <legend>Common Graduate Program SLOs</legend>
             <input
               class="form-input"
-              formControlName="common_graduate_program_slo"
               type="checkbox"
+              [checked]="isChecked(slo.common_graduate_program_slo, '1')"
               name="common_graduate_program_slo"
               value="1"
               maxlength="32"
               /> 1
             <input
               class="form-input"
-              formControlName="common_graduate_program_slo"
               type="checkbox"
+              [checked]="isChecked(slo.common_graduate_program_slo, '2')"
               name="common_graduate_program_slo"
               value="2"
               maxlength="32"
               /> 2 <br>
             <input
               class="form-input"
-              formControlName="common_graduate_program_slo"
               type="checkbox"
+              [checked]="isChecked(slo.common_graduate_program_slo, '3')"
               name="common_graduate_program_slo"
               value="3"
               maxlength="32"
               /> 3
             <input
               class="form-input"
-              formControlName="common_graduate_program_slo"
               type="checkbox"
+              [checked]="isChecked(slo.common_graduate_program_slo, '4')"
               name="common_graduate_program_slo"
               value="4"
               maxlength="32"
               /> 4 <br>
             <input
               class="form-input"
-              formControlName="common_graduate_program_slo"
               type="checkbox"
+              [checked]="isChecked(slo.common_graduate_program_slo, 'Not applicable for SLO')"
               name="common_graduate_program_slo"
               value="NA"
               maxlength="32"

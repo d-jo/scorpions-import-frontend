@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
             private service: FileServiceService) { }
 
   ngOnInit(): void {
-    this.getFiles();
+    // this.getFiles();
+    this.reviewFiles = ["file1.docx"]
   }
 
   getFiles(): void {
