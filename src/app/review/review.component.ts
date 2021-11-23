@@ -29,7 +29,7 @@ export class ReviewComponent implements OnInit {
         degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
         program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        slos: this.formBuilder.array([this.createSLO(1)]), //TODO look at this later, may need to know slo length ahead of time
+        // slos: this.formBuilder.array([this.createSLO(1)]), //TODO look at this later, may need to know slo length ahead of time
     });
 
     this.activeRoute.paramMap.subscribe(params => {
@@ -146,7 +146,7 @@ export class ReviewComponent implements OnInit {
         //   slos : reportData.slos,
         //   slos : this.formBuilder.array([reportData.slos])
         })
-        console.log(this.report)
+        // console.log(this.report)
         // console.log(this.reportForm.get('slos'))
     }
 
@@ -201,38 +201,75 @@ public isChecked(bloom:any, type:string):boolean {
   }
 
     setPayload(): IReport {
-        console.log(this.reportForm)
-        return {
-            academic_year : this.reportForm.get('academic_year'),
-            creator_id: this.reportForm.get('creator_id'),
-            valid: this.reportForm.get('valid'),
-            accreditation_body : this.reportForm.get('accreditation_body'),
-            additional_information : this.reportForm.get('additional_information'),
-            author : this.reportForm.get('author'),
-            college : this.reportForm.get('college'),
-            created : this.reportForm.get('created'),
-            date_range : this.reportForm.get('date_range'),
-            degree_level : this.reportForm.get('degree_level'),
-            department : this.reportForm.get('department'),
+        // console.log(this.report)
+        console.log(
+            {
+            academic_year : this.reportForm.get('academic_year').value,
+            creator_id: this.report['creator_id'],
+            valid: this.report['valid'],
+            accreditation_body : this.report['accreditation_body'],
+            additional_information: this.report['additional_information'],
+            author : this.reportForm.get('author').value,
+            college : this.reportForm.get('college').value,
+            created : this.report['created'],
+            date_range : this.reportForm.get('date_range').value,
+            degree_level : this.reportForm.get('degree_level').value,
+            department : this.reportForm.get('department').value,
             has_been_reviewed : true,
-            id : this.reportForm.get('id'),
-            last_accreditation_review : this.reportForm.get('last_accreditation_review'),
-            program : this.reportForm.get('program'),
-            slos_meet_standards : this.reportForm.get('slos_meet_standards'),
-            stakeholder_involvement : this.reportForm.get('stakeholder_involvement'),
-            title : this.reportForm.get('title'),
+            id : this.report['id'],
+            last_accreditation_review: this.report['last_accreditation_review'],
+            program : this.reportForm.get('program').value,
+            slos_meet_standards : this.reportForm.get('slos_meet_standards') === null 
+                ? '' : this.reportForm.get('slos_meet_standards').value,
+            stakeholder_involvement: this.report['stakeholder_involvement'],
+            title : this.report['title'],
             slos : [
                 {
-                    accredited_data_analyses: this.reportForm.get('title'),
-                    bloom: this.reportForm.get('title'),
-                    collection_analyses: this.reportForm.get('title'),
-                    common_graduate_program_slo: this.reportForm.get('title'),
-                    decision_actions: this.reportForm.get('title'),
-                    description: this.reportForm.get('title'),
-                    id: this.reportForm.get('title'),
-                    measures: this.reportForm.get('title'),
-                    methods: this.reportForm.get('title'),
-                    report_id: this.reportForm.get('title')
+                    accredited_data_analyses: [],
+                    bloom: '',
+                    collection_analyses: [],
+                    common_graduate_program_slo: '',
+                    decision_actions: [],
+                    description: '',
+                    id: 25,
+                    measures: [],
+                    methods: [],
+                    report_id: 7,
+                }
+            ]
+        })
+        return {
+            academic_year : this.reportForm.get('academic_year').value,
+            creator_id: this.report['creator_id'],
+            valid: this.report['valid'],
+            accreditation_body : this.report['accreditation_body'],
+            additional_information: this.report['additional_information'],
+            author : this.reportForm.get('author').value,
+            college : this.reportForm.get('college').value,
+            created : this.report['created'],
+            date_range : this.reportForm.get('date_range').value,
+            degree_level : this.reportForm.get('degree_level').value,
+            department : this.reportForm.get('department').value,
+            has_been_reviewed : true,
+            id : this.report['id'],
+            last_accreditation_review: this.report['last_accreditation_review'],
+            program : this.reportForm.get('program').value,
+            slos_meet_standards : this.reportForm.get('slos_meet_standards') === null 
+                ? '' : this.reportForm.get('slos_meet_standards').value,
+            stakeholder_involvement: this.report['stakeholder_involvement'],
+            title : this.report['title'],
+            slos : [
+                {
+                    accredited_data_analyses: [],
+                    bloom: '',
+                    collection_analyses: [],
+                    common_graduate_program_slo: '',
+                    decision_actions: [],
+                    description: '',
+                    id: 25,
+                    measures: [],
+                    methods: [],
+                    report_id: 7,
                 }
             ]
         }

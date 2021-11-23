@@ -150,19 +150,12 @@
       <!-- SLO SECTION -->
       <div class="row"
         *ngFor="let slo of report.slos; index as i;"
-        formGroupName="slos">
+        >
         <div class="col-25">
           <label for="slo">
-            SLO
+            <h4> SLO {{i + 1}} </h4>
           </label>
-          <input
-            class="form-input"
-            type="text"
-            name="id"
-            placeholder="SLO Number"
-            value="{{ slo.id }}"
-            maxlength="32"
-            />
+          <p>Description</p>
           <input
             class="form-input"
             type="text"
@@ -276,33 +269,3 @@
     </div>
   </form>
 </div>
-<!--
-  <div *ngIf="display" class="results">
-      <div *ngFor="let r of reports; let i = index" class="disp">
-          <h4>Report: {{file}}</h4><br/>
-          <span><b>Title:</b> {{r.title}}</span>
-          <span><b>Author:</b> {{r.author}}</span>
-          <span><b>Created:</b> {{r.created}}</span>
-          <span><b>College:</b> {{r.college}}</span>
-          <span><b>Department:</b> {{r.department}}</span>
-          <span><b>Program:</b> {{r.program}}</span>
-          <span><b>Degree Level:</b> {{r.degree_level}}</span>
-          <span><b>Academic Year:</b> {{r.academic_year}}</span>
-          <span><b>Date Range:</b> {{r.date_range}}</span><br/>
-          <h2>SLOS</h2>
-          <div *ngFor="let s of slos[i]; let idx = index" class="disp">
-              <h4>SLO {{idx+1}}</h4><br/>
-              <span><b>Description:</b> {{s.description}}</span>
-              <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
-              <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
-          </div>
-  -->
-<!-- accreditation_body: {{r.accreditation_body}}
-  last_accreditation_review: {{r.last_accreditation_review}}
-  slos_meet_standards: {{r.slos_meet_standards}}
-  stakeholder_involvement: {{r.stakeholder_involvement}}
-  additional_information: {{r.additional_information}} -->
-<!--
-  </div><br/>
-  </div
-  -->
