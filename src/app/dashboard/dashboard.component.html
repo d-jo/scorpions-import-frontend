@@ -25,7 +25,8 @@
             <div class="done">
                 <h3>Done</h3>
                 <div class="fileHolder">
-                    <span *ngFor="let complete of completedFiles">{{getFileText(complete)}}</span>
+                    <span *ngFor="let complete of completedFiles">{{getFileText(complete)}} <mat-icon
+                            style="float: right; cursor: pointer;" (click)="reviewFile(complete)">search</mat-icon></span>
                 </div>
             </div>
         </td>
