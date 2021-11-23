@@ -123,6 +123,7 @@ export class ReviewComponent implements OnInit {
   }
 
     setPayload(): IReport {
+        console.log(this.reportForm)
         return {
             academic_year : this.reportForm.get('academic_year'),
             accreditation_body : this.reportForm.get('accreditation_body'),
@@ -142,15 +143,16 @@ export class ReviewComponent implements OnInit {
             title : this.reportForm.get('title'),
             slos : [
                 {
-                    bloom: [
-                        "Application"
-                    ],
-                    common_graduate_program_slo: [
-                        "1"
-                    ],
-                    description: "Mastery of discipline content",
-                    id: "565",
-                    report_id: 1
+                    accredited_data_analyses: this.reportForm.get('title'),
+                    bloom: this.reportForm.get('title'),
+                    collection_analyses: this.reportForm.get('title'),
+                    common_graduate_program_slo: this.reportForm.get('title'),
+                    decision_actions: this.reportForm.get('title'),
+                    description: this.reportForm.get('title'),
+                    id: this.reportForm.get('title'),
+                    measures: this.reportForm.get('title'),
+                    methods: this.reportForm.get('title'),
+                    report_id: this.reportForm.get('title')
                 }
             ]
         }
