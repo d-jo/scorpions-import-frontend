@@ -7,6 +7,12 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * @ngdoc method
+   * @name uploadFile 
+   * @description uploads files to the backend
+   * @returns {Observable<any>} http response from the backend
+   */
   uploadFile(url: string, files: File[]): Observable<any> {
     let formData = new FormData();
     for(let x = 0; x < files.length; x++)

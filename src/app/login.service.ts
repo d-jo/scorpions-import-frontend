@@ -13,27 +13,52 @@ export class LoginService implements CanActivate {
 
   username:string | undefined;
   
+   /**
+   * @ngdoc method
+   * @name canActivate
+   * @description this is used to verify url routes with current user. 
+   *  If a user is not authorized, they will not be allowed to go to the url and will be redirected to login 
+   * @param {ActivatedRouteSnapshot=} route not used
+   * @param {RouterStateSnapshot=} state not used
+   * @returns {Observable} of the response from auth0 if the user is authenticated
+   */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.auth.isAuthenticated$.pipe(map((data:boolean) => {
-      if(data) {
-        return true;
-      } else {
+      if(!data) {
         this.router.navigate(['/login'])
-        return false;
       }
+      return data;
     }));
   }
 
+   /**
+   * @ngdoc method
+   * @name loginWithRedirect
+   * @description redirects user to auth0 page to sign in, not used currently 
+   * @returns {void} 
+   */
   loginWithRedirect(): void {
     this.auth.loginWithRedirect({ screen_hint: 'signup' }).subscribe(() => {
       this.router.navigate(['/dashboard']);
     });
   }
 
+  /**
+   * @ngdoc method
+   * @name getUsername 
+   * @description returns the username of the logged in user 
+   * @returns {*} string of the user or void if none 
+   */
   getUsername() {
     return localStorage.getItem('user');
   }
 
+  /**
+   * @ngdoc method
+   * @name loginWithPopup
+   * @description brings up a separate window for the user to sign in, this will preserve the page state
+   * @returns {void} 
+   */
   loginWithPopup() {
     this.auth.loginWithPopup({ screen_hint: 'signup' }).subscribe(() => {
       this.auth.getAccessTokenSilently().subscribe((details:any) => {
@@ -48,10 +73,22 @@ export class LoginService implements CanActivate {
     });
   }
 
+  /**
+   * @ngdoc method
+   * @name isUserAuthenticated 
+   * @description makes an auth0 request to verify if user is authenticated
+   * @returns {Observable<Boolean>} 
+   */
   isUserAuthenticated() {
     return this.auth.isAuthenticated$;
   }
 
+  /**
+   * @ngdoc method
+   * @name logout 
+   * @description logs out the current user
+   * @returns {*}
+   */
   logout(): void {
     this.auth.logout({ returnTo: window.location.origin });
   }

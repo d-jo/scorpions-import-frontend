@@ -19,6 +19,12 @@ export class LoginComponent implements OnInit {
     this.login.loginWithPopup();
   }
 
+  /**
+   * @ngdoc method
+   * @name checkSignedIn 
+   * @description checks if the user is signed in, and routes them to the dashboard if they are
+   * @returns {void}
+   */
   checkSignedIn() {
     this.login.isUserAuthenticated().subscribe((data:boolean) => {
       if(data) {
