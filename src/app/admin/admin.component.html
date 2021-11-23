@@ -9,13 +9,13 @@
         </mat-form-field>
     </span>
     <span *ngFor="let user of users" class="user" (click)="editUser(user)">
-        {{user.username}}
+        {{user}}
     </span>
 </div>
 
 <table *ngIf="edit" class="userList">
     <span class="header">
-        <b>{{user.username}}'s Roles</b>
+        <b>{{user}}'s Roles</b>
         <mat-icon *ngIf="!add" (click)="add = true"
             style="font-size: 20px; position: absolute; right:0px; cursor: pointer;">add</mat-icon>
         <mat-icon *ngIf="add" (click)="add = false"
@@ -31,8 +31,8 @@
         </mat-form-field>
         <button mat-flat-button color="warn" (click)="addRole()">Add Role</button>
     </span>
-    <span *ngFor="let role of user.roles" class="role">
-        {{role}}<mat-icon (click)="removeRole(user.username, role)"
+    <span *ngFor="let role of roles" class="role">
+        {{role}}<mat-icon (click)="removeRole(role)"
             style="font-size: 20px; position:absolute; right:0px; cursor: pointer;">delete</mat-icon>
     </span>
 </table>

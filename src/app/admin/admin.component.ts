@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,14 +12,15 @@ export class AdminComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  users: any[] = [];
+  baseUrl = "http://localhost:5000";
   edit: boolean = false;
-  user: any;
   add: boolean = false;
+  user: any;
   userSearch: any;
   roleInput: any;
-  baseUrl = "http://localhost:5000";
+  users: any[] = [];
   backup: any[] = [];
+  roles:any[] = [];
   map = new Map<string, string>()
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class AdminComponent implements OnInit {
       } else {
         this.users = []
         for (let x = 0; x < this.backup.length; x++) {
-          const idx = this.backup[x].username.toUpperCase().indexOf(username.toUpperCase())
+          const idx = this.backup[x].toUpperCase().indexOf(username.toUpperCase())
           if (idx == 0) {
             this.users.push(this.backup[x])
           }
@@ -52,8 +54,8 @@ export class AdminComponent implements OnInit {
   findAllUsers() {
     this.requestUsers().subscribe((data: any) => {
       console.log(data)
-      this.users = data;
-      this.backup = data;
+      this.users = data.users;
+      this.backup = data.users;
     })
   }
 
@@ -62,23 +64,15 @@ export class AdminComponent implements OnInit {
   }
 
   mockUsersAndRoles() {
-    let user1 = {
-      username: "user1",
-      roles: []
-    };
-    let user2 = {
-      username: "admin",
-      roles: ["instructor_role", "aac_role"]
-    }
-    this.users = [user1, user2];
-    this.backup = [user1, user2];
+    this.backup = this.users = ["user1", "admin"];
+    this.roles = ["instructor_role"];
   }
 
-  removeRole(username: any, role: any) {
-    if (confirm("Are you sure you want to remove " + role + " from " + username + "?")) {
+  removeRole(role: any) {
+    if (confirm("Are you sure you want to remove " + role + " from " + this.user + "?")) {
       let roleId = this.map.get(role);
       if (!roleId) return
-      this.requestRemove(username, roleId).subscribe((data:any) => {
+      this.requestRemove(this.user, roleId).subscribe((data:any) => {
         console.log(data)
       })
     }
@@ -89,10 +83,13 @@ export class AdminComponent implements OnInit {
   }
 
   addRole() {
+    if(this.roles.some(v => v === this.roleInput)) {
+      alert(this.user+ " already has the role " + this.roleInput);
+      return; 
+    }
     let roleId = this.map.get(this.roleInput);
     if (!roleId) return
-    console.log(roleId)
-    this.requestAdd(this.user?.username, roleId).subscribe((data:any) => {
+    this.requestAdd(this.user, roleId).subscribe((data:any) => {
       console.log(data)
     })
     this.roleInput = ""
@@ -105,6 +102,13 @@ export class AdminComponent implements OnInit {
   editUser(user: any) {
     this.user = user;
     this.edit = true;
+    this.getUserRoles(this.user).subscribe((data:any) => {
+      this.roles = data.roles;
+    });
+  }
+
+  getUserRoles(username:string):Observable<any> {
+    return this.http.post(this.baseUrl+"/get_user_roles", {uid:username});
   }
 
 }
