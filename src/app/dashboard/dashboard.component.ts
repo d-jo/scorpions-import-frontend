@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
   /**
    * @ngdoc method
    * @name reviewFile 
-   * @description TODO
+   * @description navigate to review page with the file id to grab info from
    * @param {any} file the specified file to review
    * @returns {void}
    */
