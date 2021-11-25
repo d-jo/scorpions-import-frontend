@@ -24,6 +24,12 @@ export class AppComponent implements OnDestroy {
     return this.login.getUsername();
   }
 
+  /**
+   * @ngdoc method
+   * @name toggleSidenav 
+   * @description toggles the side navigation panel off and on
+   * @returns {void}
+   */
   toggleSidenav() {
     this.showSidenav = !this.showSidenav;
     let classList = document.getElementById("router")?.classList
