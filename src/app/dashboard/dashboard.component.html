@@ -25,19 +25,20 @@
             <div class="done">
                 <h3>Done</h3>
                 <div class="fileHolder">
-                    <span *ngFor="let complete of completedFiles">{{getFileText(complete)}}</span>
+                    <span *ngFor="let complete of completedFiles">{{getFileText(complete)}} <mat-icon
+                            style="float: right; cursor: pointer;" (click)="reviewFile(complete)">search</mat-icon></span>
                 </div>
             </div>
         </td>
     </tr>
     <tr>
         <td>
-            <button mat-flat-button color="warn" (click)="callExtract()">Upload</button>
+            <button mat-flat-button color="warn" (click)="callExtract()">Process File(s)</button>
         </td>
     </tr>
     <tr>
         <td>
-            <a routerLink="/import"><button mat-flat-button color="warn">Import Files for Upload</button></a>
+            <a routerLink="/import"><button mat-flat-button color="warn">Import File(s)</button></a>
         </td>
     </tr>
 </table>

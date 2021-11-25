@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DashboardFiles } from './dashboard.model';
+import { Router } from '@angular/router';
+import { FileServiceService } from '../shared/services/file-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,16 +11,19 @@ import { DashboardFiles } from './dashboard.model';
 })
 export class DashboardComponent implements OnInit {
 
+  @Input()
+  fileId: string | undefined;
+  
   uploadFiles: any;
   reviewFiles: any;
   completedFiles: any;
-  baseUrl = "http://localhost:5000";
   files: string[] = []
   display = false
   slos:any[] = []
   reports:any[] = []
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private route: Router,
+            private service: FileServiceService) { }
 
   ngOnInit(): void {
     this.getFiles();
@@ -45,11 +50,7 @@ export class DashboardComponent implements OnInit {
    * @returns {any} the backend response
    */
   requestFiles(): any {
-    return this.httpClient.get(this.baseUrl + "/dashboard/", {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      }
-    });
+    return this.service.requestFiles();
   }
 
   /**
@@ -90,10 +91,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // extractFiles(): any {
-  //   return this.httpClient.get(this.baseUrl + "/reports/trigger_process");
-  // }
-
   /**
    * @ngdoc method
    * @name extractData 
@@ -101,24 +98,18 @@ export class DashboardComponent implements OnInit {
    * @returns {any} the backend http response
    */
   extractData(): any {
-    return this.httpClient.post(this.baseUrl + "/reports/extract_data", this.files, {
-      responseType: 'json',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      }
-    });
+    return this.service.extractData(this.files);
   }
 
   /**
    * @ngdoc method
    * @name reviewFile 
-   * @description TODO
+   * @description navigate to review page with the file id to grab info from
    * @param {any} file the specified file to review
    * @returns {void}
    */
   reviewFile(file: any) {
-    console.log("Review: " + file);
+    this.route.navigate(['/review', file[0]]);
   }
 
   /**

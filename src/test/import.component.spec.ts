@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { UploadService } from 'src/app/upload-service';
+import { UploadService } from 'src/app/shared/services/upload-service';
 
 import { ImportComponent } from '../app/import/import.component';
 

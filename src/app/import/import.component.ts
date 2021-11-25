@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UploadService } from '../upload-service';
+import { UploadService } from '../shared/services/upload-service';
 
 @Component({
   selector: 'app-import',
@@ -8,14 +8,14 @@ import { UploadService } from '../upload-service';
   styleUrls: ['./import.component.css']
 })
 export class ImportComponent implements OnInit {
-
+  
   constructor(private upload: UploadService, private router: Router) { }
 
   baseUrl = "http://localhost:5000";
   fileName: string | undefined;
   files = [] as any;
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /**
    * @ngdoc method
