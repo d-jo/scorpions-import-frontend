@@ -31,3 +31,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1.0.0 - For this release, we have a working Dashboard page with some mock data for Review and Done sections. For The upload section, a user is able to import a .docx, .pdf, or .txt(for testing) file to the backend and then extract data from them. 
 
 1.1.0 - For this release, we have added user authentication with Auth0, basic extraction endpoints and cleaned up the overall look of the web application. Docx files are able to be uploaded and then data is extracted from them and displayed to the page.
+
+1.3.0 - For this release, we have built out the review/edit page for reports, this page will allow the user to review what was parsed from the processed file and edit the data as needed. We have also built out the initial admin page to manage users and their roles.
