@@ -63,10 +63,14 @@ export class AdminComponent implements OnInit {
   }
 
   removeRole(role: any) {
-    if (confirm("Are you sure you want to remove " + role + " from " + this.user + "?")) {
-      let roleId = this.map.get(role);
+    let c = confirm("Are you sure you want to remove " + role.name + " from " + this.user.name + "?");
+    console.log(c);
+    if (c) {
+      let roleId = role.id;//this.map.get(role.id);
+      console.log(roleId);
       if (!roleId) return
-      this.service.requestRemove(this.user, roleId).subscribe((data:any) => {
+      console.log(roleId);
+      this.service.requestRemove(this.user.user_id, roleId).subscribe((data:any) => {
         console.log(data)
       })
     }
@@ -79,7 +83,7 @@ export class AdminComponent implements OnInit {
     }
     let roleId = this.map.get(this.roleInput);
     if (!roleId) return
-    this.service.requestAdd(this.user, roleId).subscribe((data:any) => {
+    this.service.requestAdd(this.user.user_id, roleId).subscribe((data:any) => {
       console.log(data)
     })
     this.roleInput = ""
@@ -89,8 +93,9 @@ export class AdminComponent implements OnInit {
   editUser(user: any) {
     this.user = user;
     this.edit = true;
-    this.service.getUserRoles(this.user).subscribe((data:any) => {
-      this.roles = data.roles;
+    this.service.getUserRoles(this.user.user_id).subscribe((data:any) => {
+      console.log(data)
+      this.roles = data.user_roles;
     });
   }
 

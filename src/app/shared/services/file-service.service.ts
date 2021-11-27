@@ -61,18 +61,40 @@ export class FileServiceService {
   }
 
   public requestUsers(): Observable<any> {
-    return this.httpClient.get(this.baseUrl + "/all_users");
+    return this.httpClient.get(this.baseUrl + "/users/all_users", {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 
   public requestAdd(username: any, role: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "/add_role", { uid: username, desired_role_id: role });
+    return this.httpClient.post(this.baseUrl + "/users/add_role", { uid: username, desired_role_id: role }, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 
   public getUserRoles(username:string):Observable<any> {
-    return this.httpClient.post(this.baseUrl+"/get_user_roles", {uid:username});
+    return this.httpClient.post(this.baseUrl+"/users/get_user_roles", {uid: username}, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 
   public requestRemove(username: any, role: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "/remove_role", { uid: username, desired_role_id: role });
+    return this.httpClient.post(this.baseUrl + "/users/remove_role", { uid: username, desired_role_id: role }, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
   }
 }
