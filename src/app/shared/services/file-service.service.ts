@@ -17,7 +17,7 @@ export class FileServiceService {
   public getFile(fileId: string): Observable<IReport> {
     return this.httpClient.get<IReport>(this.baseUrl + "/reports/" + fileId, {
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -25,7 +25,7 @@ export class FileServiceService {
   public requestFiles(): any {
     return this.httpClient.get(this.baseUrl + "/dashboard/", {
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -35,7 +35,7 @@ export class FileServiceService {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -45,7 +45,7 @@ export class FileServiceService {
         responseType: 'json',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
         }
       });
   }
@@ -55,7 +55,7 @@ export class FileServiceService {
         responseType: 'json',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
         }
       });
   }
@@ -63,7 +63,7 @@ export class FileServiceService {
   public requestUsers(): Observable<any> {
     return this.httpClient.get(this.baseUrl + "/users/all_users", {
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -73,7 +73,7 @@ export class FileServiceService {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -83,7 +83,7 @@ export class FileServiceService {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }
@@ -93,7 +93,17 @@ export class FileServiceService {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+      }
+    });
+  
+  }
+  public searchFiles(searchKey:any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/reports/search", { search_key: searchKey }, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
       }
     });
   }

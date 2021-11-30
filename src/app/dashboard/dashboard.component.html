@@ -1,3 +1,10 @@
+<div class="search">
+    <mat-form-field>
+        <mat-label>Search Files</mat-label>
+        <input matInput [(ngModel)]="searchKey" />
+    </mat-form-field> <button mat-flat-button color="warn" (click)="callSearch()" style="margin-left: 10px;">Search</button>
+    <button mat-flat-button color="warn" (click)="clear()" style="margin-left: 10px;">Clear</button>
+</div>
 <table>
     <tr>
         <td>
@@ -33,12 +40,12 @@
     </tr>
     <tr>
         <td>
-            <button mat-flat-button color="warn" (click)="callExtract()">Process File(s)</button>
+            <button mat-flat-button color="warn" (click)="callExtract()" class="button">Process File(s)</button>
         </td>
     </tr>
     <tr>
         <td>
-            <a routerLink="/import"><button mat-flat-button color="warn">Import File(s)</button></a>
+            <a routerLink="/import"><button mat-flat-button color="warn" class="button">Import File(s)</button></a>
         </td>
     </tr>
 </table>
@@ -61,6 +68,18 @@
             <span><b>Description:</b> {{s.description}}</span>
             <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
             <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
+            <h2>Measures</h2>
+            <div *ngFor="let m of measures[idx];" class="disp">
+                <span><b>Title:</b> {{m.title}}</span>
+                <span><b>Description:</b> {{m.description}}</span>
+                <span><b>Domain:</b> {{m.domain}}</span>
+                <span><b>Type:</b> {{s.type}}</span>
+                <span><b>Point:</b> {{m.point_in_program}}</span>
+                <span><b>Population Measured:</b> {{m.population_measured}}</span>
+                <span><b>Frequency of Data Collection:</b> {{m.frequency_of_collection}}</span>
+                <span><b>Threshold:</b> {{m.proficiency_threshold}}</span>
+                <span><b>Target:</b> {{m.proficiency_target}}</span>
+            </div>
         </div>
         <!-- accreditation_body: {{r.accreditation_body}}
         last_accreditation_review: {{r.last_accreditation_review}}

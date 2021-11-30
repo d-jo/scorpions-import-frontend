@@ -21,7 +21,7 @@ export class UploadService {
     return this.http.post(url, formData, {
       responseType: 'text',
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
       }
     });
   }

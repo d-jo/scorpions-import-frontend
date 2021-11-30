@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DashboardFiles } from './dashboard.model';
 import { Router } from '@angular/router';
@@ -18,9 +17,13 @@ export class DashboardComponent implements OnInit {
   reviewFiles: any;
   completedFiles: any;
   files: string[] = []
+  searchKey: string = "";
   display = false
-  slos:any[] = []
   reports:any[] = []
+  slos:any[] = []
+  measures:any[] = []
+  analysis:any[] = []
+  decisions:any[] = []
 
   constructor(private route: Router,
             private service: FileServiceService) { }
@@ -33,7 +36,6 @@ export class DashboardComponent implements OnInit {
    * @ngdoc method
    * @name getFiles 
    * @description requests the files and their states from the backend
-   * @returns {void}
    */
   getFiles(): void {
     this.requestFiles().subscribe((data: DashboardFiles) => {
@@ -68,7 +70,6 @@ export class DashboardComponent implements OnInit {
    * @ngdoc method
    * @name callExtract
    * @description calls the backend to extract the selected files and displays the returned data
-   * @returns {void}
    */
   callExtract() {
     this.extractData().subscribe((data:any) => {
@@ -87,7 +88,27 @@ export class DashboardComponent implements OnInit {
           this.slos.push(item[j])
         }
       }
-      this.display = true
+      for(let i = 0; i < data.measures.length; i++) {
+        let item = data.measures[i]
+        for(let j = 0; j < item.length; j++) {
+          this.measures.push(item[j])
+        }
+      }
+      for(let i = 0; i < data.analysis.length; i++) {
+        let item = data.analysis[i]
+        for(let j = 0; j < item.length; j++) {
+          this.analysis.push(item[j])
+        }
+      }
+      for(let i = 0; i < data.decisions.length; i++) {
+        let item = data.decisions[i]
+        for(let j = 0; j < item.length; j++) {
+          this.decisions.push(item[j])
+        }
+      }
+
+      this.display = true;
+      this.getFiles();
     });
   }
 
@@ -106,7 +127,6 @@ export class DashboardComponent implements OnInit {
    * @name reviewFile 
    * @description navigate to review page with the file id to grab info from
    * @param {any} file the specified file to review
-   * @returns {void}
    */
   reviewFile(file: any) {
     this.route.navigate(['/review', file[0]]);
@@ -118,7 +138,6 @@ export class DashboardComponent implements OnInit {
    * @description adds/removes a file to/from the file list for data extraction 
    * @param {boolean} checked if the box is checked or not, tells if it is an add or remove
    * @param {string} file the file name to add/remove from the list
-   * @returns {void}
    */
   addFile(checked: boolean, file: string) {
     if (checked) {
@@ -129,5 +148,35 @@ export class DashboardComponent implements OnInit {
         this.files.splice(index, 1);
       }
     }
+  }
+
+  /**
+   * @ngdoc method
+   * @name callSearch
+   * @description calls the backend to search for files based on input and displays the returned data
+   */
+  callSearch() {
+    if(this.searchKey == "") return
+    this.searchFile().subscribe((data: DashboardFiles) => {
+      this.uploadFiles = data.uploaded;
+      this.reviewFiles = data.review;
+      this.completedFiles = data.done;
+    })
+  }
+
+  /**
+   * @ngdoc method
+   * @name searchFile
+   * @description uses fileService to invoke the backend call
+   * @returns {Observable} search file return response
+   */
+  searchFile():any {
+    return this.service.searchFiles(this.searchKey);
+  }
+
+  clear() {
+    if(this.searchKey == "") return
+    this.searchKey = ""
+    this.getFiles()
   }
 }

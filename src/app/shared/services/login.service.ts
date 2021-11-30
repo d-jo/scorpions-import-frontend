@@ -50,7 +50,7 @@ export class LoginService implements CanActivate {
    * @returns {*} string of the user or void if none 
    */
   getUsername() {
-    return localStorage.getItem('user');
+    return sessionStorage.getItem('user');
   }
 
   /**
@@ -63,10 +63,10 @@ export class LoginService implements CanActivate {
     this.auth.loginWithPopup({ screen_hint: 'signup' }).subscribe(() => {
       this.auth.getAccessTokenSilently().subscribe((details:any) => {
         if(details) {
-          localStorage.setItem('token', details);
+          sessionStorage.setItem('token', details);
           this.router.navigate(['/dashboard']);
           this.auth.user$.subscribe((data:any) => {
-            localStorage.setItem('user', data.name);
+            sessionStorage.setItem('user', data.name);
           })
         }
       })
