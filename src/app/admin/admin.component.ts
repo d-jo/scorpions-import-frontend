@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { FileServiceService } from '../shared/services/file-service.service';
 
 @Component({
