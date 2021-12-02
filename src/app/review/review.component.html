@@ -265,25 +265,18 @@
             <label for="number_of_students_assessed">
                 Number of Students Assessed
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="number_of_students_assessed"
-                placeholder="Number of Students Assessed"
-                maxlength="50"
-                value="{{ data.number_of_students_assessed }}"
-                />
+            <textarea 
+              id="number_of_students_assessed"
+              name="content"
+              rows="4">{{ data.number_of_students_assessed }}</textarea>
 
             <label for="percentage_who_met_or_exceeded">
                 Percentage Who Met or Exceeded
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="percentage_who_met_or_exceeded"
-                placeholder="Percentage Who Met or Exceeded"
-                value="{{ data.percentage_who_met_or_exceeded }}"
-                />
+            <textarea 
+              id="percentage_who_met_or_exceeded"
+              name="content"
+              rows="4">{{ data.percentage_who_met_or_exceeded }}</textarea>
           </div>
           <!-- SLO DECISION ACTION SECTION -->
           <h3> Decision Actions </h3>
