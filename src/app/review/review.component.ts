@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
 import { ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
+import { getReportMockData } from './mock/report.mock';
 
 @Component({
   selector: 'app-review',
@@ -43,76 +44,7 @@ export class ReviewComponent implements OnInit {
   }
 
   mockReportInfo() {
-    this.report = {
-        academic_year: "2018-19",
-        accreditation_body: "",
-        additional_information: "",
-        author: "Andrew W Swift",
-        college: "Arts & Sciences",
-        created: 1637691952,
-        creator_id: "google-oauth2|101860098464380056734",
-        date_range: "2016-2018",
-        degree_level: "Masters",
-        department: "Mathematics",
-        has_been_reviewed: false,
-        id: "1",
-        last_accreditation_review: "",
-        program: "MS",
-        slos: [
-            {
-                accredited_data_analyses: [],
-                bloom: "Application",
-                collection_analyses: [],
-                common_graduate_program_slo: "1",
-                decision_actions: [],
-                description: "Mastery of discipline content",
-                id: 1,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Evaluation",
-                collection_analyses: [],
-                common_graduate_program_slo: "2",
-                decision_actions: [],
-                description: "Proficiency in analyzing, evaluating, and synthesizing information",
-                id: 2,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Evaluation",
-                collection_analyses: [],
-                common_graduate_program_slo: "3",
-                decision_actions: [],
-                description: "Effective oral and written communication",
-                id: 3,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Knowledge",
-                collection_analyses: [],
-                common_graduate_program_slo: "4",
-                decision_actions: [],
-                description: "Demonstrate knowledge of discipline’s ethics and standards",
-                id: 4,
-                measures: [],
-                methods: [],
-                report_id: 1
-            }
-        ],
-        slos_meet_standards: "",
-        stakeholder_involvement: "",
-        title: "",
-        valid: true
-    }
+    this.report = getReportMockData();
     this.editReport(this.report);
   }
 
