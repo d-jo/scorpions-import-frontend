@@ -72,6 +72,12 @@ export class AdminComponent implements OnInit {
       console.log(roleId);
       this.service.requestRemove(this.user.user_id, roleId).subscribe((data:any) => {
         console.log(data)
+        if (data.status == "success") {
+          alert("Role removed successfully");
+        } else {
+          alert("Error removing role: " + data.message);
+        }
+        this.updateUserInfo();
       })
     }
   }
@@ -85,6 +91,12 @@ export class AdminComponent implements OnInit {
     if (!roleId) return
     this.service.requestAdd(this.user.user_id, roleId).subscribe((data:any) => {
       console.log(data)
+      if (data.status == "success") {
+        alert("Role added successfully");
+      } else {
+        alert("Error adding role: " + data.message);
+      }
+      this.updateUserInfo();
     })
     this.roleInput = ""
   }
@@ -93,6 +105,11 @@ export class AdminComponent implements OnInit {
   editUser(user: any) {
     this.user = user;
     this.edit = true;
+
+    this.updateUserInfo();
+  }
+
+  updateUserInfo() {
     this.service.getUserRoles(this.user.user_id).subscribe((data:any) => {
       console.log(data)
       this.roles = data.user_roles;
