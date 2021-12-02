@@ -150,14 +150,10 @@ public isChecked(bloom:any, type:string):boolean {
                 collectionAnalysisIndex < this.report.slos[sloIndex].collection_analyses.length; 
                 collectionAnalysisIndex++) {
                     
-                // console.log('#SLO' + sloFormIndex + 'DataCollection' + (collectionAnalysisIndex + 1));
                 const dataCollectionForm = document.querySelector('#SLO' + sloFormIndex + 'DataCollection' + (collectionAnalysisIndex + 1)) as HTMLFormElement;
                 const dataCollection = new FormData(dataCollectionForm);
-                // console.log(dataCollection.get('data_collection_date_range') as string)
                 let analysis: ICollectionAnalyses;
                 let analysisId = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
-                let tempCollectionAnaysis = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex];
-                // console.log(tempCollectionAnaysis);
                 analysis = {
                     data_collection_date_range: dataCollection.get('data_collection_date_range') as string,
                     id: analysisId,
