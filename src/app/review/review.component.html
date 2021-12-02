@@ -247,9 +247,10 @@
           <!-- SLO DATA COLLECTION SECTION -->
           <h3> Data Collection </h3>
           <div class="row"
-            *ngFor="let data of slo.collection_analyses; index as i;"
+            *ngFor="let data of slo.collection_analyses; index as collection;"
             >
-            <h4> Collection {{ i + 1}} </h4>
+            <form id='SLO{{i + 1}}DataCollection{{collection + 1}}'>
+            <h4> Collection {{ collection + 1}} </h4>
             <label for="data_collection_date_range">
                 Data Collection Date Range
             </label>
@@ -277,6 +278,7 @@
               id="percentage_who_met_or_exceeded"
               name="content"
               rows="4">{{ data.percentage_who_met_or_exceeded }}</textarea>
+            </form>
           </div>
           <!-- SLO DECISION ACTION SECTION -->
           <h3> Decision Actions </h3>
