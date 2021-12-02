@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   users: any[] = [];
   backup: any[] = [];
   roles:any[] = [];
+  events:any[] = [];
   map = new Map<string, string>()
 
   ngOnInit(): void {
@@ -95,6 +96,13 @@ export class AdminComponent implements OnInit {
     this.service.getUserRoles(this.user.user_id).subscribe((data:any) => {
       console.log(data)
       this.roles = data.user_roles;
+    });
+
+    console.log(this.user);
+    console.log(this.user.name);
+    this.service.getUserAuditHistory(this.user.name).subscribe((data:any) => {
+      console.log(data)
+      this.events = data.audit_trail;
     });
   }
 

@@ -88,6 +88,16 @@ export class FileServiceService {
     });
   }
 
+  public getUserAuditHistory(username:string):Observable<any> {
+    return this.httpClient.post(this.baseUrl+"/audit/user", {name: username}, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+      }
+    });
+  }
+
   public requestRemove(username: any, role: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/users/remove_role", { uid: username, desired_role_id: role }, {
       responseType: 'json',
