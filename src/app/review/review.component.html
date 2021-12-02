@@ -319,71 +319,88 @@
               name="description"
               rows="10">{{ measure.description }}</textarea>
 
-            <label for="domain">
-                Domain
-            </label>
+            <fieldset>
+              <legend>Domain</legend>
             <input
-                class="form-input"
-                type="text"
-                name="domain"
-                placeholder="domain"
-                value="{{ measure.domain }}"
-                />
-
-            <label for="frequency_of_collection">
-                Frequency of Collection
-            </label>
+              class="form-input"
+              type="checkbox"
+              [checked]="isChecked(measure.domain, 'Examination')"
+              name="domain"
+              value="Examination"
+              /> Examination
             <input
-                class="form-input"
-                type="text"
-                name="frequency_of_collection"
-                placeholder="frequency_of_collection"
-                value="{{ measure.frequency_of_collection }}"
-                />
+              class="form-input"
+              type="checkbox"
+              [checked]="isChecked(measure.domain, 'Product')"
+              name="domain"
+              value="Product"
+              /> Product <br>
+            <input
+              class="form-input"
+              type="checkbox"
+              [checked]="isChecked(measure.domain, 'Performance')"
+              name="domain"
+              value="Performance"
+              /> Performance
+            </fieldset>
 
+            <fieldset>
+                <legend>Type</legend>
+              <input
+                class="form-input"
+                type="checkbox"
+                [checked]="isChecked(measure.type, 'Direct Measure')"
+                name="type"
+                value="Direct Measure"
+                /> Direct Measure
+              <input
+                class="form-input"
+                type="checkbox"
+                [checked]="isChecked(measure.type, 'Indirect Measure')"
+                name="type"
+                value="Indirect Measure"
+                /> Indirect Measure <br>
+              </fieldset>
+              
             <label for="point_in_program">
                 Point in Program
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="point_in_program"
-                placeholder="point_in_program"
-                value="{{ measure.point_in_program }}"
-                />
+            <textarea 
+              id="measurePointInProgram"
+              name="point_in_program"
+              rows="5">{{ measure.point_in_program }}</textarea>
 
             <label for="population_measured">
                 Population Measured
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="population_measured"
-                placeholder="population_measured"
-                value="{{ measure.population_measured }}"
-                />
+            <textarea 
+              id="populationMeasured"
+              name="population_measured"
+              rows="5">{{ measure.population_measured }}</textarea>
 
-            <label for="proficiency_target">
-                Proficiency Target
+            <label for="frequency_of_collection">
+                Frequency of Collection
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="proficiency_target"
-                placeholder="proficiency_target"
-                value="{{ measure.proficiency_target }}"
-                />
+            <textarea 
+              id="measureFrequency"
+              name="frequency_of_collection"
+              rows="5">{{ measure.frequency_of_collection }}</textarea>
 
             <label for="proficiency_threshold">
                 Proficiency Threshold
             </label>
-            <input
-                class="form-input"
-                type="text"
-                name="proficiency_threshold"
-                placeholder="proficiency_threshold"
-                value="{{ measure.proficiency_threshold }}"
-                />
+            <textarea 
+              id="measureThreshold"
+              name="proficiency_threshold"
+              rows="5">{{ measure.proficiency_threshold }}</textarea>
+
+            <label for="proficiency_target">
+                Proficiency Target
+            </label>
+            <textarea 
+              id="measureTarget"
+              name="proficiency_target"
+              rows="5">{{ measure.proficiency_target }}</textarea>
           </div>
           </form>
         </div>
