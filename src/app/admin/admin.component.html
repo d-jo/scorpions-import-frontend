@@ -36,3 +36,12 @@
             style="font-size: 20px; position:absolute; right:0px; cursor: pointer;">delete</mat-icon>
     </span>
 </table>
+
+<table *ngIf="edit" class="userList">
+    <span class="header">
+        <b>{{user.name}}'s History</b>
+    </span>
+    <span *ngFor="let event of events" class="role">
+        {{event.timestamp | date:'medium'}} {{event.action}} report number {{event.report_id}}
+    </span>
+</table>
