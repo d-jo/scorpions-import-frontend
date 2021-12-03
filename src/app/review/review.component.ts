@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
-import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, ISlos } from "../report/ISlo";
+import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, IMethod, ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
 import { getReportMockData } from './mock/report.mock';
 
@@ -143,6 +143,7 @@ public isChecked(bloom:any, type:string):boolean {
             let measureArray: IMeasures[] = [];
             let decsionArray: IDecisionAction[] = [];
             let accreditedArray: IAccreditedData[] = [];
+            let methodArray: IMethod[] = [];
             // console.log(this.report.slos[sloFormIndex]['accredited_data_analyses'].length == 0 
             // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
             let reportId = parseInt(this.report['id']);
@@ -237,6 +238,28 @@ public isChecked(bloom:any, type:string):boolean {
                 }
                 accreditedArray.push(accreditData)
             }
+
+            for (let methodIndex = 0; 
+                methodIndex < this.report.slos[sloIndex].methods.length; 
+                methodIndex++) {
+
+                const methodForm = document.querySelector('#SLO' + sloFormIndex + 'AssessmentMethod' + (methodIndex + 1)) as HTMLFormElement;
+                const methodData = new FormData(methodForm);
+                let decisionId = this.report.slos[sloIndex]['methods'][methodIndex]['id'];
+
+                let method: IMethod;
+                method = {
+                    data_collection: methodData.get('data_collection') === null 
+                        ? '' : methodData.get('data_collection') as string,
+                        domain: methodData.get('domain') === null 
+                        ? '' : methodData.get('domain') as string,
+                        measure: methodData.get('measure') === null 
+                        ? '' : methodData.get('measure') as string,
+                    id: decisionId,
+                    slo_id: sloId,
+                }
+                methodArray.push(method)
+            }
             
             const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
             const data = new FormData(form);
@@ -252,7 +275,7 @@ public isChecked(bloom:any, type:string):boolean {
                     ? '' : data.get('description') as string,
                 id: sloId,
                 measures: measureArray,
-                methods: this.report.slos[sloIndex]['methods'],
+                methods: methodArray,
                 report_id: reportId,
             }
             slosPayload.push(slo);

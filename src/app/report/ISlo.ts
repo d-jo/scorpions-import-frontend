@@ -6,7 +6,7 @@ export interface ISlos {
     description: string,
     id: number,
     measures: IMeasures[],
-    methods: string[],
+    methods: IMethod[],
     report_id: number,
     collection_analyses: ICollectionAnalyses[],
 }
@@ -42,5 +42,13 @@ export interface IDecisionAction {
 export interface IAccreditedData {
     status: string,
     id: number,
+    slo_id: number,
+}
+
+export interface IMethod {
+    data_collection: string,
+    domain: string,
+    id: number,
+    measure: string,
     slo_id: number,
 }
