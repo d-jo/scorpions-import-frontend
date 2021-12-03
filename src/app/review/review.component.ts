@@ -119,7 +119,7 @@ public isChecked(bloom:any, type:string):boolean {
       this.service.updateReport(this.payload)
       .subscribe({
           error: (error: any) => {
-              console.log(error);
+              console.error(error);
             },
             next: () => {
                 this.route.navigate(['/dashboard']);
@@ -140,7 +140,7 @@ public isChecked(bloom:any, type:string):boolean {
         this.service.deleteReport(this.report.id)
         .subscribe({
             error: (error: any) => {
-                console.log(error);
+                console.error(error);
             },
             next: () => {
                 this.route.navigate(['/dashboard']);

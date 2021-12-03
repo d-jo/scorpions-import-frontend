@@ -51,7 +51,6 @@ export class AdminComponent implements OnInit {
 
   findAllUsers() {
     this.service.requestUsers().subscribe((data: any) => {
-      console.log(data)
       this.users = data.users;
       this.backup = data.users;
     })
@@ -64,14 +63,10 @@ export class AdminComponent implements OnInit {
 
   removeRole(role: any) {
     let c = confirm("Are you sure you want to remove " + role.name + " from " + this.user.name + "?");
-    console.log(c);
     if (c) {
       let roleId = role.id;//this.map.get(role.id);
-      console.log(roleId);
       if (!roleId) return
-      console.log(roleId);
       this.service.requestRemove(this.user.user_id, roleId).subscribe((data:any) => {
-        console.log(data)
         if (data.status == "success") {
           alert("Role removed successfully");
         } else {
@@ -90,7 +85,6 @@ export class AdminComponent implements OnInit {
     let roleId = this.map.get(this.roleInput);
     if (!roleId) return
     this.service.requestAdd(this.user.user_id, roleId).subscribe((data:any) => {
-      console.log(data)
       if (data.status == "success") {
         alert("Role added successfully");
       } else {
@@ -111,14 +105,10 @@ export class AdminComponent implements OnInit {
 
   updateUserInfo() {
     this.service.getUserRoles(this.user.user_id).subscribe((data:any) => {
-      console.log(data)
       this.roles = data.user_roles;
     });
 
-    console.log(this.user);
-    console.log(this.user.name);
     this.service.getUserAuditHistory(this.user.name).subscribe((data:any) => {
-      console.log(data)
       this.events = data.audit_trail;
     });
   }

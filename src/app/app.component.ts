@@ -30,7 +30,6 @@ export class AppComponent implements OnDestroy {
   }
 
   selectNav(nav:string) {
-    console.log(nav);
     if(this.currentSelection && this.currentSelection != nav) {
       var previous = document.getElementById(this.currentSelection);
       previous?.classList.remove("selected");
