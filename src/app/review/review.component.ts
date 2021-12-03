@@ -154,6 +154,7 @@ public isChecked(bloom:any, type:string):boolean {
                 const dataCollection = new FormData(dataCollectionForm);
                 let analysis: ICollectionAnalyses;
                 let analysisId = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
+                console.log(dataCollection.get('collectionRange'))
                 analysis = {
                     data_collection_date_range: dataCollection.get('data_collection_date_range') as string,
                     id: analysisId,
@@ -164,26 +165,46 @@ public isChecked(bloom:any, type:string):boolean {
                 analysisArray.push(analysis);
             }
 
-            let measure: IMeasures;
-            measure = {
-                description: "",
-                domain: "",
-                frequency_of_collection: "",
-                id: 0,
-                point_in_program: "",
-                population_measured: "",
-                proficiency_target: "",
-                proficiency_threshold: "",
-                slo_id: sloId,
-                title: "",
-                type: "",
+            for (let measureIndex = 0; 
+                measureIndex < this.report.slos[sloIndex].measures.length; 
+                measureIndex++) {
+
+                const measureForm = document.querySelector('#SLO' + sloFormIndex + 'Measure' + (measureIndex + 1)) as HTMLFormElement;
+                const measureData = new FormData(measureForm);
+                let measureId = this.report.slos[sloIndex]['measures'][measureIndex]['id'];
+
+                let measure: IMeasures;
+                measure = {
+                    description: measureData.get('description') as string,
+                    domain: measureData.get('domain') as string,
+                    frequency_of_collection: measureData.get('frequency_of_collection') as string,
+                    id: measureId,
+                    point_in_program: measureData.get('point_in_program') as string,
+                    population_measured: measureData.get('population_measured') as string,
+                    proficiency_target: measureData.get('proficiency_target') as string,
+                    proficiency_threshold: measureData.get('proficiency_threshold') as string,
+                    slo_id: sloId,
+                    title: measureData.get('title') as string,
+                    type: measureData.get('type') as string,
+                }
+                measureArray.push(measure);
             }
 
-            let decsion: IDecisionAction;
-            decsion = {
-                content: "",
-                id: 0,
-                slo_id: sloId,
+            for (let decisionIndex = 0; 
+                decisionIndex < this.report.slos[sloIndex].decision_actions.length; 
+                decisionIndex++) {
+
+                const decisionForm = document.querySelector('#SLO' + sloFormIndex + 'DecisionAction' + (decisionIndex + 1)) as HTMLFormElement;
+                const decisionData = new FormData(decisionForm);
+                let decisionId = this.report.slos[sloIndex]['decision_actions'][decisionIndex]['id'];
+
+                let decision: IDecisionAction;
+                decision = {
+                    content: decisionData.get('content') as string,
+                    id: decisionId,
+                    slo_id: sloId,
+                }
+                decsionArray.push(decision)
             }
             
             const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
@@ -191,14 +212,12 @@ public isChecked(bloom:any, type:string):boolean {
             slo = {
                 accredited_data_analyses: [],
                 bloom: data.get('bloom') as string,
-                // collection_analyses: this.report.slos[sloFormIndex]['collection_analyses'],
                 collection_analyses: analysisArray,
                 common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
-                // decision_actions: this.report.slos[sloFormIndex]['decision_actions'],
-                decision_actions: [],
+                decision_actions: decsionArray,
                 description: data.get('description') as string,
                 id: sloId,
-                measures: this.report.slos[sloIndex]['measures'],
+                measures: measureArray,
                 methods: this.report.slos[sloIndex]['methods'],
                 report_id: reportId,
             }
