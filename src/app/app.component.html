@@ -1,27 +1,38 @@
 <div class="header">
-    <mat-icon (click)="toggleSidenav()"
+    <!-- <mat-icon (click)="toggleSidenav()"
         style="font-size: 30px; color: #000; position:absolute; left:10px; top:28px; cursor: pointer;">menu</mat-icon>
+     -->
+    <div class="logo">
+        <a href="https://www.unomaha.edu" target="_blank">
+            <img alt="University of Nebraska Omaha" src="https://campuscontent.nebraska.edu/UNO/dashboard/IMG/logo-subsite-o-2.png">
+        </a>
+    </div>
     <h2 class="title">Academic Assessment Import</h2>
     <div class="user" *ngIf="login.isUserAuthenticated() | async">
-        {{getUser()}}
-        <button class="b" (click)="logoutUser()">Log out</button>
+        Welcome {{getUser()}}
+        <!-- <button class="b" (click)="logoutUser()">Log out</button> -->
     </div>
 </div>
   
-<div id="side" *ngIf="login.isUserAuthenticated() | async" class="sidenav">
-    <a routerLink="/dashboard" (click)="toggleSidenav()">
-        <span class="navbox">Dashboard</span>
-    </a>
+<div class="sidenav">
+<!-- <div 
+*ngIf="login.isUserAuthenticated() | async" 
+class="sidenav"> -->
     <br/>
-    <a routerLink="/import" (click)="toggleSidenav()">
-        <span class="navbox">Import</span>
+    <a routerLink="/dashboard" class="navLink" (click)="selectNav('home')">
+        <span id="home" class="navbox">Dashboard</span>
     </a>
-    <br/>
-    <a routerLink="/admin" (click)="toggleSidenav()">
-        <span class="navbox">Admin</span>
+    <a routerLink="/import" class="navLink" (click)="selectNav('import')">
+        <span id="import" class="navbox">Import</span>
+    </a>
+    <a routerLink="/admin" class="navLink" (click)="selectNav('admin')">
+        <span id="admin" class="navbox">Admin</span>
+    </a>
+    <a class="navLink" (click)="logoutUser()">
+        <span class="navbox">Sign Out</span>
     </a>
 </div>
 
-<div id="router" style="transition: 0.5s;">
+<div id="router" style="margin-left: 80px; overflow-x: auto;">
     <router-outlet></router-outlet>
 </div>

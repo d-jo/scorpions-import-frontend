@@ -4,7 +4,7 @@
     padding: 10px;
     float: left;
     width: 350px;
-    margin: 75px;
+    margin-left: 90px;
 }
 
 .review {
@@ -12,7 +12,7 @@
     background-color: #f5d878;
     padding: 10px;
     width: 350px;
-    margin: 50px;
+    margin: 30px;
 }
 
 .done {
@@ -21,7 +21,6 @@
     padding: 10px;
     float: right;
     width: 350px;
-    margin: 50px;
     height: 300px;
 }
 

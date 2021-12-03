@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from './shared/services/login.service';
 
 @Component({
@@ -8,9 +9,13 @@ import { LoginService } from './shared/services/login.service';
 })
 export class AppComponent implements OnDestroy {
   title = 'scorpions-import-frontend';
-  showSidenav = false;
+  currentSelection = 'home';
+  
+  constructor(public login: LoginService, private router: Router) { }
 
-  constructor(public login: LoginService) { }
+  ngOnInit() {
+    this.selectNav(this.currentSelection);
+  }
 
   ngOnDestroy() {
     this.login.logout();
@@ -24,24 +29,14 @@ export class AppComponent implements OnDestroy {
     return this.login.getUsername();
   }
 
-  /**
-   * @ngdoc method
-   * @name toggleSidenav 
-   * @description toggles the side navigation panel off and on
-   * @returns {void}
-   */
-  toggleSidenav() {
-    this.showSidenav = !this.showSidenav;
-    let classList = document.getElementById("router")?.classList
-    let sideClassList = document.getElementById("side")?.classList
-    if (!classList || !sideClassList) return
-
-    if (this.showSidenav) {
-      classList.add("active");
-      sideClassList.add("active");
-    } else {
-      classList.remove("active");
-      sideClassList.remove("active");
+  selectNav(nav:string) {
+    console.log(nav);
+    if(this.currentSelection && this.currentSelection != nav) {
+      var previous = document.getElementById(this.currentSelection);
+      previous?.classList.remove("selected");
     }
+    var target = document.getElementById(nav);
+    target?.classList.add("selected");
+    this.currentSelection = nav; 
   }
 }

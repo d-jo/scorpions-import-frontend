@@ -1,46 +1,63 @@
 .header {
-    background-color: rgb(219, 210, 210);
-    width: 100vw;
-    height: 90px; 
-    margin-top: -20px;
-    text-align: center;
+    display: block;
+    background-color: #0e0e0e;
+    border-bottom: 3px solid #d71920;
+    top: 0;
+    padding: 10px 0;
+    position: sticky;
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    z-index: 6;
+}
+.logo {
+    display: inline-block;
+    margin-left: 20px;
+}
+.logo img {
+    width:50px;
 }
 .title {
-    color:rgb(158, 32, 32);
-    padding-top: 30px;
+    position: fixed;
+    color: #fff;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    margin-left: 10px;
+    margin-top: 8px;
 }
 .sidenav {
-    top: 89px;
-    left: -170px;
-    position: absolute;
-    width: 150px;
-    background-color: rgb(225, 75, 75);
-    transition: 0.5s;
-    min-height: 600px;
-    height:calc(100% - 110px);
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-.active {
-    transition: 0.5s;
-    transform: translateX(120px);
+    z-index: 5;
+    top: 60px;
+    left: 0px;
+    position: fixed;
+    width: 140px;
+    background-color: #484848;
+    height:100%;
+    padding-bottom: 100px;
 }
 .navbox {
-    display: inline-block;
-    width: 100px;
+    display: flex;
+    left: 0px;
+    width: 120px;
     text-align: center;
-    border: 2px solid #000;
-    background-color: #FFF;
+    border-bottom: 0.1px solid #000;
+    vertical-align: middle;
+    color:#FFF;
+    font-size: 14px;
+    padding: 10px;
 }
 .navbox:hover {
-    background-color: #000;
-    color: #FFF;
+    text-decoration: underline;
+    cursor: pointer;
 }
-a {
-    margin-left: 48px;
+.navLink {
     text-decoration: none;
+    text-align: center;
     color: #000;
+}
+.selected {
+    background-color: #000;
 }
 .user {
     position: absolute;
