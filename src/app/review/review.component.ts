@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
-import { ISlos } from "../report/ISlo";
+import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
+import { getReportMockData } from './mock/report.mock';
 
 @Component({
   selector: 'app-review',
@@ -43,76 +44,7 @@ export class ReviewComponent implements OnInit {
   }
 
   mockReportInfo() {
-    this.report = {
-        academic_year: "2018-19",
-        accreditation_body: "",
-        additional_information: "",
-        author: "Andrew W Swift",
-        college: "Arts & Sciences",
-        created: 1637691952,
-        creator_id: "google-oauth2|101860098464380056734",
-        date_range: "2016-2018",
-        degree_level: "Masters",
-        department: "Mathematics",
-        has_been_reviewed: false,
-        id: "1",
-        last_accreditation_review: "",
-        program: "MS",
-        slos: [
-            {
-                accredited_data_analyses: [],
-                bloom: "Application",
-                collection_analyses: [],
-                common_graduate_program_slo: "1",
-                decision_actions: [],
-                description: "Mastery of discipline content",
-                id: 1,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Evaluation",
-                collection_analyses: [],
-                common_graduate_program_slo: "2",
-                decision_actions: [],
-                description: "Proficiency in analyzing, evaluating, and synthesizing information",
-                id: 2,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Evaluation",
-                collection_analyses: [],
-                common_graduate_program_slo: "3",
-                decision_actions: [],
-                description: "Effective oral and written communication",
-                id: 3,
-                measures: [],
-                methods: [],
-                report_id: 1
-            },
-            {
-                accredited_data_analyses: [],
-                bloom: "Knowledge",
-                collection_analyses: [],
-                common_graduate_program_slo: "4",
-                decision_actions: [],
-                description: "Demonstrate knowledge of discipline’s ethics and standards",
-                id: 4,
-                measures: [],
-                methods: [],
-                report_id: 1
-            }
-        ],
-        slos_meet_standards: "",
-        stakeholder_involvement: "",
-        title: "",
-        valid: true
-    }
+    this.report = getReportMockData();
     this.editReport(this.report);
   }
 
@@ -205,24 +137,121 @@ public isChecked(bloom:any, type:string):boolean {
         let slosPayload: ISlos[] = [];
         for (let sloFormIndex = 1; sloFormIndex <= this.report.slos.length; sloFormIndex++) {
             let sloIndex = sloFormIndex - 1;
-            const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
-            const data = new FormData(form);
+            
             let slo: ISlos;
+            let analysisArray: ICollectionAnalyses[] = [];
+            let measureArray: IMeasures[] = [];
+            let decsionArray: IDecisionAction[] = [];
+            let accreditedArray: IAccreditedData[] = [];
             // console.log(this.report.slos[sloFormIndex]['accredited_data_analyses'].length == 0 
             // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
             let reportId = parseInt(this.report['id']);
             let sloId = this.report.slos[sloIndex]['id'];
+            for (let collectionAnalysisIndex = 0; 
+                collectionAnalysisIndex < this.report.slos[sloIndex].collection_analyses.length; 
+                collectionAnalysisIndex++) {
+                    
+                const dataCollectionForm = document.querySelector('#SLO' + sloFormIndex + 'DataCollection' + (collectionAnalysisIndex + 1)) as HTMLFormElement;
+                const dataCollection = new FormData(dataCollectionForm);
+                let analysis: ICollectionAnalyses;
+                let analysisId = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
+                analysis = {
+                    data_collection_date_range: dataCollection.get('data_collection_date_range') === null 
+                        ? '' : dataCollection.get('data_collection_date_range') as string,
+                    id: analysisId,
+                    number_of_students_assessed: dataCollection.get('number_of_students_assessed') === null 
+                        ? '' : dataCollection.get('number_of_students_assessed') as string,
+                    percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') === null 
+                        ? '' : dataCollection.get('percentage_who_met_or_exceeded') as string,
+                    slo_id: sloId,
+                }
+                analysisArray.push(analysis);
+            }
+
+            for (let measureIndex = 0; 
+                measureIndex < this.report.slos[sloIndex].measures.length; 
+                measureIndex++) {
+
+                const measureForm = document.querySelector('#SLO' + sloFormIndex + 'Measure' + (measureIndex + 1)) as HTMLFormElement;
+                const measureData = new FormData(measureForm);
+                let measureId = this.report.slos[sloIndex]['measures'][measureIndex]['id'];
+
+                let measure: IMeasures;
+                measure = {
+                    description: measureData.get('description') === null 
+                        ? '' : measureData.get('description') as string,
+                    domain: measureData.get('domain') === null 
+                        ? '' : measureData.get('domain') as string,
+                    frequency_of_collection: measureData.get('frequency_of_collection') === null 
+                        ? '' : measureData.get('frequency_of_collection') as string,
+                    id: measureId,
+                    point_in_program: measureData.get('point_in_program') === null 
+                        ? '' : measureData.get('point_in_program') as string,
+                    population_measured: measureData.get('population_measured') === null 
+                        ? '' : measureData.get('population_measured') as string,
+                    proficiency_target: measureData.get('proficiency_target') === null 
+                     ? '' : measureData.get('proficiency_target') as string,
+                    proficiency_threshold: measureData.get('proficiency_threshold') === null 
+                        ? '' : measureData.get('proficiency_threshold') as string,
+                    slo_id: sloId,
+                    title: measureData.get('title') === null 
+                        ? '' : measureData.get('title') as string,
+                    type: measureData.get('type') === null 
+                        ? '' : measureData.get('type') as string,
+                }
+                measureArray.push(measure);
+            }
+
+            for (let decisionIndex = 0; 
+                decisionIndex < this.report.slos[sloIndex].decision_actions.length; 
+                decisionIndex++) {
+
+                const decisionForm = document.querySelector('#SLO' + sloFormIndex + 'DecisionAction' + (decisionIndex + 1)) as HTMLFormElement;
+                const decisionData = new FormData(decisionForm);
+                let decisionId = this.report.slos[sloIndex]['decision_actions'][decisionIndex]['id'];
+
+                let decision: IDecisionAction;
+                decision = {
+                    content: decisionData.get('content') === null 
+                        ? '' : decisionData.get('content') as string,
+                    id: decisionId,
+                    slo_id: sloId,
+                }
+                decsionArray.push(decision)
+            }
+
+            for (let accreditedIndex = 0; 
+                accreditedIndex < this.report.slos[sloIndex].accredited_data_analyses.length; 
+                accreditedIndex++) {
+
+                const accreditedForm = document.querySelector('#SLO' + sloFormIndex + 'AccreditedData' + (accreditedIndex + 1)) as HTMLFormElement;
+                const accreditedData = new FormData(accreditedForm);
+                let accreditedId = this.report.slos[sloIndex]['accredited_data_analyses'][accreditedIndex]['id'];
+
+                let accreditData: IAccreditedData;
+                accreditData = {
+                    status: accreditedData.get('status') === null 
+                        ? '' : accreditedData.get('status') as string,
+                    id: accreditedId,
+                    slo_id: sloId,
+                }
+                accreditedArray.push(accreditData)
+            }
+            
+            const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
+            const data = new FormData(form);
             slo = {
-                accredited_data_analyses: [],
-                bloom: data.get('bloom') as string,
-                // collection_analyses: this.report.slos[sloFormIndex]['collection_analyses'],
-                collection_analyses: [],
-                common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
-                // decision_actions: this.report.slos[sloFormIndex]['decision_actions'],
-                decision_actions: [],
-                description: data.get('description') as string,
+                accredited_data_analyses: accreditedArray,
+                bloom: data.get('bloom') === null 
+                    ? '' : data.get('bloom') as string,
+                collection_analyses: analysisArray,
+                common_graduate_program_slo: data.get('common_graduate_program_slo') === null 
+                    ? '' : data.get('common_graduate_program_slo') as string,
+                decision_actions: decsionArray,
+                description: data.get('description') === null 
+                    ? '' : data.get('description') as string,
                 id: sloId,
-                measures: this.report.slos[sloIndex]['measures'],
+                measures: measureArray,
                 methods: this.report.slos[sloIndex]['methods'],
                 report_id: reportId,
             }

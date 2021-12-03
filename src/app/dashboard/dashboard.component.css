@@ -6,6 +6,7 @@
     width: 350px;
     margin: 75px;
 }
+
 .review {
     border: dotted #000 2px;
     background-color: #f5d878;
@@ -13,6 +14,7 @@
     width: 350px;
     margin: 50px;
 }
+
 .done {
     border: solid #000 2px;
     background-color: #50b33e;
@@ -22,9 +24,11 @@
     margin: 50px;
     height: 300px;
 }
+
 h3 {
     margin-left: 40%;
 }
+
 .fileHolder {
     display: flex;
     flex-direction: column;
@@ -33,10 +37,13 @@ h3 {
     border-radius: 15px;
     padding: 20px;
     height: 195px;
+    overflow-y: scroll;
 }
-.button {
+
+button {
     margin-left: 100px;
 }
+
 .results {
     margin-left: 5%;
     margin-top: 5%;
@@ -45,14 +52,16 @@ h3 {
     border-radius: 15px;
     padding: 10px;
 }
+
 .disp {
     display: flex;
     flex-direction: column;
 }
+
 .search {
     padding-top: 25px;
     display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
 }
