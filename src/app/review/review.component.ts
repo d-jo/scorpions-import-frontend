@@ -156,12 +156,13 @@ public isChecked(bloom:any, type:string):boolean {
                 let analysis: ICollectionAnalyses;
                 let analysisId = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
                 analysis = {
-                    data_collection_date_range: dataCollection.get('data_collection_date_range') as string,
+                    data_collection_date_range: dataCollection.get('data_collection_date_range') === null 
+                        ? '' : dataCollection.get('data_collection_date_range') as string,
                     id: analysisId,
-                    number_of_students_assessed: dataCollection.get('number_of_students_assessed') as string === null 
-                    ? '' : 'N/A',
-                    percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') as string === null 
-                    ? '' : 'N/A',
+                    number_of_students_assessed: dataCollection.get('number_of_students_assessed') === null 
+                        ? '' : dataCollection.get('number_of_students_assessed') as string,
+                    percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') === null 
+                        ? '' : dataCollection.get('percentage_who_met_or_exceeded') as string,
                     slo_id: sloId,
                 }
                 analysisArray.push(analysis);
@@ -177,18 +178,26 @@ public isChecked(bloom:any, type:string):boolean {
 
                 let measure: IMeasures;
                 measure = {
-                    description: measureData.get('description') as string,
-                    domain: measureData.get('domain') as string,
-                    frequency_of_collection: measureData.get('frequency_of_collection') as string,
+                    description: measureData.get('description') === null 
+                        ? '' : measureData.get('description') as string,
+                    domain: measureData.get('domain') === null 
+                        ? '' : measureData.get('domain') as string,
+                    frequency_of_collection: measureData.get('frequency_of_collection') === null 
+                        ? '' : measureData.get('frequency_of_collection') as string,
                     id: measureId,
-                    point_in_program: measureData.get('point_in_program') as string,
-                    population_measured: measureData.get('population_measured') as string,
-                    proficiency_target: measureData.get('proficiency_target') as string,
-                    proficiency_threshold: measureData.get('proficiency_threshold') as string,
+                    point_in_program: measureData.get('point_in_program') === null 
+                        ? '' : measureData.get('point_in_program') as string,
+                    population_measured: measureData.get('population_measured') === null 
+                        ? '' : measureData.get('population_measured') as string,
+                    proficiency_target: measureData.get('proficiency_target') === null 
+                     ? '' : measureData.get('proficiency_target') as string,
+                    proficiency_threshold: measureData.get('proficiency_threshold') === null 
+                        ? '' : measureData.get('proficiency_threshold') as string,
                     slo_id: sloId,
-                    title: measureData.get('title') as string,
-                    type: measureData.get('type') as string === null
-                        ? '' : 'N/A',
+                    title: measureData.get('title') === null 
+                        ? '' : measureData.get('title') as string,
+                    type: measureData.get('type') === null 
+                        ? '' : measureData.get('type') as string,
                 }
                 measureArray.push(measure);
             }
@@ -203,7 +212,8 @@ public isChecked(bloom:any, type:string):boolean {
 
                 let decision: IDecisionAction;
                 decision = {
-                    content: decisionData.get('content') as string,
+                    content: decisionData.get('content') === null 
+                        ? '' : decisionData.get('content') as string,
                     id: decisionId,
                     slo_id: sloId,
                 }
@@ -220,7 +230,8 @@ public isChecked(bloom:any, type:string):boolean {
 
                 let accreditData: IAccreditedData;
                 accreditData = {
-                    status: accreditedData.get('status') as string,
+                    status: accreditedData.get('status') === null 
+                        ? '' : accreditedData.get('status') as string,
                     id: accreditedId,
                     slo_id: sloId,
                 }
@@ -231,11 +242,14 @@ public isChecked(bloom:any, type:string):boolean {
             const data = new FormData(form);
             slo = {
                 accredited_data_analyses: accreditedArray,
-                bloom: data.get('bloom') as string,
+                bloom: data.get('bloom') === null 
+                    ? '' : data.get('bloom') as string,
                 collection_analyses: analysisArray,
-                common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
+                common_graduate_program_slo: data.get('common_graduate_program_slo') === null 
+                    ? '' : data.get('common_graduate_program_slo') as string,
                 decision_actions: decsionArray,
-                description: data.get('description') as string,
+                description: data.get('description') === null 
+                    ? '' : data.get('description') as string,
                 id: sloId,
                 measures: measureArray,
                 methods: this.report.slos[sloIndex]['methods'],
