@@ -244,6 +244,46 @@
               value="NA"
               /> Not applicable for SLO
           </fieldset>
+          <!-- SLO ASSESSMENT METHODS SECTION -->
+          <h3> Assessment Methods </h3>
+            <div class="row"
+              *ngFor="let method of slo.methods; index as mthd;"
+            >
+            <form id='SLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
+                <label for="data_collection">
+                  Data Collection
+                </label>
+                <input
+                  class="form-input"
+                  type="text"
+                  name="data_collection"
+                  placeholder="Data Collection"
+                  value="{{ method.data_collection }}"
+                  />
+
+                <label for="domain">
+                  Domain (Product, Performance, Examination)
+                </label>
+                <input
+                class="form-input"
+                type="text"
+                name="domain"
+                placeholder="Domain"
+                value="{{ method.domain }}"
+                />
+
+                <label for="measure">
+                    Measure
+                </label>
+                    <input
+                    class="form-input"
+                    type="text"
+                    name="measure"
+                    placeholder="measure"
+                    value="{{ method.measure }}"
+                    />
+            </form>
+          </div>
           <!-- SLO DATA COLLECTION SECTION -->
           <h3> Data Collection </h3>
           <div class="row"
@@ -404,24 +444,24 @@
             </form>
             </div>
             <!-- SLO ACCREDITED DATA SECTION -->
-          <h3> Accredited Data </h3>
-          <div class="row"
-            *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
-            >
-            <form id='SLO{{i + 1}}AccreditedData{{acc + 1}}'>
-                <label for="accredited_data_analyses">
-                    Accedited Status
-                </label>
-                <input
-                    class="form-input"
-                    type="text"
-                    name="status"
-                    placeholder="Accedited Status"
-                    maxlength="50"
-                    value="{{ credit.status }}"
-                    />
-            </form>
-        </div>
+            <h3> Accredited Data </h3>
+            <div class="row"
+              *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
+              >
+              <form id='SLO{{i + 1}}AccreditedData{{acc + 1}}'>
+                  <label for="accredited_data_analyses">
+                      Accedited Status
+                  </label>
+                  <input
+                      class="form-input"
+                      type="text"
+                      name="status"
+                      placeholder="Accedited Status"
+                      maxlength="50"
+                      value="{{ credit.status }}"
+                      />
+              </form>
+            </div>
           </form>
         </div>
       </div>

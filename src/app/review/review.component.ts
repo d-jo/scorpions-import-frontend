@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
-import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, ISlos } from "../report/ISlo";
+import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, IMethod, ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
 import { getReportMockData } from './mock/report.mock';
 
@@ -24,13 +24,13 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.reportForm = this.formBuilder.group({
-        academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        author: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        college: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        date_range: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        academic_year: new FormControl('', [Validators.required]),
+        author: new FormControl('', [Validators.required]),
+        college: new FormControl('', [Validators.required]),
+        date_range: new FormControl('', [Validators.required]),
+        degree_level: new FormControl('', [Validators.required]),
+        department: new FormControl('', [Validators.required]),
+        program: new FormControl('', [Validators.required]),
         // slos: this.formBuilder.array([this.createSLO(1)]), //TODO look at this later, may need to know slo length ahead of time
     });
 
@@ -143,6 +143,7 @@ public isChecked(bloom:any, type:string):boolean {
             let measureArray: IMeasures[] = [];
             let decsionArray: IDecisionAction[] = [];
             let accreditedArray: IAccreditedData[] = [];
+            let methodArray: IMethod[] = [];
             // console.log(this.report.slos[sloFormIndex]['accredited_data_analyses'].length == 0 
             // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
             let reportId = parseInt(this.report['id']);
@@ -237,6 +238,28 @@ public isChecked(bloom:any, type:string):boolean {
                 }
                 accreditedArray.push(accreditData)
             }
+
+            for (let methodIndex = 0; 
+                methodIndex < this.report.slos[sloIndex].methods.length; 
+                methodIndex++) {
+
+                const methodForm = document.querySelector('#SLO' + sloFormIndex + 'AssessmentMethod' + (methodIndex + 1)) as HTMLFormElement;
+                const methodData = new FormData(methodForm);
+                let decisionId = this.report.slos[sloIndex]['methods'][methodIndex]['id'];
+
+                let method: IMethod;
+                method = {
+                    data_collection: methodData.get('data_collection') === null 
+                        ? '' : methodData.get('data_collection') as string,
+                        domain: methodData.get('domain') === null 
+                        ? '' : methodData.get('domain') as string,
+                        measure: methodData.get('measure') === null 
+                        ? '' : methodData.get('measure') as string,
+                    id: decisionId,
+                    slo_id: sloId,
+                }
+                methodArray.push(method)
+            }
             
             const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
             const data = new FormData(form);
@@ -252,7 +275,7 @@ public isChecked(bloom:any, type:string):boolean {
                     ? '' : data.get('description') as string,
                 id: sloId,
                 measures: measureArray,
-                methods: this.report.slos[sloIndex]['methods'],
+                methods: methodArray,
                 report_id: reportId,
             }
             slosPayload.push(slo);
