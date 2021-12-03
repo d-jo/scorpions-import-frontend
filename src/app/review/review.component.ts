@@ -39,7 +39,6 @@ export class ReviewComponent implements OnInit {
         const fileId = params.get('id');
         if (fileId) {
             this.getReportInfo(fileId);
-            // this.mockReportInfo();
         }
     })
 
@@ -52,6 +51,11 @@ export class ReviewComponent implements OnInit {
 
   }
 
+  /**
+   * Get audit trail of file in review to display on page.
+   * 
+   * @param fileId - File id.
+   */
   fileAuditHistory(fileId: string) {
     this.service.getFileAuditHistory(fileId)
         .subscribe((audit:any) => {
@@ -59,11 +63,20 @@ export class ReviewComponent implements OnInit {
         });
   }
 
+  /**
+   * Get mockdata for report.
+   */
   mockReportInfo() {
     this.report = getReportMockData();
     this.editReport(this.report);
   }
 
+  /**
+   * Get <code>IReport</code> of file in review to populate the form.
+   * 
+   * @param fileId - File id
+   * @returns <code>IReport</code> object of the report in review
+   */
   getReportInfo(fileId: string) {
     return this.service.getFile(fileId)
         .subscribe((result : IReport) => {
@@ -73,6 +86,12 @@ export class ReviewComponent implements OnInit {
   }
 
 
+  /**
+   * Form builder's patch value for the initial section of the <code>IReport</code>.
+   * Does not include any files of the report consisting of arrays.
+   * 
+   * @param reportData - <code>IReport</code> built from the FormControls
+   */
   editReport(reportData: IReport) {
     //   console.log(reportData.slos)
       this.reportForm.patchValue({
@@ -108,12 +127,22 @@ export class ReviewComponent implements OnInit {
             report_id: new FormControl('', [Validators.required, Validators.maxLength(32)])
         });
     }
-
-public isChecked(bloom:any, type:string):boolean {
+/**
+ * Determine if the JSON response corresponds to one the form checkbox to check it.
+ * 
+ * @param input - Field from the API response.
+ * @param checkbox  - Checkbox value to compare to.
+ * @returns true if API response includes the text form the checkbox.
+ */
+public isChecked(input:any, checkbox:string):boolean {
     //cast to string in case of number
-    return (bloom+"").toUpperCase().includes(type.toUpperCase())
+    return (input+"").toUpperCase().includes(checkbox.toUpperCase())
 }
 
+  /**
+   * Submit button calls to create payload from the form and send object to update endpoint.
+   * Navigate back to dashboard upon success, log error otherwise.
+   */
   public updateReport(): void {
       this.payload = this.setPayload()
       this.service.updateReport(this.payload)
@@ -127,14 +156,24 @@ public isChecked(bloom:any, type:string):boolean {
       })
   }
 
+  /**
+   * Discarad any edits and reset the form to the original API response.
+   */
   public resetReport(): void {
     this.getReportInfo(this.report.id);
   }
 
+  /**
+   * Cancel the review and navigate back to the dashboard.
+   */
   public cancelReview(): void {
     this.route.navigate(['/dashboard']);
   }
 
+  /**
+   * Send the file in review's ID to get deleted.
+   * Navigate back to dashboard upon success, log error otherwise.
+   */
   public deleteReport(): void {
     if(confirm("Are you sure to delete " + this.report.id)) {
         this.service.deleteReport(this.report.id)
@@ -149,6 +188,12 @@ public isChecked(bloom:any, type:string):boolean {
     }
   }
 
+  /**
+   * Create new <code>IReport</code> object from the form and send to endpoint to update the report in the database.
+   * If the contents of the field is <code>null</code>, then set is as ''.
+   * 
+   * @returns {"message":"report updated","status":"success | failure"}
+   */
   setPayload(): IReport {
       let slosPayload: ISlos[] = [];
       for (let sloFormIndex = 1; sloFormIndex <= this.report.slos.length; sloFormIndex++) {
@@ -164,6 +209,8 @@ public isChecked(bloom:any, type:string):boolean {
           // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
           let reportId = parseInt(this.report['id']);
           let sloId = this.report.slos[sloIndex]['id'];
+          
+          // Create each Collection Analysis object from the form to put into the payload
           for (let collectionAnalysisIndex = 0; 
               collectionAnalysisIndex < this.report.slos[sloIndex].collection_analyses.length; 
               collectionAnalysisIndex++) {
@@ -185,6 +232,7 @@ public isChecked(bloom:any, type:string):boolean {
               analysisArray.push(analysis);
           }
   
+          // Create each Measure object from the form to put into the payload
           for (let measureIndex = 0; 
               measureIndex < this.report.slos[sloIndex].measures.length; 
               measureIndex++) {
@@ -219,6 +267,7 @@ public isChecked(bloom:any, type:string):boolean {
               measureArray.push(measure);
           }
   
+          // Create each Decision Action object from the form to put into the payload
           for (let decisionIndex = 0; 
               decisionIndex < this.report.slos[sloIndex].decision_actions.length; 
               decisionIndex++) {
@@ -237,6 +286,7 @@ public isChecked(bloom:any, type:string):boolean {
               decsionArray.push(decision)
           }
   
+          // Create each Accredited Data Collection object from the form to put into the payload
           for (let accreditedIndex = 0; 
               accreditedIndex < this.report.slos[sloIndex].accredited_data_analyses.length; 
               accreditedIndex++) {
@@ -255,6 +305,7 @@ public isChecked(bloom:any, type:string):boolean {
               accreditedArray.push(accreditData)
           }
   
+          // Create each Method object from the form to put into the payload
           for (let methodIndex = 0; 
               methodIndex < this.report.slos[sloIndex].methods.length; 
               methodIndex++) {
@@ -277,6 +328,8 @@ public isChecked(bloom:any, type:string):boolean {
               methodArray.push(method)
           }
           
+          // Create each SLO object from the form along with the corresponding lists from above 
+          // loops to put into the payload
           const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
           const data = new FormData(form);
           slo = {
@@ -296,6 +349,7 @@ public isChecked(bloom:any, type:string):boolean {
           }
           slosPayload.push(slo);
       }
+
       return {
           academic_year : this.reportForm.get('academic_year').value,
           creator_id: this.report['creator_id'],
