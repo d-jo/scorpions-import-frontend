@@ -24,13 +24,13 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.reportForm = this.formBuilder.group({
-        academic_year: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        author: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        college: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        date_range: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        degree_level: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        department: new FormControl('', [Validators.required, Validators.maxLength(32)]),
-        program: new FormControl('', [Validators.required, Validators.maxLength(32)]),
+        academic_year: new FormControl('', [Validators.required]),
+        author: new FormControl('', [Validators.required]),
+        college: new FormControl('', [Validators.required]),
+        date_range: new FormControl('', [Validators.required]),
+        degree_level: new FormControl('', [Validators.required]),
+        department: new FormControl('', [Validators.required]),
+        program: new FormControl('', [Validators.required]),
         // slos: this.formBuilder.array([this.createSLO(1)]), //TODO look at this later, may need to know slo length ahead of time
     });
 
