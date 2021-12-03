@@ -11,8 +11,8 @@
             <div class="uploading">
                 <h3>Upload</h3>
                 <div class="fileHolder">
-                    <span *ngFor="let file of uploadFiles">
-                        <mat-checkbox (change)="addFile($event.checked, file)">
+                    <span *ngFor="let file of uploadFiles; let idx = index">
+                        <mat-checkbox [(ngModel)]="checkBoxStates[idx]" (change)="addFile($event.checked, file, idx)">
                             {{getFileText(file)}}
                         </mat-checkbox>
                     </span>

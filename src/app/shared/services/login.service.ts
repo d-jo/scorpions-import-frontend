@@ -23,6 +23,10 @@ export class LoginService implements CanActivate {
    * @returns {Observable} of the response from auth0 if the user is authenticated
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    let token = localStorage.getItem("token")
+    if(token && token != " " && token.split(".").length == 3) {
+      return true;
+    }
     return this.auth.isAuthenticated$.pipe(map((data:boolean) => {
       if(!data) {
         this.router.navigate(['/login'])
@@ -50,7 +54,7 @@ export class LoginService implements CanActivate {
    * @returns {*} string of the user or void if none 
    */
   getUsername() {
-    return sessionStorage.getItem('user');
+    return localStorage.getItem('user');
   }
 
   /**
@@ -63,10 +67,10 @@ export class LoginService implements CanActivate {
     this.auth.loginWithPopup({ screen_hint: 'signup' }).subscribe(() => {
       this.auth.getAccessTokenSilently().subscribe((details:any) => {
         if(details) {
-          sessionStorage.setItem('token', details);
+          localStorage.setItem('token', details);
           this.router.navigate(['/dashboard']);
           this.auth.user$.subscribe((data:any) => {
-            sessionStorage.setItem('user', data.name);
+            localStorage.setItem('user', data.name);
           })
         }
       })

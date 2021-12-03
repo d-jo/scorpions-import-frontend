@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   measures:any[] = []
   analysis:any[] = []
   decisions:any[] = []
+  checkBoxStates:boolean[] = []
 
   constructor(private route: Router,
             private service: FileServiceService) { }
@@ -40,6 +41,9 @@ export class DashboardComponent implements OnInit {
   getFiles(): void {
     this.requestFiles().subscribe((data: DashboardFiles) => {
       this.uploadFiles = data.uploaded;
+      for(let x = 0; x < this.uploadFiles.length; x++) {
+        this.checkBoxStates.push(false)
+      }
       this.reviewFiles = data.review;
       this.completedFiles = data.done;
     })
@@ -106,10 +110,17 @@ export class DashboardComponent implements OnInit {
           this.decisions.push(item[j])
         }
       }
-
+      this.clearCheckBoxStates()
       this.display = true;
       this.getFiles();
     });
+  }
+  
+  clearCheckBoxStates() {
+    for(let x = 0; x < this.checkBoxStates.length; x++) {
+      this.checkBoxStates[x] = false
+    }
+    this.files = []
   }
 
   /**
@@ -139,7 +150,8 @@ export class DashboardComponent implements OnInit {
    * @param {boolean} checked if the box is checked or not, tells if it is an add or remove
    * @param {string} file the file name to add/remove from the list
    */
-  addFile(checked: boolean, file: string) {
+  addFile(checked: boolean, file: string, idx: number) {
+    this.checkBoxStates[idx] = checked
     if (checked) {
       this.files.push(file)
     } else {
