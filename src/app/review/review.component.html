@@ -258,7 +258,7 @@
                 class="form-input"
                 type="text"
                 name="data_collection_date_range"
-                placeholder="Data Collectin Date Range"
+                placeholder="Data Collection Date Range"
                 maxlength="50"
                 value="{{ data.data_collection_date_range }}"
                 />
@@ -403,6 +403,25 @@
                 rows="5">{{ measure.proficiency_target }}</textarea>
             </form>
             </div>
+            <!-- SLO ACCREDITED DATA SECTION -->
+          <h3> Accredited Data </h3>
+          <div class="row"
+            *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
+            >
+            <form id='SLO{{i + 1}}AccreditedData{{acc + 1}}'>
+                <label for="accredited_data_analyses">
+                    Accedited Status
+                </label>
+                <input
+                    class="form-input"
+                    type="text"
+                    name="status"
+                    placeholder="Accedited Status"
+                    maxlength="50"
+                    value="{{ credit.status }}"
+                    />
+            </form>
+        </div>
           </form>
         </div>
       </div>

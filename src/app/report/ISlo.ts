@@ -1,5 +1,5 @@
 export interface ISlos {
-    accredited_data_analyses: string[],
+    accredited_data_analyses: IAccreditedData[],
     bloom: string,
     common_graduate_program_slo: string,
     decision_actions: IDecisionAction[],
@@ -35,6 +35,12 @@ export interface IMeasures {
 
 export interface IDecisionAction {
     content: string,
+    id: number,
+    slo_id: number,
+}
+
+export interface IAccreditedData {
+    status: string,
     id: number,
     slo_id: number,
 }

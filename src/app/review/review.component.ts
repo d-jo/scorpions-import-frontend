@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IReport } from '../report/IReport';
-import { ICollectionAnalyses, IDecisionAction, IMeasures, ISlos } from "../report/ISlo";
+import { IAccreditedData, ICollectionAnalyses, IDecisionAction, IMeasures, ISlos } from "../report/ISlo";
 import { FileServiceService } from '../shared/services/file-service.service';
 import { getReportMockData } from './mock/report.mock';
 
@@ -142,6 +142,7 @@ public isChecked(bloom:any, type:string):boolean {
             let analysisArray: ICollectionAnalyses[] = [];
             let measureArray: IMeasures[] = [];
             let decsionArray: IDecisionAction[] = [];
+            let accreditedArray: IAccreditedData[] = [];
             // console.log(this.report.slos[sloFormIndex]['accredited_data_analyses'].length == 0 
             // ? ['empty'] : this.report.slos[sloFormIndex]['accredited_data_analyses'])
             let reportId = parseInt(this.report['id']);
@@ -154,12 +155,13 @@ public isChecked(bloom:any, type:string):boolean {
                 const dataCollection = new FormData(dataCollectionForm);
                 let analysis: ICollectionAnalyses;
                 let analysisId = this.report.slos[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
-                console.log(dataCollection.get('collectionRange'))
                 analysis = {
                     data_collection_date_range: dataCollection.get('data_collection_date_range') as string,
                     id: analysisId,
-                    number_of_students_assessed: dataCollection.get('number_of_students_assessed') as string,
-                    percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') as string,
+                    number_of_students_assessed: dataCollection.get('number_of_students_assessed') as string === null 
+                    ? '' : 'N/A',
+                    percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') as string === null 
+                    ? '' : 'N/A',
                     slo_id: sloId,
                 }
                 analysisArray.push(analysis);
@@ -185,7 +187,8 @@ public isChecked(bloom:any, type:string):boolean {
                     proficiency_threshold: measureData.get('proficiency_threshold') as string,
                     slo_id: sloId,
                     title: measureData.get('title') as string,
-                    type: measureData.get('type') as string,
+                    type: measureData.get('type') as string === null
+                        ? '' : 'N/A',
                 }
                 measureArray.push(measure);
             }
@@ -206,11 +209,28 @@ public isChecked(bloom:any, type:string):boolean {
                 }
                 decsionArray.push(decision)
             }
+
+            for (let accreditedIndex = 0; 
+                accreditedIndex < this.report.slos[sloIndex].accredited_data_analyses.length; 
+                accreditedIndex++) {
+
+                const accreditedForm = document.querySelector('#SLO' + sloFormIndex + 'AccreditedData' + (accreditedIndex + 1)) as HTMLFormElement;
+                const accreditedData = new FormData(accreditedForm);
+                let accreditedId = this.report.slos[sloIndex]['accredited_data_analyses'][accreditedIndex]['id'];
+
+                let accreditData: IAccreditedData;
+                accreditData = {
+                    status: accreditedData.get('status') as string,
+                    id: accreditedId,
+                    slo_id: sloId,
+                }
+                accreditedArray.push(accreditData)
+            }
             
             const form = document.querySelector('#mySLO' + sloFormIndex) as HTMLFormElement;
             const data = new FormData(form);
             slo = {
-                accredited_data_analyses: [],
+                accredited_data_analyses: accreditedArray,
                 bloom: data.get('bloom') as string,
                 collection_analyses: analysisArray,
                 common_graduate_program_slo: data.get('common_graduate_program_slo') as string,
@@ -222,7 +242,6 @@ public isChecked(bloom:any, type:string):boolean {
                 report_id: reportId,
             }
             slosPayload.push(slo);
-            console.log(slosPayload)
         }
         return {
             academic_year : this.reportForm.get('academic_year').value,
