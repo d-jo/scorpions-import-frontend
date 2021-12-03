@@ -88,6 +88,14 @@ export class FileServiceService {
     });
   }
 
+  public getFileAuditHistory(fileId:string):Observable<any> {
+    return this.httpClient.get(this.baseUrl+"/audit/file/" + fileId, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
+  }
+
   public getUserAuditHistory(username:string):Observable<any> {
     return this.httpClient.post(this.baseUrl+"/audit/user", {name: username}, {
       responseType: 'json',

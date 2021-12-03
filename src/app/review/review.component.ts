@@ -16,6 +16,7 @@ export class ReviewComponent implements OnInit {
   report!:IReport;
   payload?:IReport;
   reportForm: any;
+  auditLog: any;
 
   constructor(private formBuilder: FormBuilder,
             private activeRoute: ActivatedRoute,
@@ -41,6 +42,21 @@ export class ReviewComponent implements OnInit {
             // this.mockReportInfo();
         }
     })
+
+    this.activeRoute.paramMap.subscribe(params => {
+        const fileId = params.get('id');
+        if (fileId) {
+            this.fileAuditHistory(fileId);
+        }
+    })
+
+  }
+
+  fileAuditHistory(fileId: string) {
+    this.service.getFileAuditHistory(fileId)
+        .subscribe((audit:any) => {
+            this.auditLog = audit.audit_trail;
+        });
   }
 
   mockReportInfo() {
