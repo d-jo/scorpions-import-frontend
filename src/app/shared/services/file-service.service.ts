@@ -15,10 +15,11 @@ export class FileServiceService {
   ) { }
 
 /**
- * Get a <code>IReport</code> Observable object from the database.
- * 
- * @param fileId - File id to get from API.
- * @returns IReport of file data
+ * @ngdoc method
+ * @name getFile 
+ * @description Get a <code>IReport</code> Observable object from the database.
+ * @param {string} fileId - File id to get from API.
+ * @returns {IReport} of file data
  */
   public getFile(fileId: string): Observable<IReport> {
     return this.httpClient.get<IReport>(this.baseUrl + "/reports/" + fileId, {
@@ -29,10 +30,11 @@ export class FileServiceService {
   }
 
   /**
-   * Get a list of files in that statuses of 'Upload', 'Review' and 'Done'
+   * @ngdoc method
+   * @name requestFiles 
+   * @description Get a list of files in that statuses of 'Upload', 'Review' and 'Done'
    * to display on the dashboard.
-   * 
-   * @returns JSON response of done[], review[], uploaded[].
+   * @returns {amy} JSON response of done[], review[], uploaded[].
    */
   public requestFiles(): any {
     return this.httpClient.get(this.baseUrl + "/dashboard/", {
@@ -43,10 +45,11 @@ export class FileServiceService {
   }
 
   /**
-   * Trigger report parsing and persisting to the database via the API.
-   * 
-   * @param files - files selected from the dashboard to be processed by the backend.
-   * @returns a JSON response containing some of the data pulled from the file.
+   * @ngdoc method
+   * @name extractData 
+   * @description Trigger report parsing and persisting to the database via the API.
+   * @param {any} files - files selected from the dashboard to be processed by the backend.
+   * @returns {any} a JSON response containing some of the data pulled from the file.
    */
   public extractData(files: any): any {
     return this.httpClient.post(this.baseUrl + "/reports/extract_data", files, {
@@ -59,9 +62,10 @@ export class FileServiceService {
   }
 
   /**
-   * Sends a <code>IReport</code> payload to the backend to update the report in the database.
-   * 
-   * @param payload - <code>IRport</code> JSON payload
+   * @ngdoc method
+   * @name updateReport 
+   * @description Sends a <code>IReport</code> payload to the backend to update the report in the database.
+   * @param {IReport} payload - <code>IRport</code> JSON payload
    * @returns {"message":"report updated","status":"success | faliure"}
    */
   public updateReport(payload: IReport): any {
@@ -75,10 +79,11 @@ export class FileServiceService {
   }
 
   /**
-   * Send a file document id to the backend to mark the file as deleted so it will
+   * @ngdoc method
+   * @name deleteReport 
+   * @description Send a file document id to the backend to mark the file as deleted so it will
    * no longer be returned from all queries to the database.
-   * 
-   * @param docId - File document id to delete.
+   * @param {string} docId - File document id to delete.
    * @returns {"message":"report updated","status":"success | falure"}
    */
   public deleteReport(docId: string): any {
@@ -92,9 +97,10 @@ export class FileServiceService {
   }
 
   /**
-   * Get all users registered in Auth0. User must have proper AAC role to access this endpoint.
-   * 
-   * @returns JSON list of users and their details.
+   * @ngdoc method
+   * @name requestUsers 
+   * @description Get all users registered in Auth0. User must have proper AAC role to access this endpoint.
+   * @returns {Observable<any>} JSON list of users and their details.
    */
   public requestUsers(): Observable<any> {
     return this.httpClient.get(this.baseUrl + "/users/all_users", {
@@ -105,11 +111,12 @@ export class FileServiceService {
   }
 
   /**
-   * Append roles to a user.
-   * 
-   * @param username    - User's uid username 
-   * @param role        - Role to append to the user.
-   * @returns null
+   * @ngdoc method
+   * @name requestAdd 
+   * @description Append roles to a user.
+   * @param {any} username    - User's uid username 
+   * @param {any} role        - Role to append to the user.
+   * @returns {null}
    */
   public requestAdd(username: any, role: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/users/add_role", { uid: username, desired_role_id: role }, {
@@ -122,10 +129,11 @@ export class FileServiceService {
   }
 
   /**
-   * Get a JSON list of the user's roles.
-   * 
-   * @param username - JSON object containing the user's username
-   * @returns JSON list of the user's roles.
+   * @ngdoc method
+   * @name getUserRoles 
+   * @description Get a JSON list of the user's roles.
+   * @param {string} username - JSON object containing the user's username
+   * @returns {Observable<any>} JSON list of the user's roles.
    */
   public getUserRoles(username:string):Observable<any> {
     return this.httpClient.post(this.baseUrl+"/users/get_user_roles", {uid: username}, {
@@ -138,10 +146,11 @@ export class FileServiceService {
   }
 
   /**
-   * Get the audit log history for a single file.
-   * 
-   * @param fileId - file id.
-   * @returns JSON list of the audit trail for the file's lifecycle.
+   * @ngdoc method
+   * @name getFileAuditHistory 
+   * @description Get the audit log history for a single file.
+   * @param {string} fileId - file id.
+   * @returns {Observable<any>} JSON list of the audit trail for the file's lifecycle.
    */
   public getFileAuditHistory(fileId:string):Observable<any> {
     return this.httpClient.get(this.baseUrl+"/audit/file/" + fileId, {
@@ -152,10 +161,11 @@ export class FileServiceService {
   }
 
   /**
-   * Get a user's actions thorughout the application.
-   * 
-   * @param username - User's name { name: username }
-   * @returns JSON list of the all the user's entries in the audit log across files.
+   * @ngdoc method
+   * @name getUserAuditHistory 
+   * @description Get a user's actions thorughout the application.
+   * @param {string} username - User's name { name: username }
+   * @returns {Observable<any>} JSON list of the all the user's entries in the audit log across files.
    */
   public getUserAuditHistory(username:string):Observable<any> {
     return this.httpClient.post(this.baseUrl+"/audit/user", {name: username}, {
@@ -168,11 +178,12 @@ export class FileServiceService {
   }
 
   /**
-   * Remove a role from a user.
-   * 
-   * @param username    - User to remove role from.
-   * @param role        - Role id to be removed from the user.
-   * @returns 
+   * @ngdoc method
+   * @name requestRemove 
+   * @description Remove a role from a user.
+   * @param {any} username    - User to remove role from.
+   * @param {any} role        - Role id to be removed from the user.
+   * @returns {Observable<any>}
    */
   public requestRemove(username: any, role: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/users/remove_role", { uid: username, desired_role_id: role }, {
@@ -186,11 +197,13 @@ export class FileServiceService {
   }
 
   /**
-   * Search files from the database by either the title, college, department, 
+   * @ngdoc method
+   * @name searchFiles 
+   * @description Search files from the database by either the title, college, department, 
    * degree_level, academic year or date range
    * 
-   * @param searchKey - Key word to search by.
-   * @returns JSON list of files that match the search in one of the columns listed above, 
+   * @param {any} searchKey - Key word to search by.
+   * @returns {Observable<any>} JSON list of files that match the search in one of the columns listed above, 
    * returned in the same format as <code>/dashboard</code>
    */
   public searchFiles(searchKey:any): Observable<any> {

@@ -52,9 +52,10 @@ export class ReviewComponent implements OnInit {
   }
 
   /**
-   * Get audit trail of file in review to display on page.
-   * 
-   * @param fileId - File id.
+   * @ngdoc method
+   * @name fileAuditHistory
+   * @description Get audit trail of file in review to display on page.
+   * @param {string} fileId - File id.
    */
   fileAuditHistory(fileId: string) {
     this.service.getFileAuditHistory(fileId)
@@ -64,7 +65,10 @@ export class ReviewComponent implements OnInit {
   }
 
   /**
-   * Get mockdata for report.
+   * @ngdoc method
+   * @name mockReportInfo
+   * @description Get mockdata for report.
+   * @param {numm}
    */
   mockReportInfo() {
     this.report = getReportMockData();
@@ -72,10 +76,11 @@ export class ReviewComponent implements OnInit {
   }
 
   /**
-   * Get <code>IReport</code> of file in review to populate the form.
-   * 
-   * @param fileId - File id
-   * @returns <code>IReport</code> object of the report in review
+   * @ngdoc method
+   * @name getReportInfo
+   * @description Get <code>IReport</code> of file in review to populate the form.
+   * @param {string} fileId - File id
+   * @returns {IReport} <code>IReport</code> object of the report in review
    */
   getReportInfo(fileId: string) {
     return this.service.getFile(fileId)
@@ -87,10 +92,11 @@ export class ReviewComponent implements OnInit {
 
 
   /**
-   * Form builder's patch value for the initial section of the <code>IReport</code>.
+   * @ngdoc method
+   * @name editReport
+   * @description Form builder's patch value for the initial section of the <code>IReport</code>.
    * Does not include any files of the report consisting of arrays.
-   * 
-   * @param reportData - <code>IReport</code> built from the FormControls
+   * @param {IReport} reportData - <code>IReport</code> built from the FormControls
    */
   editReport(reportData: IReport) {
     //   console.log(reportData.slos)
@@ -128,11 +134,12 @@ export class ReviewComponent implements OnInit {
         });
     }
 /**
- * Determine if the JSON response corresponds to one the form checkbox to check it.
- * 
- * @param input - Field from the API response.
- * @param checkbox  - Checkbox value to compare to.
- * @returns true if API response includes the text form the checkbox.
+ * @ngdoc method
+ * @name isChecked
+ * @description Determine if the JSON response corresponds to one the form checkbox to check it.
+ * @param {any} input - Field from the API response.
+ * @param {string} checkbox  - Checkbox value to compare to.
+ * @returns {boolean} true if API response includes the text form the checkbox.
  */
 public isChecked(input:any, checkbox:string):boolean {
     //cast to string in case of number
@@ -140,7 +147,9 @@ public isChecked(input:any, checkbox:string):boolean {
 }
 
   /**
-   * Submit button calls to create payload from the form and send object to update endpoint.
+   * @ngdoc method
+   * @name updateReport
+   * @description Submit button calls to create payload from the form and send object to update endpoint.
    * Navigate back to dashboard upon success, log error otherwise.
    */
   public updateReport(): void {
@@ -157,21 +166,27 @@ public isChecked(input:any, checkbox:string):boolean {
   }
 
   /**
-   * Discarad any edits and reset the form to the original API response.
+   * @ngdoc method
+   * @name resetReport
+   * @description Discard any edits and reset the form to the original API response.
    */
   public resetReport(): void {
     this.getReportInfo(this.report.id);
   }
 
   /**
-   * Cancel the review and navigate back to the dashboard.
+   * @ngdoc method
+   * @name cancelReview
+   * @description Cancel the review and navigate back to the dashboard.
    */
   public cancelReview(): void {
     this.route.navigate(['/dashboard']);
   }
 
   /**
-   * Send the file in review's ID to get deleted.
+   * @ngdoc method
+   * @name deleteReport
+   * @description Send the file in review's ID to get deleted.
    * Navigate back to dashboard upon success, log error otherwise.
    */
   public deleteReport(): void {
@@ -189,9 +204,10 @@ public isChecked(input:any, checkbox:string):boolean {
   }
 
   /**
-   * Create new <code>IReport</code> object from the form and send to endpoint to update the report in the database.
+   * @ngdoc method
+   * @name setPayload
+   * @description Create new <code>IReport</code> object from the form and send to endpoint to update the report in the database.
    * If the contents of the field is <code>null</code>, then set is as ''.
-   * 
    * @returns {"message":"report updated","status":"success | failure"}
    */
   setPayload(): IReport {
