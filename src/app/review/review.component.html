@@ -3,7 +3,7 @@
         <b>File's History</b>
     </span>
     <span *ngFor="let audit of auditLog" class="role">
-        {{ audit.timestamp | date:'medium' }} {{ audit.editor_name }} 
+        {{ audit.timestamp * 1000 | date:'medium' }} {{ audit.editor_name }} 
         {{ audit.action }} report number {{ audit.report_id }}
     </span>
 </table>

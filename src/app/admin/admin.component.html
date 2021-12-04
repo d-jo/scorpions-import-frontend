@@ -42,6 +42,6 @@
         <b>{{user.name}}'s History</b>
     </span>
     <span *ngFor="let event of events" class="role">
-        {{event.timestamp | date:'medium'}} {{event.action}} report number {{event.report_id}}
+        {{event.timestamp * 1000 | date:'medium'}} {{event.action}} report number {{event.report_id}}
     </span>
 </table>
