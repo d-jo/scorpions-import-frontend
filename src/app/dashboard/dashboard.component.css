@@ -1,66 +1,41 @@
-.uploading {
-    border: dashed #000 2px;
-    background-color: #d4b485;
-    padding: 10px;
-    float: left;
-    width: 350px;
+.upload {
     margin-left: 90px;
-}
-
-.review {
-    border: dotted #000 2px;
-    background-color: #f5d878;
     padding: 10px;
-    width: 350px;
-    margin: 30px;
-}
-
-.done {
-    border: solid #000 2px;
-    background-color: #50b33e;
-    padding: 10px;
-    float: right;
     width: 350px;
     height: 300px;
+    overflow-y: auto;
 }
-
-h3 {
-    margin-left: 40%;
-}
-
-.fileHolder {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border: solid 1px #000;
-    border-radius: 15px;
-    padding: 20px;
-    height: 195px;
-    overflow-y: scroll;
-}
-
-button {
-    margin-left: 100px;
-}
-
-.results {
-    margin-left: 5%;
-    margin-top: 5%;
-    width: 600px;
-    border: 1px solid #F00;
-    border-radius: 15px;
+.review {
+    margin-left: 30px;
     padding: 10px;
+    width: 350px;
+    height: 300px;
+    overflow-y: auto;
 }
-
-.disp {
-    display: flex;
-    flex-direction: column;
+.done {
+    margin-left: 30px;
+    padding: 10px;
+    width: 350px;
+    height: 300px;
+    overflow-y: auto;
 }
-
 .search {
     padding-top: 25px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
+    margin-left: 120px;
 }
+.fileEntry {
+    color: #a94442;
+    border-bottom: dotted 1px #000;
+    padding: 10px;
+}
+.fileEntry:last-child {
+    border-bottom: none;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: #d71920 !important;
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #d71920;
+  }

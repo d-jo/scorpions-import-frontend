@@ -10,7 +10,6 @@
     <h2 class="title">Academic Assessment Import</h2>
     <div class="user" *ngIf="login.isUserAuthenticated() | async">
         Welcome {{getUser()}}
-        <!-- <button class="b" (click)="logoutUser()">Log out</button> -->
     </div>
 </div>
   
@@ -18,19 +17,20 @@
 <!-- <div 
 *ngIf="login.isUserAuthenticated() | async" 
 class="sidenav"> -->
-    <br/>
-    <a routerLink="/dashboard" class="navLink" (click)="selectNav('home')">
-        <span id="home" class="navbox">Dashboard</span>
-    </a>
-    <a routerLink="/import" class="navLink" (click)="selectNav('import')">
-        <span id="import" class="navbox">Import</span>
-    </a>
-    <a routerLink="/admin" class="navLink" (click)="selectNav('admin')">
-        <span id="admin" class="navbox">Admin</span>
-    </a>
-    <a class="navLink" (click)="logoutUser()">
-        <span class="navbox">Sign Out</span>
-    </a>
+    <div style="margin-top: 10px;">
+        <a routerLink="/dashboard" class="navLink" (click)="selectNav('home')">
+            <span id="home" class="navbox">Dashboard</span>
+        </a>
+        <a routerLink="/import" class="navLink" (click)="selectNav('import')">
+            <span id="import" class="navbox">Import</span>
+        </a>
+        <a routerLink="/admin" class="navLink" (click)="selectNav('admin')">
+            <span id="admin" class="navbox">Admin</span>
+        </a>
+        <a class="navLink" (click)="logoutUser()">
+            <span class="navbox">Sign Out</span>
+        </a>
+    </div>
 </div>
 
 <div id="router" style="margin-left: 80px; overflow-x: auto;">

@@ -4,87 +4,46 @@
         <input matInput [(ngModel)]="searchKey" />
     </mat-form-field> <button mat-flat-button color="warn" (click)="callSearch()" style="margin-left: 10px;">Search</button>
     <button mat-flat-button color="warn" (click)="clear()" style="margin-left: 10px;">Clear</button>
-</div>
-<table>
+    <button mat-flat-button color="warn" (click)="callExtract()" style="margin-left: 10px;">Process File(s)</button>
+    <a routerLink="/import"><button mat-flat-button color="warn" style="margin-left: 10px;">Import File(s)</button></a>
+</div><br/>
+<table style="padding-bottom: 50px;">
     <tr>
         <td>
-            <div class="uploading">
-                <h3>Upload</h3>
-                <div class="fileHolder">
-                    <span *ngFor="let file of uploadFiles; let idx = index">
-                        <mat-checkbox [(ngModel)]="checkBoxStates[idx]" (change)="addFile($event.checked, file, idx)">
-                            {{getFileText(file)}}
-                        </mat-checkbox>
-                    </span>
-                </div>
+            <div>
+                <h3 style="color: #d71920; margin-left: 50%;">Upload</h3>
+                <mat-card class="upload" style="background-color: rgb(248, 245, 245);">
+                    <mat-card-content style="display: flex; flex-direction: column;">
+                        <span *ngFor="let file of uploadFiles; let idx = index" class="fileEntry">
+                            <mat-checkbox [(ngModel)]="checkBoxStates[idx]" (change)="addFile($event.checked, file, idx)">
+                                {{getFileText(file)}}
+                            </mat-checkbox>
+                        </span>
+                    </mat-card-content>
+                  </mat-card>
             </div>
         </td>
         <td>
-            <div class="review">
-                <h3>Review</h3>
-                <div class="fileHolder">
-                    <span *ngFor="let review of reviewFiles">{{getFileText(review)}} <mat-icon
+            <div>
+                <h3 style="color: #d71920; margin-left: 45%;">Review</h3>
+                <mat-card class="review" style="background-color: rgb(248, 245, 245);">
+                    <mat-card-content style="display: flex; flex-direction: column;">
+                        <span *ngFor="let review of reviewFiles" class="fileEntry">{{getFileText(review)}} <mat-icon
                             style="float: right; cursor: pointer;" (click)="reviewFile(review)">search</mat-icon></span>
-                </div>
+                    </mat-card-content>
+                  </mat-card>
             </div>
         </td>
         <td>
-            <div class="done">
-                <h3>Done</h3>
-                <div class="fileHolder">
-                    <span *ngFor="let complete of completedFiles">{{getFileText(complete)}} <mat-icon
+            <div>
+                <h3 style="color: #d71920; margin-left: 45%;">Done</h3>
+                <mat-card class="done" style="background-color: rgb(248, 245, 245);">
+                    <mat-card-content style="display: flex; flex-direction: column;">
+                        <span *ngFor="let complete of completedFiles" class="fileEntry">{{getFileText(complete)}} <mat-icon
                             style="float: right; cursor: pointer;" (click)="reviewFile(complete)">search</mat-icon></span>
-                </div>
+                    </mat-card-content>
+                </mat-card>
             </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button mat-flat-button color="warn" (click)="callExtract()" class="button">Process File(s)</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a routerLink="/import"><button mat-flat-button color="warn" class="button">Import File(s)</button></a>
         </td>
     </tr>
 </table>
-
-<div *ngIf="display" class="results">
-    <div *ngFor="let r of reports; let i = index" class="disp">
-        <h4>Report {{i+1}}: {{files[i]}}</h4><br/>
-        <span><b>Title:</b> {{r.title}}</span>
-        <span><b>Author:</b> {{r.author}}</span>
-        <span><b>Created:</b> {{r.created}}</span>
-        <span><b>College:</b> {{r.college}}</span>
-        <span><b>Department:</b> {{r.department}}</span>
-        <span><b>Program:</b> {{r.program}}</span>
-        <span><b>Degree Level:</b> {{r.degree_level}}</span>
-        <span><b>Academic Year:</b> {{r.academic_year}}</span>
-        <span><b>Date Range:</b> {{r.date_range}}</span><br/>
-        <h2>SLOS</h2>
-        <div *ngFor="let s of slos[i]; let idx = index" class="disp">
-            <h4>SLO {{idx+1}}</h4><br/>
-            <span><b>Description:</b> {{s.description}}</span>
-            <span><b>Blooms Taxonomy Level:</b> {{s.bloom}}</span>
-            <span><b>Common Graduate Program SLO:</b> {{s.common_graduate_program_slo}}</span><br/>
-            <h2>Measures</h2>
-            <div *ngFor="let m of measures[idx];" class="disp">
-                <span><b>Title:</b> {{m.title}}</span>
-                <span><b>Description:</b> {{m.description}}</span>
-                <span><b>Domain:</b> {{m.domain}}</span>
-                <span><b>Type:</b> {{s.type}}</span>
-                <span><b>Point:</b> {{m.point_in_program}}</span>
-                <span><b>Population Measured:</b> {{m.population_measured}}</span>
-                <span><b>Frequency of Data Collection:</b> {{m.frequency_of_collection}}</span>
-                <span><b>Threshold:</b> {{m.proficiency_threshold}}</span>
-                <span><b>Target:</b> {{m.proficiency_target}}</span>
-            </div>
-        </div>
-        <!-- accreditation_body: {{r.accreditation_body}}
-        last_accreditation_review: {{r.last_accreditation_review}}
-        slos_meet_standards: {{r.slos_meet_standards}}
-        stakeholder_involvement: {{r.stakeholder_involvement}}
-        additional_information: {{r.additional_information}} -->
-    </div><br/>
-</div>

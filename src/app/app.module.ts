@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { UploadService } from './shared/services/upload-service';
 import { HttpClientModule } from '@angular/common/http';
 import { DragdropDirective } from './shared/services/dragdrop.directive';
@@ -41,6 +42,7 @@ import { ReviewComponent } from './review/review.component';
     MatCheckboxModule,
     MatInputModule,
     MatSelectModule,
+    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
