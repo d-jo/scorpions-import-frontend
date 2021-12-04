@@ -74,11 +74,11 @@ export class ImportComponent implements OnInit {
     this.upload.uploadFile(this.baseUrl + '/files/', this.files)
     .subscribe(
         () => {
-          console.log("Upload done");
+          console.info("Upload done");
           this.router.navigate(['/dashboard']);
         },
         (err: Error) => {
-          console.log("Upload Error:", err);
+          console.error("Upload Error:", err);
         }
       )
   }

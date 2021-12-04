@@ -94,3 +94,26 @@ input {
     display: table;
     clear: both;
 }
+
+.auditLog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.role {
+    position: relative;
+    border: solid 1px #38424c;
+    padding: 0.5rem;
+    width: 25%;
+}
+
+.header {
+    position: relative;
+    border: solid 1px #38424c;
+    background-color: rgb(219,210,210);
+    padding: 0.5rem;
+    width: 25%;
+}
