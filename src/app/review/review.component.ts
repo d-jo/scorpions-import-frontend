@@ -17,6 +17,7 @@ export class ReviewComponent implements OnInit {
   payload?:IReport;
   reportForm: any;
   auditLog: any;
+  newSLOS: ISlos[] = [];
 
   constructor(private formBuilder: FormBuilder,
             private activeRoute: ActivatedRoute,
@@ -40,14 +41,14 @@ export class ReviewComponent implements OnInit {
         if (fileId) {
             this.getReportInfo(fileId);
         }
-    })
+    });
 
     this.activeRoute.paramMap.subscribe(params => {
         const fileId = params.get('id');
         if (fileId) {
             this.fileAuditHistory(fileId);
         }
-    })
+    });
 
   }
 
@@ -75,6 +76,102 @@ export class ReviewComponent implements OnInit {
     this.editReport(this.report);
   }
 
+  createBlankSLO() {
+      let newSLO: ISlos = {
+            accredited_data_analyses: [],
+            bloom: '',
+            common_graduate_program_slo: '',
+            decision_actions: [],
+            description: '',
+            id: -1,
+            measures: [],
+            methods: [],
+            report_id: +this.report.id,
+            collection_analyses: [],
+      }
+      this.newSLOS.push(newSLO);
+  }
+    
+    createBlankMethod(slo_id: number, ind: number, new_slo: boolean) {
+        console.log(slo_id);
+        console.log(ind);
+        console.log(new_slo);
+        let newMethod: IMethod = {
+            data_collection: '',
+            domain: '',
+            id: -1,
+            measure: '',
+            slo_id: slo_id,
+        }
+        if (new_slo) {
+            this.newSLOS[ind].methods.push(newMethod);
+        } else {
+            this.report.slos[ind].methods.push(newMethod);
+        }
+    }
+
+    createBlankDataCollection(slo_id: number, ind: number, new_slo: boolean) {
+        let newDataCollection: ICollectionAnalyses = {
+            data_collection_date_range: '',
+            id: -1,
+            number_of_students_assessed: '',
+            percentage_who_met_or_exceeded: '',
+            slo_id: slo_id,
+        }
+        if (new_slo) {
+            this.newSLOS[ind].collection_analyses.push(newDataCollection);
+        } else {
+            this.report.slos[ind].collection_analyses.push(newDataCollection);
+        }
+    }
+
+    createBlankDecisionAction(slo_id: number, ind: number, new_slo: boolean) {
+        let newDecisionAction: IDecisionAction = {
+            content: '',
+            id: -1,
+            slo_id: slo_id,
+        }
+        if (new_slo) {
+            this.newSLOS[ind].decision_actions.push(newDecisionAction);
+        } else {
+            this.report.slos[ind].decision_actions.push(newDecisionAction);
+        }
+    }
+
+    createBlankMeasure(slo_id: number, ind: number, new_slo: boolean) {
+        let newMeasure: IMeasures = {
+            description: '',
+            domain: '',
+            frequency_of_collection: '',
+            id: -1,
+            point_in_program: '',
+            population_measured: '',
+            proficiency_target: '',
+            proficiency_threshold: '',
+            slo_id: slo_id,
+            title: '',
+            type: '',
+        }
+        if (new_slo) {
+            this.newSLOS[ind].measures.push(newMeasure);
+        } else {
+            this.report.slos[ind].measures.push(newMeasure);
+        }
+    }
+
+    createBlankAccreditedData(slo_id: number, ind: number, new_slo: boolean) {
+        let newAccreditedData: IAccreditedData = {
+            status: '',
+            id: -1,
+            slo_id: slo_id,
+        }
+        if (new_slo) {
+            this.newSLOS[ind].accredited_data_analyses.push(newAccreditedData);
+        } else {
+            this.report.slos[ind].accredited_data_analyses.push(newAccreditedData);
+        }
+    }
+
   /**
    * @ngdoc method
    * @name getReportInfo
@@ -87,6 +184,8 @@ export class ReviewComponent implements OnInit {
         .subscribe((result : IReport) => {
             this.report = result;
             this.editReport(result);
+            console.log(this.report)
+
         });
   }
 
@@ -133,18 +232,19 @@ export class ReviewComponent implements OnInit {
             report_id: new FormControl('', [Validators.required, Validators.maxLength(32)])
         });
     }
-/**
- * @ngdoc method
- * @name isChecked
- * @description Determine if the JSON response corresponds to one the form checkbox to check it.
- * @param {any} input - Field from the API response.
- * @param {string} checkbox  - Checkbox value to compare to.
- * @returns {boolean} true if API response includes the text form the checkbox.
- */
-public isChecked(input:any, checkbox:string):boolean {
-    //cast to string in case of number
-    return (input+"").toUpperCase().includes(checkbox.toUpperCase())
-}
+
+    /**
+     * @ngdoc method
+     * @name isChecked
+     * @description Determine if the JSON response corresponds to one the form checkbox to check it.
+     * @param {any} input - Field from the API response.
+     * @param {string} checkbox  - Checkbox value to compare to.
+     * @returns {boolean} true if API response includes the text form the checkbox.
+     */
+    public isChecked(input:any, checkbox:string):boolean {
+        //cast to string in case of number
+        return (input+"").toUpperCase().includes(checkbox.toUpperCase())
+    }
 
   /**
    * @ngdoc method
@@ -244,6 +344,7 @@ public isChecked(input:any, checkbox:string):boolean {
                   percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') === null 
                       ? '' : dataCollection.get('percentage_who_met_or_exceeded') as string,
                   slo_id: sloId,
+                  new: analysisId === -1 ? true : false,
               }
               analysisArray.push(analysis);
           }
@@ -279,6 +380,7 @@ public isChecked(input:any, checkbox:string):boolean {
                       ? '' : measureData.get('title') as string,
                   type: measureData.get('type') === null 
                       ? '' : measureData.get('type') as string,
+                  new: measureId === -1 ? true : false,
               }
               measureArray.push(measure);
           }
@@ -298,6 +400,7 @@ public isChecked(input:any, checkbox:string):boolean {
                       ? '' : decisionData.get('content') as string,
                   id: decisionId,
                   slo_id: sloId,
+                  new: decisionId === -1 ? true : false,
               }
               decsionArray.push(decision)
           }
@@ -317,6 +420,7 @@ public isChecked(input:any, checkbox:string):boolean {
                       ? '' : accreditedData.get('status') as string,
                   id: accreditedId,
                   slo_id: sloId,
+                  new: accreditedId === -1 ? true : false,
               }
               accreditedArray.push(accreditData)
           }
@@ -340,6 +444,7 @@ public isChecked(input:any, checkbox:string):boolean {
                       ? '' : methodData.get('measure') as string,
                   id: decisionId,
                   slo_id: sloId,
+                  new: decisionId === -1 ? true : false,
               }
               methodArray.push(method)
           }

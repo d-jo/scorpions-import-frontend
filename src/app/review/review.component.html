@@ -165,6 +165,10 @@
          <form id='mySLO{{i + 1}}'>
           <label for="slo">
             <h4> SLO {{i + 1}} </h4>
+            <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
+              Add SLO
+              </button>
+
           </label>
           <p>Description</p>
           <textarea 
@@ -256,6 +260,9 @@
           </fieldset>
           <!-- SLO ASSESSMENT METHODS SECTION -->
           <h3> Assessment Methods </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankMethod(slo.id, i, false)">
+              Add Method
+              </button>
             <div class="row"
               *ngFor="let method of slo.methods; index as mthd;"
             >
@@ -296,6 +303,9 @@
           </div>
           <!-- SLO DATA COLLECTION SECTION -->
           <h3> Data Collection </h3>
+          <button type="button" class="btn btn-primary" (click)="createBlankDataCollection(slo.id, i, false)">
+            Add Collection
+          </button>
           <div class="row"
             *ngFor="let data of slo.collection_analyses; index as collection;"
             >
@@ -332,6 +342,9 @@
           </div>
           <!-- SLO DECISION ACTION SECTION -->
           <h3> Decision Actions </h3>
+          <button type="button" class="btn btn-primary" (click)="createBlankDecisionAction(slo.id, i, false)">
+            Add Decision Action
+          </button>
           <div class="row"
             *ngFor="let decision of slo.decision_actions; index as dec;"
             >
@@ -346,6 +359,9 @@
           </div>
           <!-- SLO MEASURE SECTION -->
           <h3> Measures </h3>
+          <button type="button" class="btn btn-primary" (click)="createBlankMeasure(slo.id, i, false)">
+            Add Measure 
+          </button>
           <div class="row"
             *ngFor="let measure of slo.measures; index as mes;"
             >
@@ -474,6 +490,14 @@
             </div>
           </form>
         </div>
+      </div>
+
+
+
+
+
+      <div class="row" *ngFor="let slo of newSLOS; index as i">
+
       </div>
     </div>
     <div class="row">
