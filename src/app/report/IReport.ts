@@ -20,4 +20,5 @@ export interface IReport {
     creator_id:string;
     valid:boolean;
     slos: ISlos[];
+    [key: string]: any;
 }

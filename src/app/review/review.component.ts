@@ -91,6 +91,19 @@ export class ReviewComponent implements OnInit {
       }
       this.newSLOS.push(newSLO);
   }
+
+    removeSLO(ind: number, id: number) {
+        if (id === -1) {
+            this.newSLOS.splice(ind, 1);
+        } else {
+            if (this.report.slos[ind].id === id) {
+                this.report.slos.splice(ind, 1);
+            } else {
+                alert("SLO id does not match id of SLO to be removed at index " + ind);
+                console.log("SLO id" + this.report.slos[ind].id + " does not match id of SLO to be removed " + id + " at index " + ind);
+            }
+        }
+    }
     
     createBlankMethod(slo_id: number, ind: number, new_slo: boolean) {
         console.log(slo_id);
@@ -312,6 +325,8 @@ export class ReviewComponent implements OnInit {
    */
   setPayload(): IReport {
       let slosPayload: ISlos[] = [];
+      let newSlosPayload: ISlos[] = [];
+
       for (let sloFormIndex = 1; sloFormIndex <= this.report.slos.length; sloFormIndex++) {
           let sloIndex = sloFormIndex - 1;
           
@@ -471,6 +486,166 @@ export class ReviewComponent implements OnInit {
           slosPayload.push(slo);
       }
 
+
+      for (let sloFormIndex = 1; sloFormIndex <= this.newSLOS.length; sloFormIndex++) {
+          let sloIndex = sloFormIndex - 1;
+          
+          let slo: ISlos;
+          let analysisArray: ICollectionAnalyses[] = [];
+          let measureArray: IMeasures[] = [];
+          let decsionArray: IDecisionAction[] = [];
+          let accreditedArray: IAccreditedData[] = [];
+          let methodArray: IMethod[] = [];
+          // console.log(this.newSLOS[sloFormIndex]['accredited_data_analyses'].length == 0 
+          // ? ['empty'] : this.newSLOS[sloFormIndex]['accredited_data_analyses'])
+          let reportId = parseInt(this.report['id']);
+          let sloId = this.newSLOS[sloIndex]['id'];
+          
+          // Create each Collection Analysis object from the form to put into the payload
+          for (let collectionAnalysisIndex = 0; 
+              collectionAnalysisIndex < this.newSLOS[sloIndex].collection_analyses.length; 
+              collectionAnalysisIndex++) {
+                  
+              const dataCollectionForm = document.querySelector('#NEWSLO' + sloFormIndex + 'DataCollection' + (collectionAnalysisIndex + 1)) as HTMLFormElement;
+              const dataCollection = new FormData(dataCollectionForm);
+              let analysis: ICollectionAnalyses;
+              let analysisId = this.newSLOS[sloIndex]['collection_analyses'][collectionAnalysisIndex]['id'];
+              analysis = {
+                  data_collection_date_range: dataCollection.get('data_collection_date_range') === null 
+                      ? '' : dataCollection.get('data_collection_date_range') as string,
+                  id: analysisId,
+                  number_of_students_assessed: dataCollection.get('number_of_students_assessed') === null 
+                      ? '' : dataCollection.get('number_of_students_assessed') as string,
+                  percentage_who_met_or_exceeded: dataCollection.get('percentage_who_met_or_exceeded') === null 
+                      ? '' : dataCollection.get('percentage_who_met_or_exceeded') as string,
+                  slo_id: sloId,
+                  new: analysisId === -1 ? true : false,
+              }
+              analysisArray.push(analysis);
+          }
+  
+          // Create each Measure object from the form to put into the payload
+          for (let measureIndex = 0; 
+              measureIndex < this.newSLOS[sloIndex].measures.length; 
+              measureIndex++) {
+  
+              const measureForm = document.querySelector('#NEWSLO' + sloFormIndex + 'Measure' + (measureIndex + 1)) as HTMLFormElement;
+              const measureData = new FormData(measureForm);
+              let measureId = this.newSLOS[sloIndex]['measures'][measureIndex]['id'];
+  
+              let measure: IMeasures;
+              measure = {
+                  description: measureData.get('description') === null 
+                      ? '' : measureData.get('description') as string,
+                  domain: measureData.get('domain') === null 
+                      ? '' : measureData.get('domain') as string,
+                  frequency_of_collection: measureData.get('frequency_of_collection') === null 
+                      ? '' : measureData.get('frequency_of_collection') as string,
+                  id: measureId,
+                  point_in_program: measureData.get('point_in_program') === null 
+                      ? '' : measureData.get('point_in_program') as string,
+                  population_measured: measureData.get('population_measured') === null 
+                      ? '' : measureData.get('population_measured') as string,
+                  proficiency_target: measureData.get('proficiency_target') === null 
+                      ? '' : measureData.get('proficiency_target') as string,
+                  proficiency_threshold: measureData.get('proficiency_threshold') === null 
+                      ? '' : measureData.get('proficiency_threshold') as string,
+                  slo_id: sloId,
+                  title: measureData.get('title') === null 
+                      ? '' : measureData.get('title') as string,
+                  type: measureData.get('type') === null 
+                      ? '' : measureData.get('type') as string,
+                  new: measureId === -1 ? true : false,
+              }
+              measureArray.push(measure);
+          }
+  
+          // Create each Decision Action object from the form to put into the payload
+          for (let decisionIndex = 0; 
+              decisionIndex < this.newSLOS[sloIndex].decision_actions.length; 
+              decisionIndex++) {
+  
+              const decisionForm = document.querySelector('#NEWSLO' + sloFormIndex + 'DecisionAction' + (decisionIndex + 1)) as HTMLFormElement;
+              const decisionData = new FormData(decisionForm);
+              let decisionId = this.newSLOS[sloIndex]['decision_actions'][decisionIndex]['id'];
+  
+              let decision: IDecisionAction;
+              decision = {
+                  content: decisionData.get('content') === null 
+                      ? '' : decisionData.get('content') as string,
+                  id: decisionId,
+                  slo_id: sloId,
+                  new: decisionId === -1 ? true : false,
+              }
+              decsionArray.push(decision)
+          }
+  
+          // Create each Accredited Data Collection object from the form to put into the payload
+          for (let accreditedIndex = 0; 
+              accreditedIndex < this.newSLOS[sloIndex].accredited_data_analyses.length; 
+              accreditedIndex++) {
+  
+              const accreditedForm = document.querySelector('#NEWSLO' + sloFormIndex + 'AccreditedData' + (accreditedIndex + 1)) as HTMLFormElement;
+              const accreditedData = new FormData(accreditedForm);
+              let accreditedId = this.newSLOS[sloIndex]['accredited_data_analyses'][accreditedIndex]['id'];
+  
+              let accreditData: IAccreditedData;
+              accreditData = {
+                  status: accreditedData.get('status') === null 
+                      ? '' : accreditedData.get('status') as string,
+                  id: accreditedId,
+                  slo_id: sloId,
+                  new: accreditedId === -1 ? true : false,
+              }
+              accreditedArray.push(accreditData)
+          }
+  
+          // Create each Method object from the form to put into the payload
+          for (let methodIndex = 0; 
+              methodIndex < this.newSLOS[sloIndex].methods.length; 
+              methodIndex++) {
+  
+              const methodForm = document.querySelector('#NEWSLO' + sloFormIndex + 'AssessmentMethod' + (methodIndex + 1)) as HTMLFormElement;
+              const methodData = new FormData(methodForm);
+              let decisionId = this.newSLOS[sloIndex]['methods'][methodIndex]['id'];
+  
+              let method: IMethod;
+              method = {
+                  data_collection: methodData.get('data_collection') === null 
+                      ? '' : methodData.get('data_collection') as string,
+                      domain: methodData.get('domain') === null 
+                      ? '' : methodData.get('domain') as string,
+                      measure: methodData.get('measure') === null 
+                      ? '' : methodData.get('measure') as string,
+                  id: decisionId,
+                  slo_id: sloId,
+                  new: decisionId === -1 ? true : false,
+              }
+              methodArray.push(method)
+          }
+          
+          // Create each SLO object from the form along with the corresponding lists from above 
+          // loops to put into the payload
+          const form = document.querySelector('#myNEWSLO' + sloFormIndex) as HTMLFormElement;
+          const data = new FormData(form);
+          slo = {
+              accredited_data_analyses: accreditedArray,
+              bloom: data.get('bloom') === null 
+                  ? '' : data.get('bloom') as string,
+              collection_analyses: analysisArray,
+              common_graduate_program_slo: data.get('common_graduate_program_slo') === null 
+                  ? '' : data.get('common_graduate_program_slo') as string,
+              decision_actions: decsionArray,
+              description: data.get('description') === null 
+                  ? '' : data.get('description') as string,
+              id: sloId,
+              measures: measureArray,
+              methods: methodArray,
+              report_id: reportId,
+          }
+          newSlosPayload.push(slo);
+      }
+
       return {
           academic_year : this.reportForm.get('academic_year').value,
           creator_id: this.report['creator_id'],
@@ -491,7 +666,8 @@ export class ReviewComponent implements OnInit {
               ? '' : this.reportForm.get('slos_meet_standards').value,
           stakeholder_involvement: this.report['stakeholder_involvement'],
           title : this.report['title'],
-          slos : slosPayload
+          slos : slosPayload,
+          new_slos : newSlosPayload,
       }
   }
     
