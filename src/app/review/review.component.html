@@ -157,6 +157,11 @@
             />
         </div>
       </div>
+      <div class="row">
+            <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
+              Add SLO
+            </button>
+      </div>
       <!-- SLO SECTION -->
       <div class="row"
         *ngFor="let slo of report.slos; index as i;"
@@ -165,9 +170,9 @@
          <form id='mySLO{{i + 1}}'>
           <label for="slo">
             <h4> SLO {{i + 1}} </h4>
-            <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
-              Add SLO
-              </button>
+            <button type="button" class="btn btn-primary" (click)="removeSLO(i, slo.id)">
+              Delete SLO
+            </button>
 
           </label>
           <p>Description</p>
@@ -266,6 +271,10 @@
             <div class="row"
               *ngFor="let method of slo.methods; index as mthd;"
             >
+            <h4>Method {{mthd+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeMethod(i, mthd, method.id)">
+              Remove Method
+            </button>
             <form id='SLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
                 <label for="data_collection">
                   Data Collection
@@ -309,8 +318,11 @@
           <div class="row"
             *ngFor="let data of slo.collection_analyses; index as collection;"
             >
+            <h4>Collection {{collection+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeCollectionAnalysis(i, collection, data.id)">
+              Remove Collection
+            </button>
             <form id='SLO{{i + 1}}DataCollection{{collection + 1}}'>
-            <h4> Collection {{ collection + 1}} </h4>
             <label for="data_collection_date_range">
                 Data Collection Date Range
             </label>
@@ -348,8 +360,11 @@
           <div class="row"
             *ngFor="let decision of slo.decision_actions; index as dec;"
             >
+            <h4> Decision Action {{ dec + 1}} </h4>
+            <button type="button" class="btn btn-primary" (click)="removeDecisionAction(i, dec, decision.id)">
+              Remove Decision Action
+            </button>
             <form id='SLO{{i + 1}}DecisionAction{{dec + 1}}'>
-                <h4> Decision Action {{ dec + 1}} </h4>
                 <p>Decision Content</p>
                 <textarea 
                 id="decisionContent"
@@ -365,8 +380,11 @@
           <div class="row"
             *ngFor="let measure of slo.measures; index as mes;"
             >
+            <h4>Measure {{mes+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeMeasure(i, mes, measure.id)">
+              Remove Measure
+            </button>
             <form id='SLO{{i + 1}}Measure{{mes + 1}}'>
-                <h4> Measure {{ mes + 1}} </h4>
                 <label for="title">
                     Title
                 </label>
@@ -474,6 +492,10 @@
             <div class="row"
               *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
               >
+              <h4> Accredited Data Analysis {{acc + 1}} </h4>
+              <button type="button" class="btn btn-primary" (click)="removeAccreditedDataAnalysis(i, acc, credit.id)">
+                Remove Accredited Data Analysis
+              </button>
               <form id='SLO{{i + 1}}AccreditedData{{acc + 1}}'>
                   <label for="accredited_data_analyses">
                       Accedited Status
@@ -506,7 +528,10 @@
             <h4> New SLO {{i + 1}} </h4>
             <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
               Add SLO
-              </button>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="removeSLO(i, slo.id)">
+              Delete SLO
+            </button>
 
           </label>
           <p>Description</p>
@@ -605,6 +630,11 @@
             <div class="row"
               *ngFor="let method of slo.methods; index as mthd;"
             >
+            <h4>Method {{mthd+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeMethod(i, mthd, method.id)">
+              Remove Method
+            </button>
+
             <form id='NEWSLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
                 <label for="data_collection">
                   Data Collection
@@ -648,6 +678,10 @@
           <div class="row"
             *ngFor="let data of slo.collection_analyses; index as collection;"
             >
+            <h4>Collection {{collection+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeCollectionAnalysis(i, collection, data.id)">
+              Remove Collection
+            </button>
             <form id='NEWSLO{{i + 1}}DataCollection{{collection + 1}}'>
             <h4> Collection {{ collection + 1}} </h4>
             <label for="data_collection_date_range">
@@ -687,6 +721,10 @@
           <div class="row"
             *ngFor="let decision of slo.decision_actions; index as dec;"
             >
+            <h4>Decision Action {{dec-1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeDecisionAction(i, dec, decision.id)">
+              Remove Decision Action
+            </button>
             <form id='NEWSLO{{i + 1}}DecisionAction{{dec + 1}}'>
                 <h4> Decision Action {{ dec + 1}} </h4>
                 <p>Decision Content</p>
@@ -704,6 +742,10 @@
           <div class="row"
             *ngFor="let measure of slo.measures; index as mes;"
             >
+            <h4>Measure {{mes+1}}</h4>
+            <button type="button" class="btn btn-primary" (click)="removeMeasure(i, mes, measure.id)">
+              Remove Measure
+            </button>
             <form id='NEWSLO{{i + 1}}Measure{{mes + 1}}'>
                 <h4> Measure {{ mes + 1}} </h4>
                 <label for="title">
@@ -813,6 +855,10 @@
             <div class="row"
               *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
               >
+              <h4> Accredited Data Analysis {{acc + 1}} </h4>
+              <button type="button" class="btn btn-primary" (click)="removeAccreditedDataAnalysis(i, acc, credit.id)">
+                Remove Accredited Data Analysis
+              </button>
               <form id='NEWSLO{{i + 1}}AccreditedData{{acc + 1}}'>
                   <label for="accredited_data_analyses">
                       Accedited Status

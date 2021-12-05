@@ -215,4 +215,20 @@ export class FileServiceService {
       }
     });
   }
+
+  /**
+   * 
+   * @param {any} pl The payload for deleting 
+   * @param fileId The file id the payload is related to
+   * @returns  {Observable<any>} JSON object of the response
+   */
+  public postDeletePayload(pl: any, fileId: string): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/reports/manage/" + fileId, pl, {
+      responseType: 'json',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      }
+    });
+  }
 }

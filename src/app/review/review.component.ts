@@ -18,6 +18,20 @@ export class ReviewComponent implements OnInit {
   reportForm: any;
   auditLog: any;
   newSLOS: ISlos[] = [];
+  deletePayload: any = {
+    "remove_slos": [
+    ],
+    "remove_measure": [
+    ],
+    "remove_decision_action": [
+    ],
+    "remove_collection_analysis": [
+    ],
+    "remove_method": [
+    ],
+    "remove_accredited_data_analysis": [
+    ]
+  };
 
   constructor(private formBuilder: FormBuilder,
             private activeRoute: ActivatedRoute,
@@ -65,6 +79,23 @@ export class ReviewComponent implements OnInit {
         });
   }
 
+  resetDeletePayload() {
+    this.deletePayload = {
+            "remove_slos": [
+            ],
+            "remove_measure": [
+            ],
+            "remove_decision_action": [
+            ],
+            "remove_collection_analysis": [
+            ],
+            "remove_method": [
+            ],
+            "remove_accredited_data_analysis": [
+            ]
+        };
+  }
+
   /**
    * @ngdoc method
    * @name mockReportInfo
@@ -92,16 +123,168 @@ export class ReviewComponent implements OnInit {
       this.newSLOS.push(newSLO);
   }
 
+  sendDeletePayload() {
+      return this.service.postDeletePayload(this.deletePayload, this.report.id);
+  }
+
     removeSLO(ind: number, id: number) {
-        if (id === -1) {
-            this.newSLOS.splice(ind, 1);
-        } else {
-            if (this.report.slos[ind].id === id) {
-                this.report.slos.splice(ind, 1);
+        let r = confirm("Are you sure you want to delete this SLO?");
+        if (r) {
+            if (id === -1) {
+                this.newSLOS.splice(ind, 1);
             } else {
-                alert("SLO id does not match id of SLO to be removed at index " + ind);
-                console.log("SLO id" + this.report.slos[ind].id + " does not match id of SLO to be removed " + id + " at index " + ind);
+                if (this.report.slos[ind].id === id) {
+                    let rm_slo = this.report.slos.splice(ind, 1);
+                    this.deletePayload["remove_slos"].push(rm_slo[0].id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        // TODO success message
+                    });
+                } else {
+                    alert("SLO id does not match id of SLO to be removed at index " + ind);
+                    console.log("SLO id" + this.report.slos[ind].id + " does not match id of SLO to be removed " + id + " at index " + ind);
+                }
             }
+        }
+    }
+
+    removeMethod(slo_ind: number, child_ind: number, id: number) {
+        let r = confirm("Are you sure you want to delete this method?");
+        if (r === true) {
+            if (slo_ind === -1) {
+                // we are in the newSLOs array
+                // no need to do request, just remove from array
+                this.newSLOS[slo_ind].methods.splice(child_ind, 1);
+                // todo success message
+            } else {
+                if (id === -1) {
+                    // its a new method, just remove it locally
+                    this.report.slos[slo_ind].methods.splice(child_ind, 1);
+                } else {
+                    // needs to be removed loclaly and from server
+                    this.deletePayload["remove_method"].push(id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        console.log("success??")
+                        this.report.slos[slo_ind].methods.splice(child_ind, 1);
+                        // TODO success message
+                    });
+                }
+            }
+        } else {
+            this.resetDeletePayload();
+        }
+    }
+
+    removeMeasure(slo_ind: number, child_ind: number, id: number) {
+        let r = confirm("Are you sure you want to delete this measure?");
+        if (r === true) {
+            if (slo_ind === -1) {
+                // we are in the newSLOs array
+                // no need to do request, just remove from array
+                this.newSLOS[slo_ind].measures.splice(child_ind, 1);
+                // todo success message
+            } else {
+                if (id === -1) {
+                    // its a new method, just remove it locally
+                    this.report.slos[slo_ind].measures.splice(child_ind, 1);
+                } else {
+                    // needs to be removed loclaly and from server
+                    this.deletePayload["remove_measure"].push(id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        console.log("success??")
+                        this.report.slos[slo_ind].measures.splice(child_ind, 1);
+                        // TODO success message
+                    });
+                }
+            }
+        } else {
+            this.resetDeletePayload();
+        }
+    }
+
+    removeCollectionAnalysis(slo_ind: number, child_ind: number, id: number) {
+        let r = confirm("Are you sure you want to delete this Collection Analysis?");
+        if (r === true) {
+            if (slo_ind === -1) {
+                // we are in the newSLOs array
+                // no need to do request, just remove from array
+                this.newSLOS[slo_ind].collection_analyses.splice(child_ind, 1);
+                // todo success message
+            } else {
+                if (id === -1) {
+                    // its a new method, just remove it locally
+                    this.report.slos[slo_ind].collection_analyses.splice(child_ind, 1);
+                } else {
+                    // needs to be removed loclaly and from server
+                    this.deletePayload["remove_collection_analysis"].push(id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        console.log("success??")
+                        this.report.slos[slo_ind].collection_analyses.splice(child_ind, 1);
+                        // TODO success message
+                    });
+                }
+            }
+        } else {
+            this.resetDeletePayload();
+        }
+    }
+
+    removeDecisionAction(slo_ind: number, child_ind: number, id: number) {
+        let r = confirm("Are you sure you want to delete this Decision Action?");
+        if (r === true) {
+            if (slo_ind === -1) {
+                // we are in the newSLOs array
+                // no need to do request, just remove from array
+                this.newSLOS[slo_ind].decision_actions.splice(child_ind, 1);
+                // todo success message
+            } else {
+                if (id === -1) {
+                    // its a new method, just remove it locally
+                    this.report.slos[slo_ind].decision_actions.splice(child_ind, 1);
+                } else {
+                    // needs to be removed loclaly and from server
+                    this.deletePayload["remove_decision_action"].push(id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        console.log("success??")
+                        this.report.slos[slo_ind].decision_actions.splice(child_ind, 1);
+                        // TODO success message
+                    });
+                }
+            }
+        } else {
+            this.resetDeletePayload();
+        }
+    }
+
+    removeAccreditedDataAnalysis(slo_ind: number, child_ind: number, id: number) {
+        let r = confirm("Are you sure you want to delete this Accredited Data Analysis?");
+        if (r === true) {
+            if (slo_ind === -1) {
+                // we are in the newSLOs array
+                // no need to do request, just remove from array
+                this.newSLOS[slo_ind].accredited_data_analyses.splice(child_ind, 1);
+                // todo success message
+            } else {
+                if (id === -1) {
+                    // its a new method, just remove it locally
+                    this.report.slos[slo_ind].accredited_data_analyses.splice(child_ind, 1);
+                } else {
+                    // needs to be removed loclaly and from server
+                    this.deletePayload["remove_accredited_data_analysis"].push(id);
+                    this.sendDeletePayload().subscribe((r) => {
+                        console.log(r);
+                        console.log("success??")
+                        this.report.slos[slo_ind].accredited_data_analyses.splice(child_ind, 1);
+                        // TODO success message
+                    });
+                }
+            }
+        } else {
+            this.resetDeletePayload();
         }
     }
     
