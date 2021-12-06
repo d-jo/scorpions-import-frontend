@@ -1,11 +1,11 @@
 <table class="auditLog">
-    <span class="header">
-        <b>File's History</b>
-    </span>
-    <span *ngFor="let audit of auditLog" class="role">
-        {{ audit.timestamp * 1000 | date:'medium' }} {{ audit.editor_name }} 
-        {{ audit.action }} report number {{ audit.report_id }}
-    </span>
+  <span class="header">
+    <b>File's History</b>
+  </span>
+  <span *ngFor="let audit of auditLog" class="role">
+    {{ audit.timestamp * 1000 | date:'medium' }} {{ audit.editor_name }}
+    {{ audit.action }} report number {{ audit.report_id }}
+  </span>
 </table>
 
 <div class="container">
@@ -13,467 +13,524 @@
     <div class="panel panel-primary">
       <!-- ACADEMIC YEAR SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="academic_year">
             Academic Year
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('academic_year').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('academic_year').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="academic_year"
-            type="text"
-            name="academic_year"
-            placeholder="Academic Year"
-            maxlength="32"
-            />
+          <input class="form-input" formControlName="academic_year" type="text" name="academic_year"
+            placeholder="Academic Year" maxlength="32" />
         </div>
       </div>
       <br />
       <!-- AUTHOR SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="Author">
             Author
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('author').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('author').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="author"
-            type="text"
-            name="Author"
-            placeholder="Author"
-            maxlength="32"
-            />
+          <input class="form-input" formControlName="author" type="text" name="Author" placeholder="Author"
+            maxlength="32" />
         </div>
       </div>
       <br />
       <!-- COLLEGE SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="college">
             College
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('college').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('college').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="college"
-            type="text"
-            name="college"
-            placeholder="College"
-            maxlength="50"
-            />
+          <input class="form-input" formControlName="college" type="text" name="college" placeholder="College"
+            maxlength="50" />
         </div>
       </div>
       <br />
       <!-- DATE RANGE SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="date_range">
             Date Range
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('date_range').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('date_range').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="date_range"
-            type="text"
-            name="date_range"
-            placeholder="Date Range"
-            maxlength="50"
-            />
+          <input class="form-input" formControlName="date_range" type="text" name="date_range" placeholder="Date Range"
+            maxlength="50" />
         </div>
       </div>
       <br />
       <!-- DEGREE LEVEL SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="degree_level">
             Degree Level
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('degree_level').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('degree_level').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="degree_level"
-            type="text"
-            name="degree_level"
-            placeholder="Degree Level"
-            maxlength="50"
-            />
+          <input class="form-input" formControlName="degree_level" type="text" name="degree_level"
+            placeholder="Degree Level" maxlength="50" />
         </div>
       </div>
       <br />
       <!-- DEPARTMENT SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="department">
             Department
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('department').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('department').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="department"
-            type="text"
-            name="department"
-            placeholder="Department"
-            maxlength="50"
-            />
+          <input class="form-input" formControlName="department" type="text" name="department" placeholder="Department"
+            maxlength="50" />
         </div>
       </div>
       <br />
       <!-- PROGRAM SECTION -->
       <div class="row">
-        <div class="col-25">
+        <div class="col-4">
           <label for="program">
             Program
-            <div
-              class="form-input-valid-icon"
-              *ngIf="reportForm.get('program').valid"
-              ></div>
+            <div class="form-input-valid-icon" *ngIf="reportForm.get('program').valid"></div>
           </label>
-          <input
-            class="form-input"
-            formControlName="program"
-            type="text"
-            name="program"
-            placeholder="Program"
-            maxlength="50"
-            />
+          <input class="form-input" formControlName="program" type="text" name="program" placeholder="Program"
+            maxlength="50" />
         </div>
       </div>
+      <div class="row">
+        <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
+          Add SLO
+        </button>
+      </div>
       <!-- SLO SECTION -->
-      <div class="row"
-        *ngFor="let slo of report.slos; index as i;"
-        >
-        <div class="col-25">
-         <form id='mySLO{{i + 1}}'>
-          <label for="slo">
-            <h4> SLO {{i + 1}} </h4>
-          </label>
-          <p>Description</p>
-          <textarea 
-            id="sloDescription"
-            name="description"
-            rows="10">{{ slo.description }}</textarea>
-          <fieldset>
-            <legend>Bloom's Taxonomy Cognitive Level</legend>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Knowledge')"
-              name="bloom"
-              value="Knowledge"
-              /> Knowledge
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Analysis')"
-              name="bloom"
-              value="Analysis"
-              /> Analysis <br>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Comprehension')"
-              name="bloom"
-              value="Comprehension"
-              /> Comprehension
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Synthesis')"
-              name="bloom"
-              value="Synthesis"
-              /> Synthesis <br>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Application')"
-              name="bloom"
-              value="Application"
-              /> Application
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.bloom, 'Evaluation')"
-              name="bloom"
-              value="Evaluation"
-              /> Evaluation
-          </fieldset>
-          <fieldset>
-            <legend>Common Graduate Program SLOs</legend>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.common_graduate_program_slo, '1')"
-              name="common_graduate_program_slo"
-              value="1"
-              /> 1
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.common_graduate_program_slo, '2')"
-              name="common_graduate_program_slo"
-              value="2"
-              /> 2 <br>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.common_graduate_program_slo, '3')"
-              name="common_graduate_program_slo"
-              value="3"
-              /> 3
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.common_graduate_program_slo, '4')"
-              name="common_graduate_program_slo"
-              value="4"
-              /> 4 <br>
-            <input
-              class="form-input"
-              type="checkbox"
-              [checked]="isChecked(slo.common_graduate_program_slo, 'NA')"
-              name="common_graduate_program_slo"
-              value="NA"
-              /> Not applicable for SLO
-          </fieldset>
-          <!-- SLO ASSESSMENT METHODS SECTION -->
-          <h3> Assessment Methods </h3>
-            <div class="row"
-              *ngFor="let method of slo.methods; index as mthd;"
-            >
-            <form id='SLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
+      <div class="row slo-container" *ngFor="let slo of report.slos; index as i;">
+        <hr>
+        <hr>
+        <hr>
+        <div class="col-4">
+          <form id='mySLO{{i + 1}}'>
+            <label for="slo">
+              <h3> SLO {{i + 1}} </h3>
+              <button type="button" class="btn btn-danger" (click)="removeSLO(i, slo.id)">
+                Delete SLO
+              </button>
+            </label>
+            <p>Description</p>
+            <textarea id="sloDescription" name="description" rows="10">{{ slo.description }}</textarea>
+            <fieldset>
+              <legend>Bloom's Taxonomy Cognitive Level</legend>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Knowledge')" name="bloom"
+                value="Knowledge" /> Knowledge
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Analysis')" name="bloom"
+                value="Analysis" /> Analysis <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Comprehension')" name="bloom"
+                value="Comprehension" /> Comprehension
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Synthesis')" name="bloom"
+                value="Synthesis" /> Synthesis <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Application')" name="bloom"
+                value="Application" /> Application
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Evaluation')" name="bloom"
+                value="Evaluation" /> Evaluation
+            </fieldset>
+            <fieldset>
+              <legend>Common Graduate Program SLOs</legend>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '1')"
+                name="common_graduate_program_slo" value="1" /> 1
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '2')"
+                name="common_graduate_program_slo" value="2" /> 2 <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '3')"
+                name="common_graduate_program_slo" value="3" /> 3
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '4')"
+                name="common_graduate_program_slo" value="4" /> 4 <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, 'NA')"
+                name="common_graduate_program_slo" value="NA" /> Not applicable for SLO
+            </fieldset>
+            <!-- SLO ASSESSMENT METHODS SECTION -->
+            <hr>
+            <h3> Assessment Methods </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankMethod(slo.id, i, false)">
+              Add Method
+            </button>
+            <div class="row child-container" *ngFor="let method of slo.methods; index as mthd;">
+              <h4>Method {{mthd+1}}</h4>
+              <button type="button" class="btn btn-danger" (click)="removeMethod(i, mthd, method.id)">
+                Remove Method
+              </button>
+              <form id='SLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
                 <label for="data_collection">
                   Data Collection
                 </label>
-                <input
-                  class="form-input"
-                  type="text"
-                  name="data_collection"
-                  placeholder="Data Collection"
-                  value="{{ method.data_collection }}"
-                  />
+                <input class="form-input" type="text" name="data_collection" placeholder="Data Collection"
+                  value="{{ method.data_collection }}" />
 
                 <label for="domain">
                   Domain (Product, Performance, Examination)
                 </label>
-                <input
-                class="form-input"
-                type="text"
-                name="domain"
-                placeholder="Domain"
-                value="{{ method.domain }}"
-                />
+                <input class="form-input" type="text" name="domain" placeholder="Domain" value="{{ method.domain }}" />
 
                 <label for="measure">
-                    Measure
+                  Measure
                 </label>
-                    <input
-                    class="form-input"
-                    type="text"
-                    name="measure"
-                    placeholder="measure"
-                    value="{{ method.measure }}"
-                    />
-            </form>
-          </div>
-          <!-- SLO DATA COLLECTION SECTION -->
-          <h3> Data Collection </h3>
-          <div class="row"
-            *ngFor="let data of slo.collection_analyses; index as collection;"
-            >
-            <form id='SLO{{i + 1}}DataCollection{{collection + 1}}'>
-            <h4> Collection {{ collection + 1}} </h4>
-            <label for="data_collection_date_range">
-                Data Collection Date Range
-            </label>
-            <input
-                class="form-input"
-                type="text"
-                name="data_collection_date_range"
-                placeholder="Data Collection Date Range"
-                maxlength="50"
-                value="{{ data.data_collection_date_range }}"
-                />
+                <input class="form-input" type="text" name="measure" placeholder="measure"
+                  value="{{ method.measure }}" />
+              </form>
+            </div>
+            <!-- SLO DATA COLLECTION SECTION -->
+            <hr>
+            <h3> Data Collection </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankDataCollection(slo.id, i, false)">
+              Add Collection
+            </button>
+            <div class="row" *ngFor="let data of slo.collection_analyses; index as collection;">
+              <h4>Collection {{collection+1}}</h4>
+              <button type="button" class="btn btn-danger" (click)="removeCollectionAnalysis(i, collection, data.id)">
+                Remove Collection
+              </button>
+              <form id='SLO{{i + 1}}DataCollection{{collection + 1}}'>
+                <label for="data_collection_date_range">
+                  Data Collection Date Range
+                </label>
+                <input class="form-input" type="text" name="data_collection_date_range"
+                  placeholder="Data Collection Date Range" maxlength="50"
+                  value="{{ data.data_collection_date_range }}" />
 
-            <label for="number_of_students_assessed">
-                Number of Students Assessed
-            </label>
-            <textarea 
-              id="number_of_students_assessed"
-              name="number_of_students_assessed"
-              rows="4">{{ data.number_of_students_assessed }}</textarea>
+                <label for="number_of_students_assessed">
+                  Number of Students Assessed
+                </label>
+                <textarea id="number_of_students_assessed" name="number_of_students_assessed"
+                  rows="4">{{ data.number_of_students_assessed }}</textarea>
 
-            <label for="percentage_who_met_or_exceeded">
-                Percentage Who Met or Exceeded
-            </label>
-            <textarea 
-              id="percentage_who_met_or_exceeded"
-              name="percentage_who_met_or_exceeded"
-              rows="4">{{ data.percentage_who_met_or_exceeded }}</textarea>
-            </form>
-          </div>
-          <!-- SLO DECISION ACTION SECTION -->
-          <h3> Decision Actions </h3>
-          <div class="row"
-            *ngFor="let decision of slo.decision_actions; index as dec;"
-            >
-            <form id='SLO{{i + 1}}DecisionAction{{dec + 1}}'>
-                <h4> Decision Action {{ dec + 1}} </h4>
+                <label for="percentage_who_met_or_exceeded">
+                  Percentage Who Met or Exceeded
+                </label>
+                <textarea id="percentage_who_met_or_exceeded" name="percentage_who_met_or_exceeded"
+                  rows="4">{{ data.percentage_who_met_or_exceeded }}</textarea>
+              </form>
+            </div>
+            <!-- SLO DECISION ACTION SECTION -->
+            <hr>
+            <h3> Decision Actions </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankDecisionAction(slo.id, i, false)">
+              Add Decision Action
+            </button>
+            <div class="row" *ngFor="let decision of slo.decision_actions; index as dec;">
+              <h4> Decision Action {{ dec + 1}} </h4>
+              <button type="button" class="btn btn-danger" (click)="removeDecisionAction(i, dec, decision.id)">
+                Remove Decision Action
+              </button>
+              <form id='SLO{{i + 1}}DecisionAction{{dec + 1}}'>
                 <p>Decision Content</p>
-                <textarea 
-                id="decisionContent"
-                name="content"
-                rows="10">{{ decision.content }}</textarea>
-            </form>
-          </div>
-          <!-- SLO MEASURE SECTION -->
-          <h3> Measures </h3>
-          <div class="row"
-            *ngFor="let measure of slo.measures; index as mes;"
-            >
-            <form id='SLO{{i + 1}}Measure{{mes + 1}}'>
-                <h4> Measure {{ mes + 1}} </h4>
+                <textarea id="decisionContent" name="content" rows="10">{{ decision.content }}</textarea>
+              </form>
+            </div>
+            <!-- SLO MEASURE SECTION -->
+            <hr>
+            <h3> Measures </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankMeasure(slo.id, i, false)">
+              Add Measure
+            </button>
+            <div class="row" *ngFor="let measure of slo.measures; index as mes;">
+              <h4>Measure {{mes+1}}</h4>
+              <button type="button" class="btn btn-danger" (click)="removeMeasure(i, mes, measure.id)">
+                Remove Measure
+              </button>
+              <form id='SLO{{i + 1}}Measure{{mes + 1}}'>
                 <label for="title">
-                    Title
+                  Title
                 </label>
-                <input
-                class="form-input"
-                type="text"
-                name="title"
-                placeholder="Title"
-                value="{{ measure.title }}"
-                />
-                
+                <input class="form-input" type="text" name="title" placeholder="Title" value="{{ measure.title }}" />
+
                 <p>Description</p>
-                <textarea 
-                id="decisionContent"
-                name="description"
-                rows="10">{{ measure.description }}</textarea>
-                
+                <textarea id="decisionContent" name="description" rows="10">{{ measure.description }}</textarea>
+
                 <fieldset>
-                    <legend>Domain</legend>
-                    <input
-                    class="form-input"
-                    type="checkbox"
-                    [checked]="isChecked(measure.domain, 'Examination')"
-                    name="domain"
-                    value="Examination"
-                    required
-                    /> Examination
-                    <input
-                    class="form-input"
-                    type="checkbox"
-                    [checked]="isChecked(measure.domain, 'Product')"
-                    name="domain"
-                    value="Product"
-                    /> Product <br>
-                    <input
-                    class="form-input"
-                    type="checkbox"
-                    [checked]="isChecked(measure.domain, 'Performance')"
-                    name="domain"
-                    value="Performance"
-                    /> Performance
+                  <legend>Domain</legend>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Examination')"
+                    name="domain" value="Examination" required /> Examination
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Product')"
+                    name="domain" value="Product" /> Product <br>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Performance')"
+                    name="domain" value="Performance" /> Performance
                 </fieldset>
-                
+
                 <fieldset>
-                    <legend>Type</legend>
-                    <input
-                    class="form-input"
-                    type="checkbox"
-                    [checked]="isChecked(measure.type, 'Direct Measure')"
-                    name="type"
-                    value="Direct Measure"
-                    /> Direct Measure
-                    <input
-                    class="form-input"
-                    type="checkbox"
-                    [checked]="isChecked(measure.type, 'Indirect Measure')"
-                    name="type"
-                    value="Indirect Measure"
-                    /> Indirect Measure <br>
+                  <legend>Type</legend>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.type, 'Direct Measure')"
+                    name="type" value="Direct Measure" /> Direct Measure
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.type, 'Indirect Measure')"
+                    name="type" value="Indirect Measure" /> Indirect Measure <br>
                 </fieldset>
-                
+
                 <label for="point_in_program">
-                    Point in Program
+                  Point in Program
                 </label>
-                <textarea 
-                id="measurePointInProgram"
-                name="point_in_program"
-                rows="5">{{ measure.point_in_program }}</textarea>
-                
+                <textarea id="measurePointInProgram" name="point_in_program"
+                  rows="5">{{ measure.point_in_program }}</textarea>
+
                 <label for="population_measured">
-                    Population Measured
+                  Population Measured
                 </label>
-                <textarea 
-                id="populationMeasured"
-                name="population_measured"
-                rows="5">{{ measure.population_measured }}</textarea>
-                
+                <textarea id="populationMeasured" name="population_measured"
+                  rows="5">{{ measure.population_measured }}</textarea>
+
                 <label for="frequency_of_collection">
-                    Frequency of Collection
+                  Frequency of Collection
                 </label>
-                <textarea 
-                id="measureFrequency"
-                name="frequency_of_collection"
-                rows="5">{{ measure.frequency_of_collection }}</textarea>
-                
+                <textarea id="measureFrequency" name="frequency_of_collection"
+                  rows="5">{{ measure.frequency_of_collection }}</textarea>
+
                 <label for="proficiency_threshold">
-                    Proficiency Threshold
+                  Proficiency Threshold
                 </label>
-                <textarea 
-                id="measureThreshold"
-                name="proficiency_threshold"
-                rows="5">{{ measure.proficiency_threshold }}</textarea>
-                
+                <textarea id="measureThreshold" name="proficiency_threshold"
+                  rows="5">{{ measure.proficiency_threshold }}</textarea>
+
                 <label for="proficiency_target">
-                    Proficiency Target
+                  Proficiency Target
                 </label>
-                <textarea 
-                id="measureTarget"
-                name="proficiency_target"
-                rows="5">{{ measure.proficiency_target }}</textarea>
-            </form>
+                <textarea id="measureTarget" name="proficiency_target"
+                  rows="5">{{ measure.proficiency_target }}</textarea>
+              </form>
             </div>
             <!-- SLO ACCREDITED DATA SECTION -->
+            <hr>
             <h3> Accredited Data </h3>
-            <div class="row"
-              *ngFor="let credit of slo.accredited_data_analyses; index as acc;"
-              >
+            <div class="row" *ngFor="let credit of slo.accredited_data_analyses; index as acc;">
+              <h4> Accredited Data Analysis {{acc + 1}} </h4>
+              <button type="button" class="btn btn-danger" (click)="removeAccreditedDataAnalysis(i, acc, credit.id)">
+                Remove Accredited Data Analysis
+              </button>
               <form id='SLO{{i + 1}}AccreditedData{{acc + 1}}'>
-                  <label for="accredited_data_analyses">
-                      Accedited Status
-                  </label>
-                  <input
-                      class="form-input"
-                      type="text"
-                      name="status"
-                      placeholder="Accedited Status"
-                      maxlength="50"
-                      value="{{ credit.status }}"
-                      />
+                <label for="accredited_data_analyses">
+                  Accedited Status
+                </label>
+                <input class="form-input" type="text" name="status" placeholder="Accedited Status" maxlength="50"
+                  value="{{ credit.status }}" />
               </form>
             </div>
           </form>
         </div>
+      </div>
+      <!-- SLO SECTION -->
+
+
+
+      <!-- NEW SLO SECTION -->
+
+      <div class="row" *ngFor="let slo of newSLOS; index as i;">
+        <div class="col-4">
+          <form id='myNEWSLO{{i + 1}}'>
+            <label for="slo">
+              <h4> New SLO {{i + 1}} </h4>
+              <button type="button" class="btn btn-primary" (click)="createBlankSLO()">
+                Add SLO
+              </button>
+              <button type="button" class="btn btn-danger" (click)="removeSLO(i, slo.id)">
+                Delete SLO
+              </button>
+
+            </label>
+            <p>Description</p>
+            <textarea id="sloDescription" name="description" rows="10">{{ slo.description }}</textarea>
+            <fieldset>
+              <legend>Bloom's Taxonomy Cognitive Level</legend>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Knowledge')" name="bloom"
+                value="Knowledge" /> Knowledge
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Analysis')" name="bloom"
+                value="Analysis" /> Analysis <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Comprehension')" name="bloom"
+                value="Comprehension" /> Comprehension
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Synthesis')" name="bloom"
+                value="Synthesis" /> Synthesis <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Application')" name="bloom"
+                value="Application" /> Application
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.bloom, 'Evaluation')" name="bloom"
+                value="Evaluation" /> Evaluation
+            </fieldset>
+            <fieldset>
+              <legend>Common Graduate Program SLOs</legend>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '1')"
+                name="common_graduate_program_slo" value="1" /> 1
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '2')"
+                name="common_graduate_program_slo" value="2" /> 2 <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '3')"
+                name="common_graduate_program_slo" value="3" /> 3
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, '4')"
+                name="common_graduate_program_slo" value="4" /> 4 <br>
+              <input class="form-input" type="checkbox" [checked]="isChecked(slo.common_graduate_program_slo, 'NA')"
+                name="common_graduate_program_slo" value="NA" /> Not applicable for SLO
+            </fieldset>
+            <!-- SLO ASSESSMENT METHODS SECTION -->
+            <h3> Assessment Methods </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankMethod(slo.id, i, true)">
+              Add Method
+            </button>
+            <div class="row" *ngFor="let method of slo.methods; index as mthd;">
+              <h4>Method {{mthd+1}}</h4>
+              <button type="button" class="btn btn-primary" (click)="removeMethod(i, mthd, method.id)">
+                Remove Method
+              </button>
+
+              <form id='NEWSLO{{i + 1}}AssessmentMethod{{mthd + 1}}'>
+                <label for="data_collection">
+                  Data Collection
+                </label>
+                <input class="form-input" type="text" name="data_collection" placeholder="Data Collection"
+                  value="{{ method.data_collection }}" />
+
+                <label for="domain">
+                  Domain (Product, Performance, Examination)
+                </label>
+                <input class="form-input" type="text" name="domain" placeholder="Domain" value="{{ method.domain }}" />
+
+                <label for="measure">
+                  Measure
+                </label>
+                <input class="form-input" type="text" name="measure" placeholder="measure"
+                  value="{{ method.measure }}" />
+              </form>
+            </div>
+            <!-- SLO DATA COLLECTION SECTION -->
+            <h3> Data Collection </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankDataCollection(slo.id, i, true)">
+              Add Collection
+            </button>
+            <div class="row" *ngFor="let data of slo.collection_analyses; index as collection;">
+              <h4>Collection {{collection+1}}</h4>
+              <button type="button" class="btn btn-primary" (click)="removeCollectionAnalysis(i, collection, data.id)">
+                Remove Collection
+              </button>
+              <form id='NEWSLO{{i + 1}}DataCollection{{collection + 1}}'>
+                <h4> Collection {{ collection + 1}} </h4>
+                <label for="data_collection_date_range">
+                  Data Collection Date Range
+                </label>
+                <input class="form-input" type="text" name="data_collection_date_range"
+                  placeholder="Data Collection Date Range" maxlength="50"
+                  value="{{ data.data_collection_date_range }}" />
+
+                <label for="number_of_students_assessed">
+                  Number of Students Assessed
+                </label>
+                <textarea id="number_of_students_assessed" name="number_of_students_assessed"
+                  rows="4">{{ data.number_of_students_assessed }}</textarea>
+
+                <label for="percentage_who_met_or_exceeded">
+                  Percentage Who Met or Exceeded
+                </label>
+                <textarea id="percentage_who_met_or_exceeded" name="percentage_who_met_or_exceeded"
+                  rows="4">{{ data.percentage_who_met_or_exceeded }}</textarea>
+              </form>
+            </div>
+            <!-- SLO DECISION ACTION SECTION -->
+            <h3> Decision Actions </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankDecisionAction(slo.id, i, true)">
+              Add Decision Action
+            </button>
+            <div class="row" *ngFor="let decision of slo.decision_actions; index as dec;">
+              <h4>Decision Action {{dec-1}}</h4>
+              <button type="button" class="btn btn-primary" (click)="removeDecisionAction(i, dec, decision.id)">
+                Remove Decision Action
+              </button>
+              <form id='NEWSLO{{i + 1}}DecisionAction{{dec + 1}}'>
+                <h4> Decision Action {{ dec + 1}} </h4>
+                <p>Decision Content</p>
+                <textarea id="decisionContent" name="content" rows="10">{{ decision.content }}</textarea>
+              </form>
+            </div>
+            <!-- SLO MEASURE SECTION -->
+            <h3> Measures </h3>
+            <button type="button" class="btn btn-primary" (click)="createBlankMeasure(slo.id, i, true)">
+              Add Measure
+            </button>
+            <div class="row" *ngFor="let measure of slo.measures; index as mes;">
+              <h4>Measure {{mes+1}}</h4>
+              <button type="button" class="btn btn-primary" (click)="removeMeasure(i, mes, measure.id)">
+                Remove Measure
+              </button>
+              <form id='NEWSLO{{i + 1}}Measure{{mes + 1}}'>
+                <h4> Measure {{ mes + 1}} </h4>
+                <label for="title">
+                  Title
+                </label>
+                <input class="form-input" type="text" name="title" placeholder="Title" value="{{ measure.title }}" />
+
+                <p>Description</p>
+                <textarea id="decisionContent" name="description" rows="10">{{ measure.description }}</textarea>
+
+                <fieldset>
+                  <legend>Domain</legend>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Examination')"
+                    name="domain" value="Examination" required /> Examination
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Product')"
+                    name="domain" value="Product" /> Product <br>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.domain, 'Performance')"
+                    name="domain" value="Performance" /> Performance
+                </fieldset>
+
+                <fieldset>
+                  <legend>Type</legend>
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.type, 'Direct Measure')"
+                    name="type" value="Direct Measure" /> Direct Measure
+                  <input class="form-input" type="checkbox" [checked]="isChecked(measure.type, 'Indirect Measure')"
+                    name="type" value="Indirect Measure" /> Indirect Measure <br>
+                </fieldset>
+
+                <label for="point_in_program">
+                  Point in Program
+                </label>
+                <textarea id="measurePointInProgram" name="point_in_program"
+                  rows="5">{{ measure.point_in_program }}</textarea>
+
+                <label for="population_measured">
+                  Population Measured
+                </label>
+                <textarea id="populationMeasured" name="population_measured"
+                  rows="5">{{ measure.population_measured }}</textarea>
+
+                <label for="frequency_of_collection">
+                  Frequency of Collection
+                </label>
+                <textarea id="measureFrequency" name="frequency_of_collection"
+                  rows="5">{{ measure.frequency_of_collection }}</textarea>
+
+                <label for="proficiency_threshold">
+                  Proficiency Threshold
+                </label>
+                <textarea id="measureThreshold" name="proficiency_threshold"
+                  rows="5">{{ measure.proficiency_threshold }}</textarea>
+
+                <label for="proficiency_target">
+                  Proficiency Target
+                </label>
+                <textarea id="measureTarget" name="proficiency_target"
+                  rows="5">{{ measure.proficiency_target }}</textarea>
+              </form>
+            </div>
+            <!-- SLO ACCREDITED DATA SECTION -->
+            <h3> Accredited Data </h3>
+            <div class="row" *ngFor="let credit of slo.accredited_data_analyses; index as acc;">
+              <h4> Accredited Data Analysis {{acc + 1}} </h4>
+              <button type="button" class="btn btn-primary" (click)="removeAccreditedDataAnalysis(i, acc, credit.id)">
+                Remove Accredited Data Analysis
+              </button>
+              <form id='NEWSLO{{i + 1}}AccreditedData{{acc + 1}}'>
+                <label for="accredited_data_analyses">
+                  Accedited Status
+                </label>
+                <input class="form-input" type="text" name="status" placeholder="Accedited Status" maxlength="50"
+                  value="{{ credit.status }}" />
+              </form>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- NEW SLO SECTION END -->
+
+
+
+
+      <div class="row" *ngFor="let slo of newSLOS; index as i">
+
       </div>
     </div>
     <div class="row">
