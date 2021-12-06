@@ -26,9 +26,9 @@ export class AdminComponent implements OnInit {
     this.map.set("aac_role", "rol_IOtTwiQVxUQHbk2A");
     this.findAllUsers();
     //TODO remove this after testing
-    if (!this.users || this.users.length == 0) {
-      this.mockUsersAndRoles();
-    }
+    // if (!this.users || this.users.length == 0) {
+    //   this.mockUsersAndRoles();
+    // }
   }
 
   onChange(event: any) {

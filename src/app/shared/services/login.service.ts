@@ -53,8 +53,9 @@ export class LoginService implements CanActivate {
    * @description returns the username of the logged in user 
    * @returns {*} string of the user or void if none 
    */
-  getUsername() {
-    return localStorage.getItem('user');
+  getUsername() :string {
+    let str = localStorage.getItem('user');
+    return str ? str : "";
   }
 
   /**
@@ -70,7 +71,9 @@ export class LoginService implements CanActivate {
           localStorage.setItem('token', details);
           this.router.navigate(['/dashboard']);
           this.auth.user$.subscribe((data:any) => {
+            console.log(data)
             localStorage.setItem('user', data.name);
+            localStorage.setItem('user_id', data.user_id);
           })
         }
       })

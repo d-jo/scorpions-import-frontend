@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { FileServiceService } from './shared/services/file-service.service';
 import { LoginService } from './shared/services/login.service';
 
 @Component({
@@ -10,10 +10,17 @@ import { LoginService } from './shared/services/login.service';
 export class AppComponent implements OnDestroy {
   title = 'scorpions-import-frontend';
   currentSelection = 'home';
+  showAdmin = false;
   
-  constructor(public login: LoginService, private router: Router) { }
+  constructor(public login: LoginService, private service: FileServiceService) { }
 
   ngOnInit() {
+    //TODO dont show admin link if user is not admin
+    // this.service.getUserRoles(this.getUser()).subscribe((data:any) => {
+    //   console.log(data)
+    //   pseudo code - also put *ngIf="showAdmin" in the html
+    //   this.showAdmin = adminRole in data.user_roles;
+    // });
     this.selectNav(this.currentSelection);
   }
 
@@ -25,7 +32,7 @@ export class AppComponent implements OnDestroy {
     this.login.logout();
   }
 
-  getUser() {
+  getUser() :string {
     return this.login.getUsername();
   }
 

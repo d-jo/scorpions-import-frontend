@@ -1,7 +1,4 @@
-<div class="header">
-    <!-- <mat-icon (click)="toggleSidenav()"
-        style="font-size: 30px; color: #000; position:absolute; left:10px; top:28px; cursor: pointer;">menu</mat-icon>
-     -->
+<div class="main-header">
     <div class="logo">
         <a href="https://www.unomaha.edu" target="_blank">
             <img alt="University of Nebraska Omaha" src="https://campuscontent.nebraska.edu/UNO/dashboard/IMG/logo-subsite-o-2.png">
@@ -14,9 +11,6 @@
 </div>
   
 <div class="sidenav">
-<!-- <div 
-*ngIf="login.isUserAuthenticated() | async" 
-class="sidenav"> -->
     <div style="margin-top: 10px;">
         <a routerLink="/dashboard" class="navLink" (click)="selectNav('home')">
             <span id="home" class="navbox">Dashboard</span>
@@ -33,6 +27,6 @@ class="sidenav"> -->
     </div>
 </div>
 
-<div id="router" style="margin-left: 80px; overflow-x: auto;">
+<div id="router" style="margin-left: 80px; margin-top:60px; overflow-x: auto;">
     <router-outlet></router-outlet>
 </div>
