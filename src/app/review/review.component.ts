@@ -50,8 +50,6 @@ export class ReviewComponent implements OnInit {
         // slos: this.formBuilder.array([this.createSLO(1)]), //TODO look at this later, may need to know slo length ahead of time
     });
 
-    this.mockReportInfo();
-
     this.activeRoute.paramMap.subscribe(params => {
         const fileId = params.get('id');
         if (fileId) {
