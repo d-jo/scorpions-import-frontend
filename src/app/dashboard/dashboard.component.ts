@@ -187,7 +187,6 @@ export class DashboardComponent implements OnInit {
   }
 
   clear() {
-    if(this.searchKey == "") return
     this.searchKey = ""
     this.getFiles()
   }
