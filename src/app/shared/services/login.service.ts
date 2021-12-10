@@ -71,9 +71,7 @@ export class LoginService implements CanActivate {
           localStorage.setItem('token', details);
           this.router.navigate(['/dashboard']);
           this.auth.user$.subscribe((data:any) => {
-            console.log(data)
             localStorage.setItem('user', data.name);
-            localStorage.setItem('user_id', data.user_id);
           })
         }
       })

@@ -114,12 +114,12 @@ export class FileServiceService {
    * @ngdoc method
    * @name requestAdd 
    * @description Append roles to a user.
-   * @param {any} username    - User's uid username 
+   * @param {any} userId      - User's id 
    * @param {any} role        - Role to append to the user.
    * @returns {null}
    */
-  public requestAdd(username: any, role: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "/users/add_role", { uid: username, desired_role_id: role }, {
+  public requestAdd(userId: any, role: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/users/add_role", { uid: userId, desired_role_id: role }, {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
@@ -132,11 +132,11 @@ export class FileServiceService {
    * @ngdoc method
    * @name getUserRoles 
    * @description Get a JSON list of the user's roles.
-   * @param {string} username - JSON object containing the user's username
+   * @param {string} userId - JSON object containing the user's username
    * @returns {Observable<any>} JSON list of the user's roles.
    */
-  public getUserRoles(username:string):Observable<any> {
-    return this.httpClient.post(this.baseUrl+"/users/get_user_roles", {uid: username}, {
+  public getUserRoles(userId:string):Observable<any> {
+    return this.httpClient.post(this.baseUrl+"/users/get_user_roles", {uid: userId}, {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',
@@ -144,6 +144,20 @@ export class FileServiceService {
       }
     });
   }
+
+   /**
+   * @ngdoc method
+   * @name getCurrentUserInfo 
+   * @description Get the current logged in user's information.
+   * @returns {Observable<any>} JSON list of the current user's info.
+   */
+    public getCurrentUserInfo():Observable<any> {
+      return this.httpClient.get(this.baseUrl+"/users/me", {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+      });
+    }
 
   /**
    * @ngdoc method
@@ -181,12 +195,12 @@ export class FileServiceService {
    * @ngdoc method
    * @name requestRemove 
    * @description Remove a role from a user.
-   * @param {any} username    - User to remove role from.
+   * @param {any} userId      - User to remove role from.
    * @param {any} role        - Role id to be removed from the user.
    * @returns {Observable<any>}
    */
-  public requestRemove(username: any, role: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "/users/remove_role", { uid: username, desired_role_id: role }, {
+  public requestRemove(userId: any, role: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/users/remove_role", { uid: userId, desired_role_id: role }, {
       responseType: 'json',
       headers: {
         'Content-Type': 'application/json',

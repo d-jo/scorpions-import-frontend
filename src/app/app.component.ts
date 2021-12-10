@@ -15,10 +15,9 @@ export class AppComponent implements OnDestroy {
   constructor(public login: LoginService, private service: FileServiceService) { }
 
   ngOnInit() {
-    this.service.getUserRoles(this.getUser()).subscribe((data:any) => {
-      console.log(data)
+    this.service.getCurrentUserInfo().subscribe((data:any) => {
       if (data) {
-        this.showAdmin = data.user_roles.some((p: any) => p === "aac")
+        this.showAdmin = data.user_roles.some((p: any) => p.name === "aac")
       }
     });
     this.selectNav(this.currentSelection);
