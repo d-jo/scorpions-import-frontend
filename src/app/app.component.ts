@@ -16,6 +16,7 @@ export class AppComponent implements OnDestroy {
 
   ngOnInit() {
     this.service.getUserRoles(this.getUser()).subscribe((data:any) => {
+      console.log(data)
       if (data) {
         this.showAdmin = data.user_roles.some((p: any) => p === "aac")
       }
