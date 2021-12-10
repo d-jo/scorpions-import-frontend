@@ -18,7 +18,7 @@
         <a routerLink="/import" class="navLink" (click)="selectNav('import')">
             <span id="import" class="navbox">Import</span>
         </a>
-        <a routerLink="/admin" class="navLink" (click)="selectNav('admin')">
+        <a routerLink="/admin" *ngIf="showAdmin" class="navLink" (click)="selectNav('admin')">
             <span id="admin" class="navbox">Admin</span>
         </a>
         <a class="navLink" (click)="logoutUser()">

@@ -25,10 +25,6 @@ export class AdminComponent implements OnInit {
     this.map.set("instructor_role", "rol_qR3M6gdO5mSdmKsM");
     this.map.set("aac_role", "rol_IOtTwiQVxUQHbk2A");
     this.findAllUsers();
-    //TODO remove this after testing
-    // if (!this.users || this.users.length == 0) {
-    //   this.mockUsersAndRoles();
-    // }
   }
 
   onChange(event: any) {
@@ -56,15 +52,10 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  mockUsersAndRoles() {
-    this.backup = this.users = ["user1", "admin"];
-    this.roles = ["instructor_role"];
-  }
-
   removeRole(role: any) {
     let c = confirm("Are you sure you want to remove " + role.name + " from " + this.user.name + "?");
     if (c) {
-      let roleId = role.id;//this.map.get(role.id);
+      let roleId = role.id;
       if (!roleId) return
       this.service.requestRemove(this.user.user_id, roleId).subscribe((data:any) => {
         if (data.status == "success") {

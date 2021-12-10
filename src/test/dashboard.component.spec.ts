@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { DashboardComponent } from '../app/dashboard/dashboard.component';
@@ -18,10 +19,13 @@ describe('DashboardComponent', () => {
     }
   }
 
+  let mockRouter = {
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
-      providers: [{provide:HttpClient, useValue: mockHttpClient}]
+      providers: [{provide:HttpClient, useValue: mockHttpClient}, {provide:Router, useValue:mockRouter}]
     })
     .compileComponents();
   });

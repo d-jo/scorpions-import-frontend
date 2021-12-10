@@ -15,12 +15,11 @@ export class AppComponent implements OnDestroy {
   constructor(public login: LoginService, private service: FileServiceService) { }
 
   ngOnInit() {
-    //TODO dont show admin link if user is not admin
-    // this.service.getUserRoles(this.getUser()).subscribe((data:any) => {
-    //   console.log(data)
-    //   pseudo code - also put *ngIf="showAdmin" in the html
-    //   this.showAdmin = adminRole in data.user_roles;
-    // });
+    this.service.getUserRoles(this.getUser()).subscribe((data:any) => {
+      if (data) {
+        this.showAdmin = data.user_roles.some((p: any) => p === "aac")
+      }
+    });
     this.selectNav(this.currentSelection);
   }
 

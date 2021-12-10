@@ -97,6 +97,7 @@ export class LoginService implements CanActivate {
    * @returns {*}
    */
   logout(): void {
+    localStorage.setItem('token', "");
     this.auth.logout({ returnTo: window.location.origin });
   }
 }
